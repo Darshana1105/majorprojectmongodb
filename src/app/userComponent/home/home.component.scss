@@ -1,0 +1,27 @@
+section{
+  .jumbotron{
+    max-height: 70vh;
+    overflow: auto;
+    background-image: url("../../../assets/doodle.jpg");
+    background-size: cover;
+    background-blend-mode: lighten;
+    mat-card{
+      background-color: white;
+      color: black;
+
+      .cost{
+        text-align: center;
+
+      }
+    }
+  }
+}
+.accept-button{
+  background-color: #4CAF50;
+}
+.reject-button{
+  background-color: red;
+}
+
+
+
