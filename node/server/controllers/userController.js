@@ -19,6 +19,15 @@ exports.getUsers = (req, res, next) => {
     });
 }
 
+exports.getUserById = (req,res,next) => {
+  let id = mongoose.Types.ObjectId(req.params.id);
+  userDataCollection.findById(id, function (err, res) {
+    if (err) console.log(err.message);
+    else {
+        console.log(res);
+    }
+    })
+}
 exports.addUser = (req, res, next) => {
     //const userDataCollection = mongoose.model('user', userSchema, 'users');
     let userObj;
@@ -114,10 +123,10 @@ exports.addToCart=async (req,res,next)=>{
     // }
 
     if(req.body.role=="user"){
-    
+
         let existingCart=await userDataCollection.findById(id,{cart:1});
         if(existingCart==null){
-            
+
         }
         console.log(existingCart);
         // userDataCollection.findByIdAndUpdate(id,{"cart":cart})

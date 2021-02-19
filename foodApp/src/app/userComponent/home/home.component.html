@@ -24,12 +24,12 @@
               PickUp-
             </div>
             <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12 mb-3">
-              <div class="lead pb-2"> {{order.restaurantDetails.restaurantName}}
+              <div class="lead pb-2"> {{order.restaurantDetails[0].restaurantName}}
                 <span class="text-muted font-weight-bold border-dark">PinCode - </span>
-                <span class="h5">{{order.restaurantDetails.restaurantLocation.zip}}</span>
+                <span class="h5">{{order.restaurantDetails[0].restaurantLocation.zip}}</span>
               </div>
-              <div class="text-muted h5"> {{order.restaurantDetails.restaurantLocation.area}} <span >(Locality)</span> </div>
-              <div class="lead"> {{order.restaurantDetails.restaurantLocation.landmark}}
+              <div class="text-muted h5"> {{order.restaurantDetails[0].restaurantLocation.area}} <span >(Locality)</span> </div>
+              <div class="lead"> {{order.restaurantDetails[0].restaurantLocation.landmark}}
                  <span >(Landmark)</span> </div>
             </div>
           </div>

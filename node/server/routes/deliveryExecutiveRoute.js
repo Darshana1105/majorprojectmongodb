@@ -8,6 +8,4 @@ const router = express.Router();
 
 router.get('/orders', deliveryExecutiveController.getOrders);
 
-router.patch('/acceptOrder/:oId',data,deliveryExecutiveController.acceptOrders)
-
 module.exports = router;

@@ -54,21 +54,8 @@ const orderSchema = new mongoose.Schema(
                 quantity: { type: Number, required: true }
             }
         ],
-        restaurantDetails: {
-            restaurantId: {
-                type: mongoose.Types.ObjectId,
-                required: true,
-                ref:'restaurant'
-            },
-            restaurantName: {
-                type: String,
-                required: true
-            }
-        },
-        deliveryExecutive: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'user',
-        },
+        restaurantDetails: [{ type: mongoose.Schema.Types.ObjectId, ref: 'restaurant' }],
+        deliveryExecutive: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
     }
 )
 

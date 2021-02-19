@@ -16,4 +16,6 @@ router.get('/login', userController.loginUser);
 
 router.put('/addToCart',userController.addToCart);
 
+router.get('/getUserById/:id', userController.getUserById);
+
 module.exports = router;
