@@ -1,0 +1,268 @@
+
+<section>
+    <p class="display-4 theme-color ml-5 heading">Incoming Orders</p>
+    <div class="jumbotron pt-0 pb-0" *ngIf="orders && orders.length else loading">
+      <mat-card class="pt-2 m-4 mt-0 mat-card-content" *ngFor="let order of orders">
+        <div class="row">
+          <div class="col-md-2 col-lg-2 d-none d-md-block d-xl-block">
+            <span class="material-icons display-3">
+              delivery_dining
+            </span>
+          </div>
+          <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 p-3">
+            <div class="row ">
+              <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 h5 theme-color">
+                OrderId-
+              </div>
+              <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12 mb-3">
+                <div class="lead pb-2"> {{order._id}}
+                </div>
+              </div>
+            </div>
+            <div class="row ">
+              <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 h5 theme-color">
+                PickUp-
+              </div>
+              <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12 mb-3">
+                <div class="lead pb-2"> {{order.restaurantDetails[0].restaurantName}}
+                  <span class="text-muted font-weight-bold border-dark">PinCode - </span>
+                  <span class="h5">{{order.restaurantDetails[0].restaurantLocation.zip}}</span>
+                </div>
+                <div class="text-muted h5"> {{order.restaurantDetails[0].restaurantLocation.area}} <span >(Locality)</span> </div>
+                <div class="lead"> {{order.restaurantDetails[0].restaurantLocation.landmark}}
+                   <span >(Landmark)</span> </div>
+              </div>
+            </div>
+            <div class="row ">
+              <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 h5 theme-color">
+                Drop-
+              </div>
+              <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                <div class="lead pb-2"> <p class="font-weight-bold">{{order.customerName}}</p>
+                  {{order.orderLocation.streetAddress}}
+                  <span class="text-muted font-weight-bold border-dark">PinCode - </span>
+                  <span class="h5">{{order.orderLocation.streetAddress}}</span>
+                </div>
+                <div class="text-muted h5"> {{order.orderLocation.area}} <span >(Locality)</span> </div>
+                <div class="lead"> {{order.orderLocation.landmark}} <span >(Landmark)</span> </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+            <p class="lead font-weight-bold p-3">COST -
+              <span class="lead font-weight-bold text-dark">{{order.totalAmount}}</span><span>Rs</span></p>
+          </div>
+        </div>
+        <mat-card-actions class="text-right">
+          <button mat-raised-button class="accept-button" (click)="acceptOrder([order._id])">Accept</button>
+          <button mat-raised-button class="reject-button">Reject</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <ng-template #loading>
+      <div class="jumbotron">
+        <h1 class="display-3">No Incomming Orders</h1>
+        <p class="lead">Keep Checking</p>
+        <hr class="my-2">
+        <p>Thanks for being our valuable Executive</p>
+      </div>
+    </ng-template>
+  </section>
+
+  
+<section id="active-orders">
+   <div> <p class="display-4 theme-color ml-5 heading"> Active Orders </p><hr></div>
+    <div class="jumbotron pt-0 mt-0 bg-doodle">
+        <mat-card class="pt-2 m-4 mt-0 mat-card-content ">
+            <div class="row">
+                <div class="col-md-2 col-lg-2 d-none d-md-block d-xl-block">
+                    <span class="material-icons display-3">
+                        directions_bike
+                    </span>
+                </div>
+         
+            <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 p-3">
+                <div class="row mb-3">
+                    <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 h6 font-color-red">
+                       Order Id - 
+                    </div>
+                    <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                        <div class="lead pb-2"> qwertyuijhgfcvbn
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-2 col-lg-2 col-sm-2 col-xs-12 h6 font-color-red">
+                        Pick Up - 
+                    </div>
+                    <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                        <div class="lead pb-2"> Adress
+                                <span class="text-muted font-weight-bold border-dark"> pincode- </span>
+                                <span class="h6"> 440023</span>
+                        </div>
+                        <div class="text-muted h5"> Nagal Wadi <span>Locality</span></div>
+                        <div class="lead"> Adress<span>Lol</span></div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-2 col-lg-2 col-sm-2 col-xs-12 h6 font-color-red">
+                        Drop - 
+                    </div>
+                    <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                        <div class="border-dark mb-2 h5"> Shakti Singh </div>
+                        <div class="lead pb-2"> Adress
+                                <span class="text-muted font-weight-bold border-dark"> pincode- </span>
+                                <span class="h5"> 440023</span>
+                        </div>
+                        <div class="text-muted h5"> Nagal Wadi <span>Locality</span></div>
+                        <div class="lead"> Adress <span>Lol</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-2 col-xs-12">
+                <p class="lead font-weight-bold p-3">
+                    COST - <span class="lead font-weight-bold h1 text-danger">500 </span><span>Rs</span>         
+                </p>
+            </div>
+        </div>
+        <mat-card-actions >
+            <mat-form-field   class="bg-success card ml-3">
+                <mat-label class="text-white p-3 h5">Order status</mat-label>
+                <mat-select class="p-2 " [(value)]="selected">
+                  <mat-option value="pickedup" class="bg-white text-dark">Picked Up</mat-option>
+                  <mat-option value="ontheway" class="bg-white text-dark">On The Way</mat-option>
+                  <mat-option value="delivered" class="bg-white text-dark">Delivered</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+            <button mat-raised-button class="btn btn-lg btn-danger text-white" > Confirm </button>
+          </mat-card-actions>
+        </mat-card>
+       
+    </div>
+    
+    
+    
+</section>
+
+<br><br>
+
+
+<section id="recent-delivery">
+        <div class="container-fluid bg-color-redLight p-3">
+        <p class="display-4 text-light ml-5 heading"> Recent Deliveries</p><hr class="bg-light">
+                <div class="container">
+                    <mat-card class="pt-2 m-4 mt-0 mat-card-content shadow-box">
+                        <div class="row">
+                            <div class="col-md-2 col-lg-2 d-none d-md-block d-xl-block">
+                                <span class="material-icons display-3">
+                                    brunch_dining
+                                </span>
+                            </div>
+                    
+                        <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 p-3">
+                            <div class="row mb-3">
+                                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-12 h6 font-color-red">
+                                Order Id- 
+                                </div>
+                                <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                    <div class="lead pb-2"> qwertyuijhgfd
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-12 h6 font-color-red">
+                                    Pick Up - 
+                                </div>
+                                <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                    <div class="lead pb-2"> Address
+                                            <span class="text-muted font-weight-bold border-dark"> pincode- </span>
+                                            <span class="h5"> 440023</span>
+                                    </div>
+                                    <div class="text-muted h5"> Datta Wadi <span>Locality</span></div>
+                                    <div class="lead"> New Place <span>Lol</span></div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-12 h6 font-color-red">
+                                    Drop - 
+                                </div>
+                                <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                    <div class="border-dark mb-2 h5"> Shakti Singh </div>
+                                    <div class="lead pb-2"> Anywhere
+                                            <span class="text-muted font-weight-bold border-dark"> pincode- </span>
+                                            <span class="h5"> 440023</span>
+                                    </div>
+                                    <div class="text-muted h5"> Datta Wadi <span>Locality</span></div>
+                                    <div class="lead"> New Place <span>New</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-sm-2 col-xs-12">
+                            <p class="lead font-weight-bold p-3">
+                                COST - <span class="lead font-weight-bold h1 text-danger">500 </span><span>Rs</span>         
+                            </p>
+                        </div>
+                    </div>
+                
+                    </mat-card>
+                    <mat-card class="pt-2 m-4 mt-0 mat-card-content shadow-box">
+                        <div class="row">
+                            <div class="col-md-2 col-lg-2 d-none d-md-block d-xl-block">
+                                <span class="material-icons display-3">
+                                    brunch_dining
+                                </span>
+                            </div>
+                    
+                        <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 p-3">
+                            <div class="row mb-3">
+                                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-12 h6 font-color-red">
+                                Order ID - 
+                                </div>
+                                <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                    <div class="lead pb-2"> qwuikjhbgfdsxd
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-12 h6 font-color-red">
+                                    Pick Up - 
+                                </div>
+                                <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                    <div class="lead pb-2"> Address
+                                            <span class="text-muted font-weight-bold border-dark"> pincode- </span>
+                                            <span class="h6"> 440023</span>
+                                    </div>
+                                    <div class="text-muted h5"> Datta Wadi <span>Locality</span></div>
+                                    <div class="lead"> New Place <span>Lol</span></div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-12 h6 font-color-red">
+                                    Drop - 
+                                </div>
+                                <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                    <div class="border-dark mb-2 h5"> Shakti Singh </div>
+                                    <div class="lead pb-2"> Hello world
+                                            <span class="text-muted font-weight-bold border-dark"> pincode- </span>
+                                            <span class="h5"> 440023</span>
+                                    </div>
+                                    <div class="text-muted h5"> Datta Wadi <span>Locality</span></div>
+                                    <div class="lead"> Hello <span>New</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-sm-2 col-xs-12">
+                            <p class="lead font-weight-bold p-3">
+                                COST - <span class="lead font-weight-bold h1 text-danger">500 </span><span>Rs</span>         
+                            </p>
+                        </div>
+                    </div>
+                
+                    </mat-card>
+                </div>
+        </div>
+</section>

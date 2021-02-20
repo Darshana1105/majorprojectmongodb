@@ -18,4 +18,7 @@ export class DeliveryExecutiveService {
   acceptOrder(oId:any,dId:any):Observable<any>{
     return this.http.patch<any>(this.url+"/acceptOrder/"+oId,dId)
   }
+  getUserById(id:any):Observable<any>{
+    return this.http.get<any>(this.url+"/getUserById/"+id);
+  }
 }

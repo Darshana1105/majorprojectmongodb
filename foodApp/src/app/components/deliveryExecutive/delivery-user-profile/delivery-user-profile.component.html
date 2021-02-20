@@ -1,0 +1,177 @@
+
+    <div class="container-fluid mt-4 bg-danger">
+      <div class="row d-flex">
+      <div class=" flex-column p-3 mt-3 align-items-center text-center img-animate bg-danger div-animate-left col-sm-12 col-md-4 col-lg-4">
+         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="img-size mt-3">
+        <div class="user-static-card text-light mt-4">
+            <p id= "username-static" class="username-static p-2">{{this.userdata.firstName + " " +  this.userdata.lastName}}</p>
+            <h2 id="ratings-static"> <span class="text-dark">Average Ratings - </span>
+              <span>
+                <mat-icon class="text-warning h2 text-center"> grade </mat-icon>
+              </span>
+              {{ this.deRatings}} / 5
+            </h2>
+           
+        </div>
+       </div>
+       <div class=" col-md-9 col-lg-9 col-sm-12 header-2-section div-animate-right bg-gray ">
+<!-- ---------------------------- -->
+              <div class="ml-6  form-div" *ngIf="userdata">
+                    <!-- <h1>Delivery Executive Details</h1><hr> -->
+                    <form  [formGroup]="profileForm" class="mt-2" (ngSubmit)="profileForm.valid && sendProfile()">
+
+                              <div class="row ml-5 custom-padding">
+                                  <span class="lead col-md-3 "></span>
+                                  <mat-form-field appearance="outline" class="col-md-9 ">
+                                    <mat-label class="text-danger">First Name</mat-label>
+                                    <input matInput  formControlName="firstName" id="firstName" required>
+                                  </mat-form-field>
+                              </div>
+                              <div class="row justify-content-end custom-padding" >
+                                <span class="col-md-3"></span>
+                                <div class=" ml-5  col-md-9  alert alert-light " *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+                                        <div *ngIf="firstName.errors.required" class=" text-danger font-weight-bold h6">
+                                        First Name is required* .
+                                        </div>
+                                </div>
+                              </div>
+
+
+                              <div class="row  ml-5 custom-padding ">
+                                  <span class="col-md-3 "></span>
+                                  <mat-form-field appearance="outline" class="col-md-9">
+                                      <mat-label class="text-danger">Last Name</mat-label>
+                                      <input matInput formControlName="lastName" required>
+                                  </mat-form-field>  
+                              </div>
+                              <div class="row justify-content-end custom-padding" >
+                                <span class="col-md-3"></span>
+                                <div class=" ml-5  col-md-9  alert alert-light " *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+                                        <div *ngIf="lastName.errors.required" class="text-danger font-weight-bold h6">
+                                        Last Name is required* .
+                                        </div>
+                                </div>
+                              </div>
+
+                                <div class="row  ml-5 custom-padding ">
+                                    <span class="col-md-3 "></span>
+                                    <mat-form-field appearance="outline" class="col-md-9">
+                                        <mat-label class="text-danger">Email</mat-label>
+                                        <input matInput type="email" formControlName="email" required> 
+                                    </mat-form-field>    
+                              </div>
+                              <div class="row justify-content-end custom-padding" >
+                                <span class="col-md-3"></span>
+                                <div class=" ml-5  col-md-9  alert alert-light " *ngIf="email.invalid && (email.dirty || email.touched)">
+                                        <div *ngIf="email.errors.required" class="text-danger font-weight-bold h6r">
+                                        Email is required* .
+                                        </div>
+                                        <div *ngIf="email.errors.email" class="text-danger font-weight-bold h6r
+                                        ">
+                                          Please Enter email in format* .
+                                        </div>
+                                </div>
+                              </div>
+
+                                <div class="row  ml-5 custom-padding">
+                                  <span class="lead col-md-3"></span>
+                                      <mat-form-field appearance="outline" class="col-md-4">
+                                          <mat-label class="text-danger">Birth Date</mat-label>
+                                          <input matInput type="date" formControlName="birthDate">
+                                      </mat-form-field>
+                                  <mat-form-field appearance="outline" class="col-md-4">
+                                      <mat-label class="text-danger">Gender</mat-label>
+                                          <mat-select class="text-dark" formControlName="gender"> 
+                                            <mat-option value="male" class="text-dark bg-light">Male </mat-option>
+                                            <mat-option value="female" class="text-dark bg-light">Female</mat-option>
+                                          </mat-select>
+                                          <mat-icon matSuffix>wc</mat-icon>
+                                    </mat-form-field>
+                              </div>
+                              <div class="row ml-5 custom-padding">
+                                <span class="col-md-3 "></span>
+                                <mat-form-field appearance="outline" class="col-md-9">
+                                <mat-label class="text-danger">Vehicle Number</mat-label>
+                                <input matInput formControlName="vehicleNumber" required>
+                                <mat-icon matSuffix>two_wheeler</mat-icon>
+                              </mat-form-field>
+                              </div>
+                              <div class="row justify-content-end custom-padding" >
+                                <span class="col-md-3"></span>
+                                <div class=" ml-5  col-md-9  alert alert-light bg-outline-danger " *ngIf="vehicleNumber.invalid && (vehicleNumber.dirty || vehicleNumber.touched)">
+                                        <div *ngIf="vehicleNumber.errors.required" class=" text-danger font-weight-bold h6">
+                                        Vehicle Number is required* .
+                                        </div>
+                                </div>
+                              </div>
+
+                              <div class="row  ml-5 custom-padding">
+                                <span class="lead col-md-3"></span>
+                                <mat-form-field appearance="outline" class="col-md-9">
+                                    <mat-label class="text-danger">Mobile Number</mat-label>
+                                    <input matInput type="number" formControlName="mobileNumber" required>
+                                    <mat-icon matSuffix>dialpad</mat-icon>
+                                </mat-form-field>
+                              </div>
+                              <div class="row justify-content-end custom-padding" >
+                                <span class="col-md-3"></span>
+                                <div class=" ml-5  col-md-9  alert alert-light " *ngIf="mobileNumber.invalid && (mobileNumber.dirty || mobileNumber.touched)">
+                                        <div *ngIf="mobileNumber.errors.required" class="text-danger font-weight-bold h6">
+                                        Mobile Number is required* .
+                                        </div>
+                                        <div *ngIf="mobileNumber.errors.pattern" class="text-danger font-weight-bold h6">
+                                          Please Enter 10 Digit Number* .
+                                        </div>
+                                </div>
+                              </div>
+
+                              <div class="row  ml-5 custom-padding ">
+                                <span class="col-md-3 "></span>
+                                <mat-form-field appearance="outline" class="col-md-9">
+                                  <mat-label class="text-danger">Street address</mat-label>
+                                  <input matInput formControlName="streetAddress">
+                                </mat-form-field>    
+                            </div>
+                            <div class="row  ml-5 custom-padding ">
+                              <span class="col-md-3 "></span>
+                              <mat-form-field appearance="outline" class="col-md-9">
+                                <mat-label class="text-danger">State</mat-label>
+                                <input matInput formControlName="state">
+                              </mat-form-field>    
+                          </div>
+
+                              <div class="row  ml-5 custom-padding">
+                                <span class="lead col-md-3"></span>
+                                <mat-form-field appearance="outline" class="col-md-4">
+                                    <mat-label class="text-danger">Pincode</mat-label>
+                                    <input matInput type="number" formControlName="pincode" required  >
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="col-md-4">
+                                  <mat-label class="text-danger">City/Town/District</mat-label>
+                                  <input matInput type="text" formControlName="city">
+                              </mat-form-field>
+                              </div>
+                              <div class="row justify-content-end custom-padding" >
+                                <span class="col-md-3"></span>
+                                <div class=" ml-5  col-md-9  alert alert-light " *ngIf="pincode.invalid && (pincode.dirty || pincode.touched)">
+                                        <div *ngIf="pincode.errors.required" class="text-danger font-weight-bold h6">
+                                         Pincode is Needed.
+                                        </div>
+                                        <div *ngIf="pincode.errors.pattern" class="text-danger font-weight-bold h6">
+                                          Please enter valid 6 digit Pincode
+                                        </div>
+                                </div>
+                              </div>
+
+                              <div>
+                                  <button type="submit" class="btn btn-lg btn-danger p-2 m-2 " value="Submit">Submit</button>
+                              </div>
+                    </form>
+
+              </div>
+
+<!-- --------------------------------- -->
+        </div>
+      </div>
+     
+    </div>

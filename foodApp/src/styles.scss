@@ -1,15 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; box-sizing: border-box }
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
-
+html, body { height: 100%; 
+    scroll-behavior: smooth;
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .theme-color{
-  color: #cc3528;
-}
-.heading{
-  font-size: 4vw;
-  font-weight: 900;
+    color: #cc3528;
+  }
+  .heading{
+    font-size: 4vw;
+    font-weight: 900;
+  
+  }
 
-}
+  .accept-button{
+    background-color: #4CAF50;
+  }
+  .reject-button{
+    background-color: red;
+  }
+  

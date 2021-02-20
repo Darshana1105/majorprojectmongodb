@@ -1,30 +1,38 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './userComponent/home/home.component';
-import { SearchLocationComponent } from './userComponent/search-location/search-location.component';
+import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DeliveryComponent } from './components/deliveryExecutive/delivery/delivery.component';
+import { DeliveryProfileComponent } from './components/deliveryExecutive/delivery-profile/delivery-profile.component';
+import { DeliveryReportsComponent } from './components/deliveryExecutive/delivery-reports/delivery-reports.component';
 import { MaterialModule } from './material/material.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FooterComponent } from './components/footer/footer.component';
+import { DeliveryUserProfileComponent } from './components/deliveryExecutive/delivery-user-profile/delivery-user-profile.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ChartsModule } from 'ng2-charts';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    SearchLocationComponent
+    HeaderComponent,
+    DeliveryComponent,
+    DeliveryProfileComponent,
+    DeliveryReportsComponent,
+    FooterComponent,
+    DeliveryUserProfileComponent
+   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    NgbModule,
-    ChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]
