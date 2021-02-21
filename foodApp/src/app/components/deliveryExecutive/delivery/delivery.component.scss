@@ -1,12 +1,6 @@
 $enable-responsive-font-sizes : true;
 
-.jumbotron{
-    overflow: auto;
-    height: 50%;
-    background-color:rgb(232, 228, 228) ;
-    background-size: cover;
-    // background-blend-mode: ;
-}
+
 section{
     .jumbotron{
       max-height: 70vh;
@@ -17,14 +11,21 @@ section{
       mat-card{
         background-color: white;
         color: black;
-  
+
         .cost{
           text-align: center;
-  
+
         }
       }
     }
   }
+
+  #active-orders > .jumbotron{
+      background-color: rgba(211, 72, 48, 0.384);
+      background-image: none;
+    }
+
+
 
 .shadow-box{
     -webkit-box-shadow: 14px 11px 20px -6px rgba(0,0,0,0.62);
@@ -40,12 +41,7 @@ section{
 .bg-color-redLight{
     background-color:#cc3528 ;
 }
-  .bg-doodle{
-      background-image: url("../../../../assets/doodle.jpg");
-      background-size: contain;
-      background-blend-mode: lighten;
-  }
+
   .heading-6{
       font-size: 6vw;
   }
-  

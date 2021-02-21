@@ -24,7 +24,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item p-1 m-1" href="#" routerLink="/de-profile"><i class="fas fa-sign-out-alt"></i>  Profile </a>
-          <a class="dropdown-item p-1 m-1" href="#"><i class="fas fa-project-diagram"></i> Reports</a>
+          <a class="dropdown-item p-1 m-1" href="#" routerLink="/de-reports"><i class="fas fa-project-diagram"></i> Reports</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item p-1 m-1" href="#"><i class="fas fa-sign-out-alt"></i>  Logout</a>
         </div>
@@ -77,12 +77,12 @@
                 <span class="text-dark">Profile</span>
               </a>
               </button>
-              <button mat-menu-item disabled>
-               <a class="text-decoration-none"> <mat-icon  class="text-dark">article</mat-icon>
+              <button mat-menu-item >
+               <a routerLink="/de-reports" class="text-decoration-none"> <mat-icon  class="text-dark">article</mat-icon>
                 <span  class="text-dark">Reports</span>
               </a>
               </button>
-              <button mat-menu-item disabled>
+              <button mat-menu-item >
                  <a class="text-decoration-none"> <mat-icon  class="text-dark">logout</mat-icon>
                   <span  class="text-dark">Log Out</span>
                 </a>
@@ -93,6 +93,6 @@
         </ul>
       </div>
     </div>
-    
+
   </div>
 </nav>

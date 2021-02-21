@@ -16,9 +16,28 @@ export class DeliveryExecutiveService {
     return this.http.get<any>(this.url+"/getRestaurantById/"+id);
   }
   acceptOrder(oId:any,dId:any):Observable<any>{
-    return this.http.patch<any>(this.url+"/acceptOrder/"+oId,dId)
+    let body = {
+      "dId":dId
+    };
+    return this.http.patch<any>(this.url+"/accept-order/"+oId,body)
+  }
+  doneOrder(oId:any):Observable<any>{
+    let body = {'orderDateAndTime':Date.now()};
+    return this.http.patch<any>(this.url+"/done-order/"+oId,body)
+  }
+  activeOrders(dId:any):Observable<any>{
+    return this.http.get<any>(this.url+"/active-orders/"+dId);
+  }
+  deliveredOrders(dId:any):Observable<any>{
+    return this.http.get<any>(this.url+"/delivered-orders/"+dId);
+  }
+  getRatings(dId:any):Observable<any>{
+    return this.http.get<any>(this.url+"/getRatings/"+dId);
   }
   getUserById(id:any):Observable<any>{
     return this.http.get<any>(this.url+"/getUserById/"+id);
+  }
+  getRecent(id:any):Observable<any>{
+    return this.http.get<any>(this.url+"/recent-orders/"+id);
   }
 }

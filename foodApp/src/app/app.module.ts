@@ -12,6 +12,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DeliveryUserProfileComponent } from './components/deliveryExecutive/delivery-user-profile/delivery-user-profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     DeliveryReportsComponent,
     FooterComponent,
     DeliveryUserProfileComponent
-   
+
   ],
   imports: [
     BrowserModule,
@@ -31,8 +32,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    ReactiveFormsModule
- 
+    ReactiveFormsModule,
+    ChartsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

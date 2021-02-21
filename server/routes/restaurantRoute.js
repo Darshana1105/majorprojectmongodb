@@ -8,9 +8,9 @@ router.post('/addRestaurant', restaurantController.addRestaurant);
 
 router.get('/topRestaurants', restaurantController.getTopRestaurants);
 
-router.get('/getRestaurantById/:id', restaurantController.getRestaurantById);
+router.get('/getRestaurantById', restaurantController.getRestaurantById);
 
-// router.get('/topFoods',restaurantController.getTopFood);
+router.get('/topFoods',restaurantController.getTopFood);
 
 router.get('/searchRestaurants', restaurantController.searchRestaurants);
 
