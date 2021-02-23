@@ -20,4 +20,6 @@ router.get('/delivered-orders/:id', deliveryExecutiveController.deliveredOrders)
 
 router.get('/getRatings/:id', deliveryExecutiveController.getRatings);
 
+router.put('/update-de/:id/', deliveryExecutiveController.updateDe);
+
 module.exports = router;

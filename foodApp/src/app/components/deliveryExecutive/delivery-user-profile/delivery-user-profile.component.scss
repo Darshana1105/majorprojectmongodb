@@ -5,8 +5,9 @@
     clip-path: circle(74.6% at 25% 49%);
 }
 .header-2-section{
-    margin-left: -10%;
-    margin-right: -10%;
+
+    margin-right: -9%;
+    margin-left: -8.3%;
     background-color: rgb(228, 203, 203);
     height: 15%;
     min-height: 15%;
@@ -44,19 +45,21 @@
 }
 
 
-@media all and (max-width:767px){
+@media all and (max-width:988px){
     .img-animate{
         clip-path: none
     }   
+    .header-1-section{
+        width: 100%;
+    }
     .header-2-section{
-        margin-top: 2%;
         margin-left: 0%;
+        margin-right: 0%;
         background-color: rgb(228, 203, 203);
         height: 15%;
         min-height: 15%;
         padding: 0px;
         clip-path: none;
-        text-align: left;
     }
     .form-div{
         margin-left: 0%;
