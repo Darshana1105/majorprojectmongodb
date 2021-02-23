@@ -27,9 +27,11 @@ import { TopFoodCardComponent } from './components/top-food-card/top-food-card.c
     DeliveryReportsComponent,
     FooterComponent,
     DeliveryUserProfileComponent,
+
     LandingMainComponent,
     RestaurantCardComponent,
     TopFoodCardComponent
+
   ],
   imports: [
     BrowserModule,

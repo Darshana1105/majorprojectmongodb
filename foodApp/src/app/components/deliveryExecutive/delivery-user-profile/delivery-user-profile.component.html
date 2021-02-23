@@ -1,10 +1,10 @@
 
     <div class="container-fluid mt-4 bg-danger">
       <div class="row d-flex">
-      <div class=" flex-column p-3 mt-3 align-items-center text-center img-animate bg-danger div-animate-left col-sm-12 col-md-4 col-lg-4">
+      <div class=" flex-column p-3 mt-3 align-items-center header-1-section text-center img-animate bg-danger div-animate-left col-sm-12 col-md-5 col-lg-4">
          <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="img-size mt-3">
-        <div class="user-static-card text-light mt-4">
-            <p id= "username-static" class="username-static p-2">{{this.userdata.firstName + " " +  this.userdata.lastName}}</p>
+        <div class="user-static-card text-light mt-4" *ngIf = "userdata">
+            <p id= "username-static" class="username-static p-2">{{userdata.firstName  + " " +  userdata.lastName}}</p>
             <h2 id="ratings-static"> <span class="text-dark">Average Ratings - </span>
               <span>
                 <mat-icon class="text-warning h2 text-center"> grade </mat-icon>
@@ -14,7 +14,7 @@
            
         </div>
        </div>
-       <div class=" col-md-9 col-lg-9 col-sm-12 header-2-section div-animate-right bg-gray ">
+       <div class=" col-md-7 col-lg-9 col-sm-12 pt-2 header-2-section div-animate-right bg-gray ">
 <!-- ---------------------------- -->
               <div class="ml-6  form-div" *ngIf="userdata">
                     <!-- <h1>Delivery Executive Details</h1><hr> -->
@@ -24,7 +24,7 @@
                                   <span class="lead col-md-3 "></span>
                                   <mat-form-field appearance="outline" class="col-md-9 ">
                                     <mat-label class="text-danger">First Name</mat-label>
-                                    <input matInput  formControlName="firstName" id="firstName" required>
+                                    <input matInput  formControlName="firstName" id="firstName" required placeholder="Firstname">
                                   </mat-form-field>
                               </div>
                               <div class="row justify-content-end custom-padding" >
@@ -32,8 +32,8 @@
                                 <div class=" ml-5  col-md-9  alert alert-light " *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
                                         <div *ngIf="firstName.errors.required" class=" text-danger font-weight-bold h6">
                                         First Name is required* .
-                                        </div>
-                                </div>
+                                        </div> 
+                                 </div> 
                               </div>
 
 
@@ -41,7 +41,7 @@
                                   <span class="col-md-3 "></span>
                                   <mat-form-field appearance="outline" class="col-md-9">
                                       <mat-label class="text-danger">Last Name</mat-label>
-                                      <input matInput formControlName="lastName" required>
+                                      <input matInput formControlName="lastName" required placeholder="Firstname">
                                   </mat-form-field>  
                               </div>
                               <div class="row justify-content-end custom-padding" >
@@ -66,8 +66,7 @@
                                         <div *ngIf="email.errors.required" class="text-danger font-weight-bold h6r">
                                         Email is required* .
                                         </div>
-                                        <div *ngIf="email.errors.email" class="text-danger font-weight-bold h6r
-                                        ">
+                                        <div *ngIf="email.errors.email" class="text-danger font-weight-bold h6r">
                                           Please Enter email in format* .
                                         </div>
                                 </div>
@@ -75,18 +74,20 @@
 
                                 <div class="row  ml-5 custom-padding">
                                   <span class="lead col-md-3"></span>
-                                      <mat-form-field appearance="outline" class="col-md-4">
-                                          <mat-label class="text-danger">Birth Date</mat-label>
-                                          <input matInput type="date" formControlName="birthDate">
-                                      </mat-form-field>
-                                  <mat-form-field appearance="outline" class="col-md-4">
-                                      <mat-label class="text-danger">Gender</mat-label>
-                                          <mat-select class="text-dark" formControlName="gender"> 
-                                            <mat-option value="male" class="text-dark bg-light">Male </mat-option>
-                                            <mat-option value="female" class="text-dark bg-light">Female</mat-option>
-                                          </mat-select>
-                                          <mat-icon matSuffix>wc</mat-icon>
+                                  <!-- <span class="lead col-md-9"> -->
+                                    <mat-form-field appearance="outline" class="col-md-4">
+                                        <mat-label class="text-danger">Birth Date</mat-label>
+                                        <input matInput type="date" formControlName="birthDate">
                                     </mat-form-field>
+                                    <mat-form-field appearance="outline" class="col-md-5">
+                                        <mat-label class="text-danger">Gender</mat-label>
+                                            <mat-select class="text-dark" formControlName="gender" > 
+                                              <mat-option value="male" class="text-dark bg-light">Male </mat-option>
+                                              <mat-option value="female" class="text-dark bg-light">Female</mat-option>
+                                            </mat-select>
+                                            <mat-icon matSuffix>wc</mat-icon>
+                                      </mat-form-field>
+                                  <!-- </span> -->
                               </div>
                               <div class="row ml-5 custom-padding">
                                 <span class="col-md-3 "></span>
@@ -146,7 +147,7 @@
                                     <mat-label class="text-danger">Pincode</mat-label>
                                     <input matInput type="number" formControlName="pincode" required  >
                                 </mat-form-field>
-                                <mat-form-field appearance="outline" class="col-md-4">
+                                <mat-form-field appearance="outline" class="col-md-5">
                                   <mat-label class="text-danger">City/Town/District</mat-label>
                                   <input matInput type="text" formControlName="city">
                               </mat-form-field>

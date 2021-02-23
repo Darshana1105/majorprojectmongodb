@@ -23,12 +23,13 @@ export class DeliveryUserProfileComponent implements OnInit {
   deRatings:any;
   ngOnInit(): void {
 
-
-    this._ordersServ.getUserById("602a35f1ef3f0f46d49e867e").subscribe(res  =>{
+    this._ordersServ.getUserById("6030c1a0a56123fa757da6ba").subscribe(res  =>{
       console.log(res.user);
       this.userdata = res.user;
       this.Ratings();
+      if(this.userdata){
       this.form();
+      }
     });
   }
   
@@ -48,7 +49,28 @@ export class DeliveryUserProfileComponent implements OnInit {
   // Get Profile Data from DE 
   sendProfile():void{
     this.postData = this.profileForm.value;
-    console.log(this.postData);
+    let dataDe = {
+      firstName:this.postData.firstName,
+      lastName:this.postData.lastName,
+      email:this.postData.email,
+      birthDate:this.postData.birthDate,
+      mobileNumber:this.postData.mobileNumber,
+      gender:this.postData.gender,
+      deliveryExecutive:{
+        vehicleNumber:this.postData.vehicleNumber,
+        deliveryExecutiveLocation:{
+          streetAddress:this.postData.streetAddress,
+          city:this.postData.city,
+          zip:this.postData.pincode,
+          state:this.postData.state
+        }
+      }
+
+    }
+    this._ordersServ.updateDe("6030c1a0a56123fa757da6ba", dataDe ).subscribe(res => {
+    console.log(res);
+    })
+    // console.log(this.postData);
   }
  
   form(){
@@ -64,9 +86,11 @@ export class DeliveryUserProfileComponent implements OnInit {
         pincode:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.zip,[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{6}$")]),
         state:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.state,Validators.required),
         gender:new FormControl(this.userdata.gender),
+
     });
+    console.log("this.userdata");
   }
-  
+
   get firstName() { return this.profileForm.get('firstName'); }
   get lastName() { return this.profileForm.get('lastName'); }
   get email() { return this.profileForm.get('email'); }

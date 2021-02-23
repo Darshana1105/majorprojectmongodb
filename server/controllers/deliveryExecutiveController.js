@@ -113,3 +113,16 @@ exports.getRatings = (req, res, next) => {
     })
   })
 }
+
+exports.updateDe = (req,res,next) => {
+  let id = mongoose.Types.ObjectId(req.params.id);
+  console.log(req.body)
+  let updateData = req.body;
+
+  userDataCollection.findByIdAndUpdate(id,updateData,function(err, res) {
+    if (err) console.log(err.message);
+    else {
+        console.log("Data updated ", res);
+    }
+  });
+}

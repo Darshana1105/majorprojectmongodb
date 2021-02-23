@@ -6,9 +6,11 @@ import { DeliveryComponent } from './components/deliveryExecutive/delivery/deliv
 import { LandingMainComponent } from './components/landing-main/landing-main.component';
 
 const routes: Routes = [
+
 {path:'', component:LandingMainComponent},
 {path:'de-dashboard', component:DeliveryComponent},
 {path:'de-profile', component:DeliveryUserProfileComponent},
+
 {path:'de-reports', component:DeliveryReportsComponent}
 ];
 

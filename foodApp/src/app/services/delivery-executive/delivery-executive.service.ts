@@ -40,4 +40,7 @@ export class DeliveryExecutiveService {
   getRecent(id:any):Observable<any>{
     return this.http.get<any>(this.url+"/recent-orders/"+id);
   }
+  updateDe(dId:any,data:any):Observable<any>{
+    return this.http.put<any>(this.url+"/update-de/"+dId,data)
+  }
 }
