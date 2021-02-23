@@ -33,8 +33,8 @@ export class DeliveryComponent implements OnInit {
     this.recentOrders = res.orders;
     console.log(res.orders);
   });
-   setInterval(() => { this.gOrders(); }, 2000);
-   setInterval(() => { this.gOrders(); }, 2000);
+  //  setInterval(() => { this.gOrders(); }, 2000);
+  //  setInterval(() => { this.gOrders(); }, 2000);
  }
  Acount = 0;
  Ocount = 0;
