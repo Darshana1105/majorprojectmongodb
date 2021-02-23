@@ -22,5 +22,4 @@ router.put('/clearCart',userController.clearCart);
 
 router.get('/getUserById/:id',userController.getUserById);
 
-module.exports = router;
-
+module.exports = router; 

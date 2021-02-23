@@ -10,8 +10,8 @@ const userDataCollection = mongoose.model('user', userSchema, 'users');
 
 
 // Get all users
-exports.getUsers =async (req, res, next) => {
-    let users=await userDataCollection.find({});
+exports.getUsers = async (req, res, next) => {
+    let users = await userDataCollection.find({});
     res.send(users);
 }
 
@@ -67,7 +67,7 @@ exports.addUser = (req, res, next) => {
 
 
 // update profile data of user
-exports.updateUser =async (req, res, next) => {
+exports.updateUser = async (req, res, next) => {
     let id = req.query.id;
     let updateData = {
         firstName: req.body.firstName,
@@ -78,23 +78,23 @@ exports.updateUser =async (req, res, next) => {
 }
 
 
-// user authentication login
-exports.loginUser =async (req, res, next) => {
+// user authentication login 
+exports.loginUser = async (req, res, next) => {
     let email = req.body.email;
     let password = req.body.password;
-    let user=await userDataCollection.find({ 'email': email }, { 'email': 1, 'password': 1 })
+    let user = await userDataCollection.find({ 'email': email }, { 'email': 1, 'password': 1 })
 
-            if (user != null) {
-                if (password === user.password) {
-                    console.log("User Logged in Successfully");
-                }
-                else {
-                    console.log("Wrong Password");
-                }
-            }
-            else {
-                console.log("User doesn't Exist");
-            }
+    if (user != null) {
+        if (password === user.password) {
+            console.log("User Logged in Successfully");
+        }
+        else {
+            console.log("Wrong Password");
+        }
+    }
+    else {
+        console.log("User doesn't Exist");
+    }
 }
 
 
@@ -149,18 +149,18 @@ exports.reduceCartItem = async (req, res, next) => {
     if (req.body.role == "user") {
         let existingCart = await userDataCollection.findById(id, { cart: 1 });
 
-        if (existingCart.cart.foodList.length==1 && existingCart.cart.foodList[0].quantity==1) {
+        if (existingCart.cart.foodList.length == 1 && existingCart.cart.foodList[0].quantity == 1) {
             await userDataCollection.findByIdAndUpdate(id, { "cart": undefined });
         }
-        else{
+        else {
             let foodIndex = existingCart.cart.foodList.findIndex((food) => {
                 return food.foodId.toString() == foodItem.foodId;
             });
-            if(existingCart.cart.foodList[foodIndex].quantity==1){
-                existingCart.cart.foodList=existingCart.cart.foodList.filter((x)=>{return x.foodId.toString()!=foodItem.foodId});
+            if (existingCart.cart.foodList[foodIndex].quantity == 1) {
+                existingCart.cart.foodList = existingCart.cart.foodList.filter((x) => { return x.foodId.toString() != foodItem.foodId });
             }
-            else{
-                existingCart.cart.foodList[foodIndex].quantity-=1;
+            else {
+                existingCart.cart.foodList[foodIndex].quantity -= 1;
             }
             await userDataCollection.findByIdAndUpdate(id, { "cart": existingCart.cart });
         }
@@ -168,18 +168,19 @@ exports.reduceCartItem = async (req, res, next) => {
     }
 }
 
-exports.clearCart=async (req,res,next)=>{
+exports.clearCart = async (req, res, next) => {
     let id = req.body.userId;
     await userDataCollection.findByIdAndUpdate(id, { "cart": undefined });
 }
 
+
 //Get user using id
-exports.getUserById = (req,res,next) => {
-  let id = mongoose.Types.ObjectId(req.params.id);
-  userDataCollection.findById(id, function (err, user) {
-    if (err) console.log(err.message);
-    res.status(200).json({
-      user: user
+exports.getUserById = (req, res, next) => {
+    let id = mongoose.Types.ObjectId(req.params.id);
+    userDataCollection.findById(id, function (err, user) {
+        if (err) console.log(err.message);
+        res.status(200).json({
+            user: user
+        })
     })
-  })
 }

@@ -13,6 +13,7 @@ import { DeliveryUserProfileComponent } from './components/deliveryExecutive/del
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
+import { RestaurentOwnerHomeComponent } from './components/restaurentOwner/restaurent-owner-home/restaurent-owner-home.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ChartsModule } from 'ng2-charts';
     DeliveryProfileComponent,
     DeliveryReportsComponent,
     FooterComponent,
-    DeliveryUserProfileComponent
+    DeliveryUserProfileComponent,
+    RestaurentOwnerHomeComponent
 
   ],
   imports: [

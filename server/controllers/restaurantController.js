@@ -96,23 +96,26 @@ exports.getTopRestaurants = (req, res, next) => {
 exports.searchRestaurants = async (req, res, next) => {
     let search = req.body.search;
     let city = req.body.city;
-    let searchRestaurants = await restaurantDataCollection.find({
-        $text: {
-            $search: search,
-            $search: city
+    let searchRestaurants = await restaurantDataCollection.find({$and:[{'restaurantLocation.city': city },
+        {$text:{
+            $search: search
         }
-    }).catch((err) => {
-        res.send(err)
-    });
+    }
+    ]});
+        // .catch((err) => {
+        //     res.send(err)
+        // });
+    // let searchRestaurants= await restaurantDataCollection.aggregate([{"search city":{$in:[city,'$restaurantLocation.city']}}]).exec(function(err,data){
+
+    console.log(searchRestaurants);
 
     res.send(searchRestaurants);
-
 }
 
 
 exports.getTopFood = async (req, res, next) => {
-    let city="Ahmedabad";
-    let rest = await restaurantDataCollection.find({'restaurantLocation.city':city}).select('menuDetails');
+    let city = "Ahmedabad";
+    let rest = await restaurantDataCollection.find({ 'restaurantLocation.city': city }).select('menuDetails');
     let foodlist = [];
     let ratings = [];
     var temp;
@@ -121,13 +124,13 @@ exports.getTopFood = async (req, res, next) => {
         element.menuDetails.forEach((food) => {
             let avgRating = 0;
             if (food.foodRating != undefined && food.foodRating.length > 0)
-                avgRating = food.foodRating.reduce((total, current) =>  total + current.rating , 0) / food.foodRating.length;
+                avgRating = food.foodRating.reduce((total, current) => total + current.rating, 0) / food.foodRating.length;
             foodlist.push({ restaurantId: element._id.toString(), food: food, avgRating: avgRating })
         })
     })
 
-    foodlist = foodlist.sort(function(a,b){
-        return (a.avgRating<b.avgRating) ? 1 :-1;
+    foodlist = foodlist.sort(function (a, b) {
+        return (a.avgRating < b.avgRating) ? 1 : -1;
     })
 
     res.send(foodlist);
