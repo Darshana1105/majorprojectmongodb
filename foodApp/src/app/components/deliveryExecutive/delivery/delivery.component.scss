@@ -5,7 +5,7 @@ section{
     .jumbotron{
       max-height: 70vh;
       overflow: auto;
-      background-image: url("../../../../assets/doodle.jpg");
+      // background-image: url("../../../../assets/doodle.jpg");
       background-size: cover;
       background-blend-mode: lighten;
       mat-card{
@@ -26,6 +26,11 @@ section{
     }
 
 
+.recent-delivery.mat-card-content{
+  background-color: #424242;
+  color: #fff;
+}
+
 
 .shadow-box{
     -webkit-box-shadow: 14px 11px 20px -6px rgba(0,0,0,0.62);
@@ -45,3 +50,12 @@ section{
   .heading-6{
       font-size: 6vw;
   }
+
+  // .confirm.btn{
+  //   color: #cc3528;
+  //   border:1px solid #cc3528;
+  // }
+
+  // .confirm.btn:hover{
+  //   color: white;
+  // }
