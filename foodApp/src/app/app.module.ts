@@ -13,6 +13,9 @@ import { DeliveryUserProfileComponent } from './components/deliveryExecutive/del
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
+import { LandingMainComponent } from './components/landing-main/landing-main.component';
+import { RestaurantCardComponent } from './components/restaurant-card/restaurant-card.component';
+import { TopFoodCardComponent } from './components/top-food-card/top-food-card.component';
 
 
 @NgModule({
@@ -23,8 +26,10 @@ import { ChartsModule } from 'ng2-charts';
     DeliveryProfileComponent,
     DeliveryReportsComponent,
     FooterComponent,
-    DeliveryUserProfileComponent
-
+    DeliveryUserProfileComponent,
+    LandingMainComponent,
+    RestaurantCardComponent,
+    TopFoodCardComponent
   ],
   imports: [
     BrowserModule,

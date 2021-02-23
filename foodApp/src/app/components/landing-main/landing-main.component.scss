@@ -1,0 +1,101 @@
+.main-div-home {
+  background-color: white;
+  // height: 100vh;
+  position: relative;
+
+  .inner {
+    position: relative;
+    top: -100px;
+    background-color: transparent;
+    // background: rgba(255,255,255,1) url("/assets/images/fast_food-02-.jpg")  ;
+    background-size: contain;
+  }
+}
+
+.carousel-image {
+  height: 70vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+.inner-jumbotron {
+  //  background: rgba(0,0,255,0.8)  ;
+  background: transparent;
+  background-size: contain;
+  margin: auto;
+  height: max-content;
+  min-height: 95vh;
+  .top-restaurants {
+    // background-color: rgba(255, 255, 255, 0.9);
+    background: transparent;
+    min-width: inherit;
+    min-height: inherit;
+    .restaurant-carousel-item {
+      justify-content: space-evenly;
+      min-height: 40vh;
+      margin-bottom: 3rem;
+      @media (min-width: 992px) {
+        .col-lg-4 {
+          flex: 0 0 30%;
+        }
+      }
+    }
+    ol.carousel-indicators > li {
+      background-color: rgb(244, 67, 54);
+    }
+    .carousel-next-icon:after {
+      content: ">";
+      font-size: 40px;
+      color: rgb(244, 67, 54);
+    }
+
+    .carousel-prev-icon:after {
+      content: "<";
+      font-size: 40px;
+      color: rgb(244, 67, 54);
+    }
+  }
+}
+
+.middle-index{
+  img{
+    object-fit: contain;
+    height: 80vh;
+  }
+}
+
+
+.rating {
+  color: orangered;
+}
+.heading-text {
+  font-family: monospace;
+  color: rgb(244, 67, 54, 0.8);
+}
+
+.middle-index {
+  background: url(../../../assets/images/background-wooden.jpg);
+  background-size: cover;
+  height: 90vh;
+}
+
+.food-card-image {
+  // height: 30vh;
+  width: 100%;
+  object-fit: cover;
+  background-image: url("../../../assets/images/pizza.jpg");
+}
+
+.top-dishes {
+  background-color: white;
+  background: url(../../../assets/images/background-top-dishes.jpg) no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: inherit;
+  // color: white;
+}
+
+.text {
+  background-color: white;
+  border-width: thin;
+}

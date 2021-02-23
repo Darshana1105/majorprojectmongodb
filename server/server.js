@@ -4,7 +4,7 @@ const express = require('express');
 const userRoute = require('./routes/userRoute');
 const restaurantRoute = require('./routes/restaurantRoute');
 const deliverExecutiveRoute = require('./routes/deliveryExecutiveRoute');
-const orderRoute = require ('./routes/orderRoute');
+const orderRoute = require('./routes/orderRoute');
 const cors = require("cors");
 
 dotenv.config();
@@ -35,23 +35,36 @@ app.use(deliverExecutiveRoute);
 app.use(orderRoute);
 
 
-app.use("/", function(req, res){
+app.use("/", function (req, res) {
     res.send("<h1>This is Home</h1>");
 })
 
 // Error Middleware
 
-app.listen(3000, function(err){
-    if(err){
+app.listen(3000, function (err) {
+    if (err) {
         // throw err;
         console.log(err);
     }
-    else{
+    else {
         console.log("Server is running on 3000...");
     }
 });
 
-
+const nodemailer = require("nodemailer"); var smtpTransport = require("nodemailer-smtp-transport");
+const sendMails = function (mailList, subject, html) {
+    let mailTransporter = nodemailer.createTransport(
+        smtpTransport({
+            host: "172.27.172.202",
+            port: 25,
+            auth: {
+                user: "CEL",
+                pass: "Gmail#@5689",
+            },
+            debug: true,
+            logger: true,
+            tls: { rejectUnauthorized: false },
+        }));
 
 
 

@@ -13,7 +13,6 @@ const orderDataCollection = mongoose.model('order', orderSchema, 'orders');
 
 
 exports.getOrders = (req, res, next) => {
-  console.log("Hello /../////");
   
   orderDataCollection.find({ orderStatus: "ordered" }).populate('restaurantDetails'
     , ['restaurantName', 'restaurantLocation']).populate('userId', ['firstName', 'email'])
