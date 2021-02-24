@@ -4,13 +4,14 @@ import { DeliveryReportsComponent } from './components/deliveryExecutive/deliver
 import { DeliveryUserProfileComponent } from './components/deliveryExecutive/delivery-user-profile/delivery-user-profile.component';
 import { DeliveryComponent } from './components/deliveryExecutive/delivery/delivery.component';
 import { LandingMainComponent } from './components/landing-main/landing-main.component';
+import { RestaurantListComponent } from './components/restaurant-list/restaurant-list.component';
 
 const routes: Routes = [
 
   { path: '', component: LandingMainComponent },
+  {path:'restaurants',component:RestaurantListComponent},
   { path: 'de-dashboard', component: DeliveryComponent },
-  { path: 'de-profile', component: DeliveryUserProfileComponent },
-
+  { path: 'profile', component: DeliveryUserProfileComponent },
   { path: 'de-reports', component: DeliveryReportsComponent }
 ];
 
