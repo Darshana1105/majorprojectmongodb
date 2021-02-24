@@ -139,17 +139,19 @@
             </p>
           </div>
         </div>
-        <form [formGroup]="statusForm" (ngSubmit)="change(aorder._id)">
-          <mat-card-actions>
-            <mat-form-field class="bg-success card ml-3">
-              <mat-label class="text-white p-3 h5">Order status</mat-label>
-              <mat-select class="p-2" formControlName='selected'>
-                <mat-option value="pickedup" class="bg-white text-dark">Picked Up</mat-option>
-                <mat-option value="ontheway" class="bg-white text-dark">On The Way</mat-option>
-                <mat-option value="delivered" class="bg-white text-dark">Delivered</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <button mat-raised-button class=" btn btn-lg bg-danger text-white"> Confirm </button>
+        <form [formGroup]="statusForm" (ngSubmit)=
+        "change(aorder._id,aorder.userId.email,aorder.restaurantDetails.restaurantName,
+        aorder.totalAmount)">
+          <mat-card-actions >
+            <mat-form-field   class="bg-success card ml-3" >
+                <mat-label class="text-white p-3 h5">Order status</mat-label>
+                <mat-select class="p-2" formControlName='selected'>
+                  <mat-option value="pickedup" class="bg-white text-dark">Picked Up</mat-option>
+                  <mat-option value="ontheway" class="bg-white text-dark">On The Way</mat-option>
+                  <mat-option value="delivered" class="bg-white text-dark">Delivered</mat-option>
+                </mat-select>
+              </mat-form-field>
+            <button mat-raised-button class="btn btn-lg bg-danger text-white" > Confirm </button>
           </mat-card-actions>
         </form>
       </mat-card>

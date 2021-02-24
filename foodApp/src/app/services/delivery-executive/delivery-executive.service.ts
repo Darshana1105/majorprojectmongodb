@@ -17,13 +17,14 @@ export class DeliveryExecutiveService {
   }
   acceptOrder(oId:any,dId:any):Observable<any>{
     let body = {
-      "dId":dId
+      "dId":dId,
+      "status":status
     };
     return this.http.patch<any>(this.url+"/accept-order/"+oId,body)
   }
-  doneOrder(oId:any):Observable<any>{
-    let body = {'orderDateAndTime':Date.now()};
-    return this.http.patch<any>(this.url+"/done-order/"+oId,body)
+  orderStatus(oId:any,status:string):Observable<any>{
+    let body = {'orderDateAndTime':Date.now(),'status':status};
+    return this.http.patch<any>(this.url+"/order-status/"+oId,body)
   }
   activeOrders(dId:any):Observable<any>{
     return this.http.get<any>(this.url+"/active-orders/"+dId);
@@ -39,6 +40,11 @@ export class DeliveryExecutiveService {
   }
   getRecent(id:any):Observable<any>{
     return this.http.get<any>(this.url+"/recent-orders/"+id);
+  }
+  sendMail(eid:any,status:any,order:any):Observable<any>{
+    let body = order;
+    console.log(body)
+    return this.http.post<any>(this.url+"/send-mail/"+eid+"/"+status,body);
   }
   updateDe(dId:any,data:any):Observable<any>{
     return this.http.put<any>(this.url+"/update-de/"+dId,data)

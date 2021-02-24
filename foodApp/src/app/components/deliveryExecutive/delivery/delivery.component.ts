@@ -9,7 +9,7 @@ import { DeliveryExecutiveService } from 'src/app/services/delivery-executive/de
 })
 export class DeliveryComponent implements OnInit {
  activeOrders:any = [];
- dId = "602a35f1ef3f0f46d49e867e";
+ dId = "6030c1a0a56123fa757da6ba";
  statusForm = this.formBuilder.group({
   selected: ['', Validators.required],
 });
@@ -34,6 +34,7 @@ export class DeliveryComponent implements OnInit {
     console.log(res.orders);
   });
    setInterval(() => { this.gOrders(); }, 2000);
+   setInterval(() => { this.gOrders(); }, 2000);
  }
  Acount = 0;
  Ocount = 0;
@@ -55,24 +56,48 @@ export class DeliveryComponent implements OnInit {
 
  }
 
- acceptOrder(value:any):void{
+  acceptOrder(value:any):void{
 
-   this._ordersServ.acceptOrder(value[0],this.dId).subscribe(res =>{
-     console.log(res);
-   })
-   console.log(value)
- }
+    if(this.Acount<3){
+      this._ordersServ.acceptOrder(value[0],this.dId).subscribe(res =>{
+        console.log(res);
+      })
+      //console.log(value)
+    }else{
+      alert("Oops!! Cant accept more than 3 orders at a time")
+    }
+  }
 
- change(id:any){
+
+
+ change(id:any,email:any,restaurantName:string,total:number){
    console.log(id);
   let status = '';
   status = this.statusForm.value.selected;
+  let data = {
+    restaurantName : restaurantName,
+    billAmount : total
+  }
+
   if(status === 'delivered'){
-    this._ordersServ.doneOrder(id).subscribe(res =>{
+    this._ordersServ.orderStatus(id,"delivered").subscribe(res =>{
       console.log(res);
     })
-  }else{
-    //call SMTP
+  }else if(status === 'pickedup'){
+    this._ordersServ.sendMail(email,"Picked-up",data).subscribe(res =>{
+      console.log(res);
+    })
+    this._ordersServ.orderStatus(id,"Picked-up").subscribe(res =>{
+      console.log(res);
+    })
+
+  }else if(status === 'ontheway'){
+    this._ordersServ.sendMail(email,"On-the-Way",data).subscribe(res =>{
+      console.log(res);
+    })
+    this._ordersServ.orderStatus(id,"On-the-Way").subscribe(res =>{
+      console.log(res);
+    })
   }
 
  }

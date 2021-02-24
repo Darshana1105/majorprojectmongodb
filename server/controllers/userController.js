@@ -78,7 +78,7 @@ exports.updateUser = async (req, res, next) => {
 }
 
 
-// user authentication login 
+// user authentication login
 exports.loginUser = async (req, res, next) => {
     let email = req.body.email;
     let password = req.body.password;
