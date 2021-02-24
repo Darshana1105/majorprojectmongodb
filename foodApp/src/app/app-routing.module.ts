@@ -7,15 +7,18 @@ import { LandingMainComponent } from './components/landing-main/landing-main.com
 
 const routes: Routes = [
 
-{path:'', component:LandingMainComponent},
-{path:'de-dashboard', component:DeliveryComponent},
-{path:'de-profile', component:DeliveryUserProfileComponent},
+  { path: '', component: LandingMainComponent },
+  { path: 'de-dashboard', component: DeliveryComponent },
+  { path: 'de-profile', component: DeliveryUserProfileComponent },
 
-{path:'de-reports', component:DeliveryReportsComponent}
+  { path: 'de-reports', component: DeliveryReportsComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled',    onSameUrlNavigation: 'reload',
+
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
