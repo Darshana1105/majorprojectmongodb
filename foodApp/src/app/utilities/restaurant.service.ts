@@ -8,22 +8,26 @@ import { Restaurant } from '../interfaces/restaurant';
   providedIn: 'root'
 })
 export class RestaurantService {
- 
+
   baseUrl: string = 'http://localhost:3000/';
 
   constructor(private httpClient: HttpClient) { }
 
-  getTopRestaurants():Observable<Array<Restaurant>> {
-  //  let queryParam = new HttpParams({fromString:"id=602ca48cf2697638d43f4f11"});
+  getTopRestaurants(): Observable<Array<Restaurant>> {
+    //  let queryParam = new HttpParams({fromString:"id=602ca48cf2697638d43f4f11"});
     // queryParam.append("id",'602ca48cf2697638d43f4f11');
-    
+
     return this.httpClient.get<any>(this.baseUrl + 'topRestaurants');
     // return this.httpClient.get(this.baseUrl + 'getRestaurantById',{params:queryParam});
   }
 
-  getTopFoods():Observable<Array<Food>>{
-    
+  getTopFoods(): Observable<Array<Food>> {
+
     return this.httpClient.get<any>(this.baseUrl + 'topFoods');
+  }
+
+  getAllRestaurants(): Observable<Array<Restaurant>> {
+    return this.httpClient.get<any>(this.baseUrl + 'getRestaurants');
   }
 
 }

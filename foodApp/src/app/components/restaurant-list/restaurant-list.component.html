@@ -1,8 +1,12 @@
 <div class="main-section">
-    <div class="filter-section">
+    <div class="filter-section ">
         <mat-slide-toggle>Slide me!</mat-slide-toggle>
     </div>
     <div class=" container-fluid">
-
+        <div class="row justify-content-center">
+            <ng-container *ngFor='let restaurant of restaurants'>
+            <app-restaurant-card class="col-4 mb-3" [restaurant]='restaurant'></app-restaurant-card>
+        </ng-container>
+        </div>
     </div>
 </div>
