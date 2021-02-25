@@ -13,6 +13,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatDialogModule} from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
+
 
 
 const materialComponents = [
@@ -28,7 +33,10 @@ const materialComponents = [
   MatSelectModule,
   MatGridListModule,
   MatSlideToggleModule,
+  MatDialogModule,
   BrowserAnimationsModule,
+  MatAutocompleteModule,
+  MatCheckboxModule
 ];
 
 @NgModule({

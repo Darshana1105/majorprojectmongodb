@@ -1,12 +1,15 @@
-<div class="main-section">
-    <div class="filter-section ">
-        <mat-slide-toggle>Slide me!</mat-slide-toggle>
+<div class="main-section max-width mx-auto ">
+    <div class="filter-section bg-light shadow row justify-content-between align-items-center px-3 py-2 mb-3 rounded ">
+        <!-- <mat-slide-toggle class="col-3">Slide me!</mat-slide-toggle> -->
+        <app-search-bar class="col-lg-6 col-md-7 col-sm-9"></app-search-bar>
+        <div class="col-3"> <button mat-stroked-button class="filters-btn" (click)='openDialog()'>Filters</button>
+        </div>
     </div>
     <div class=" container-fluid">
         <div class="row justify-content-center">
             <ng-container *ngFor='let restaurant of restaurants'>
-            <app-restaurant-card class="col-4 mb-3" [restaurant]='restaurant'></app-restaurant-card>
-        </ng-container>
+                <app-top-restaurant-card class="col-4 mb-3" [restaurant]='restaurant'></app-top-restaurant-card>
+            </ng-container>
         </div>
     </div>
 </div>
