@@ -1,16 +1,44 @@
-// const jwt = require('jsonwebtoken');
 var mongoose = require("mongoose");
-
 const userSchema = require('../models/userModel');
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const auth = require("../helpers/authAPI");
+
 
 const app = require("../server");
 
 // user schema
 const userDataCollection = mongoose.model('user', userSchema, 'users');
 
+// user authentication login 
+exports.loginUser = async (req, res, next) => {
+    let email = req.body.email;
+    let password = req.body.password;
+
+    let user = await userDataCollection.findOne({ 'email': email });
+    console.log("userRole" + user.role);
+
+    if (user && password === user.password) {
+        const token = jwt.sign({ userId: user._id, email: user.email, password: user.password, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1d" });
+        req.session.token = token;
+        return res.status(200).json({ token: token, firstName: user.firstName });
+    }
+    else if (!user) {
+        res.status(404).json({ message: "User not found" });
+    }
+    else {
+        res.status(400).json({ message: "User or Password is not match" });
+    }
+}
+
+exports.logoutUser = (req, res, next) => {
+    req.session.name = null;
+}
+
 
 // Get all users
 exports.getUsers = async (req, res, next) => {
+    console.log("this is session " + req.session.name);
     let users = await userDataCollection.find({});
     res.send(users);
 }
@@ -68,35 +96,16 @@ exports.addUser = (req, res, next) => {
 
 // update profile data of user
 exports.updateUser = async (req, res, next) => {
-    let id = req.query.id;
+    console.log(">>>>>>>>>",req.body);
+    
+    let id = req.body.userId;
     let updateData = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        mobileNumber: req.body.mobileNumber
+        mobileNumber: req.body.mobileNumber,
     }
-    await userDataCollection.findByIdAndUpdate(id, updateData);
+    // await userDataCollection.findByIdAndUpdate(id, updateData);
 }
-
-
-// user authentication login 
-exports.loginUser = async (req, res, next) => {
-    let email = req.body.email;
-    let password = req.body.password;
-    let user = await userDataCollection.find({ 'email': email }, { 'email': 1, 'password': 1 })
-
-    if (user != null) {
-        if (password === user.password) {
-            console.log("User Logged in Successfully");
-        }
-        else {
-            console.log("Wrong Password");
-        }
-    }
-    else {
-        console.log("User doesn't Exist");
-    }
-}
-
 
 // Add to cart
 exports.addToCart = async (req, res, next) => {

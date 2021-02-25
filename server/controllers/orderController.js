@@ -3,14 +3,19 @@ const orderSchema = require('../models/orderModel');
 const restaurantSchema = require('../models/restaurantModel');
 const userSchema = require('../models/userModel');
 const app = require("../server");
+const authAPI = require("../helpers/authAPI");
 
 let orderDataCollection = mongoose.model('order', orderSchema, 'orders');
 let restaurantDataCollection = mongoose.model('restaurant', restaurantSchema, 'restaurants');
 let userDataCollection = mongoose.model('user', userSchema, 'users');
 
 exports.getOrders = async (req, res, next) => {
-    let userId = mongoose.Types.ObjectId(req.body.userId);
-    console.log(userId);
+    // let userId = mongoose.Types.ObjectId(req.body.userId);
+    console.log("this is session "+req.session.name);
+    authAPI.authAPI(req, res, next);
+    let userId = req.body.userId;
+    let userRole = req.body.role;
+    console.log("This is new "+userId +" and " + userRole);
 
     let orders = await orderDataCollection.find({ userId: userId });
     console.log(orders);
@@ -19,6 +24,7 @@ exports.getOrders = async (req, res, next) => {
 }
 
 exports.addOrder = async (req, res, next) => {
+    authAPI.authAPI(req, res, next);
     let userId = req.body.userId;
 
     let deliveryExecutive = req.body.deliveryExecutive;

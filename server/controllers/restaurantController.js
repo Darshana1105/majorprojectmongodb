@@ -96,15 +96,18 @@ exports.getTopRestaurants = (req, res, next) => {
 exports.searchRestaurants = async (req, res, next) => {
     let search = req.body.search;
     let city = req.body.city;
-    let searchRestaurants = await restaurantDataCollection.find({$and:[{'restaurantLocation.city': city },
-        {$text:{
-            $search: search
+    let searchRestaurants = await restaurantDataCollection.find({
+        $and: [{ 'restaurantLocation.city': city },
+        {
+            $text: {
+                $search: search
+            }
         }
-    }
-    ]});
-        // .catch((err) => {
-        //     res.send(err)
-        // });
+        ]
+    });
+    // .catch((err) => {
+    //     res.send(err)
+    // });
     // let searchRestaurants= await restaurantDataCollection.aggregate([{"search city":{$in:[city,'$restaurantLocation.city']}}]).exec(function(err,data){
 
     console.log(searchRestaurants);
@@ -136,6 +139,27 @@ exports.getTopFood = async (req, res, next) => {
     res.send(foodlist);
 }
 
+
+exports.getFoodByRestaurant = async (req, res, next) => {
+    let id = mongoose.Types.ObjectId(req.query.id);
+
+    let foodList=[];
+
+    let restaurant=await restaurantDataCollection.findById(id);
+    let avgRating = 0;
+
+    restaurant.menuDetails.forEach((food)=>{
+        avgRating=food.foodRating.reduce((total,current)=>total+current.rating,0)/food.foodRating.length;
+        foodList.push({food: food, avgRating:avgRating});
+    })
+
+    foodList = foodList.sort(function (a, b) {
+        return (a.avgRating < b.avgRating) ? 1 : -1;
+    });
+
+    res.send(foodList);
+
+}
 // exports.getTopFood = (req, res, next) => {
 //     restaurantDataCollection.aggregate([
 //         {

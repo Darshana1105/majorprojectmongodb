@@ -2,7 +2,7 @@ const express = require("express");
 // const { body } = require("express-validator");
 
 const userController = require("../controllers/userController");
-// const auth = require("../middleware/auth");
+const auth = require("../helpers/authAPI");
 
 const router = express.Router();
 
@@ -10,15 +10,15 @@ router.get('/users', userController.getUsers);
 
 router.post('/addUser',userController.addUser);
 
-router.put('/updateUser/:id',userController.updateUser);
+router.put('/updateUser',auth.authAPI,userController.updateUser);
 
 router.get('/login', userController.loginUser);
 
-router.put('/addToCart',userController.addToCart);
+router.put('/addToCart',auth.authAPI,userController.addToCart);
 
-router.put('/reduceCartItem',userController.reduceCartItem);
+router.put('/reduceCartItem',auth.authAPI,userController.reduceCartItem);
 
-router.put('/clearCart',userController.clearCart);
+router.put('/clearCart',auth.authAPI,userController.clearCart);
 
 router.get('/getUserById/:id',userController.getUserById);
 

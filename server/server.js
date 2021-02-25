@@ -6,6 +6,7 @@ const restaurantRoute = require('./routes/restaurantRoute');
 const deliverExecutiveRoute = require('./routes/deliveryExecutiveRoute');
 const orderRoute = require('./routes/orderRoute');
 const cors = require("cors");
+const session = require('express-session');
 
 dotenv.config();
 mongoose.connect(
@@ -24,7 +25,13 @@ db.on('error', console.error.bind(console, 'connection error'));
 const app = express();
 app.use(express.json());
 
-app.use(cors())
+app.use(session({ 
+    secret: 'CybageSoftware', 
+    resave: true, 
+    saveUninitialized: true
+}))
+
+app.use(cors());
 
 app.use(userRoute);
 
