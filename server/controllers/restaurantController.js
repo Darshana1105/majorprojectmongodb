@@ -3,6 +3,10 @@ const restaurantSchema = require('../models/restaurantModel');
 // const foodSchema = require('../models/foodModel');
 const app = require("../server");
 // const categorySchema = require("../models/categoryModel");
+const orderSchema = require('../models/orderModel');
+const orderDataCollection = mongoose.model('order', orderSchema, 'orders');
+
+
 
 restaurantSchema.index({ '$**': 'text' });
 const restaurantDataCollection = mongoose.model('restaurant', restaurantSchema, 'restaurants');
@@ -136,6 +140,19 @@ exports.getTopFood = async (req, res, next) => {
     res.send(foodlist);
 }
 
+exports.acceptOrderRo = (req,res,next) => {
+  let id = mongoose.Types.ObjectId(req.params.id);
+  //console.log(req.body.dId)
+  let updateData = {
+    orderStatus: req.body.status,
+  }
+  orderDataCollection.findByIdAndUpdate(id,updateData,function(err, res) {
+    if (err) console.log(err.message);
+    else {
+        console.log("Data updated ", res);
+    }
+  });
+}
 // exports.getTopFood = (req, res, next) => {
 //     restaurantDataCollection.aggregate([
 //         {

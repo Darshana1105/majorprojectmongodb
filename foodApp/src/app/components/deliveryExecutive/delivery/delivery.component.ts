@@ -56,10 +56,11 @@ export class DeliveryComponent implements OnInit {
 
  }
 
-  acceptOrder(value:any):void{
-
+  acceptOrder(value:any,email:any):void{
+    console.log(value,email);
     if(this.Acount<3){
-      this._ordersServ.acceptOrder(value[0],this.dId).subscribe(res =>{
+      let val = Math.floor(1000 + Math.random() * 9000);
+      this._ordersServ.acceptOrder(value,this.dId,val,email).subscribe(res =>{
         console.log(res);
       })
       //console.log(value)
@@ -70,7 +71,7 @@ export class DeliveryComponent implements OnInit {
 
 
 
- change(id:any,email:any,restaurantName:string,total:number){
+ change(id:any,email:any,restaurantName:string,total:number,otp:number){
    console.log(id);
   let status = '';
   status = this.statusForm.value.selected;
@@ -80,9 +81,17 @@ export class DeliveryComponent implements OnInit {
   }
 
   if(status === 'delivered'){
-    this._ordersServ.orderStatus(id,"delivered").subscribe(res =>{
-      console.log(res);
-    })
+    let dOtp:any = prompt("Enter OTP");
+    if(dOtp == otp){
+      this._ordersServ.orderStatus(id,"delivered").subscribe(res =>{
+      })
+      this._ordersServ.sendMail(email,"delivered",data).subscribe(res =>{
+        console.log(res);
+      })
+      alert("success");
+    }else{
+      alert('OTP is incorrect please try again');
+    }
   }else if(status === 'pickedup'){
     this._ordersServ.sendMail(email,"Picked-up",data).subscribe(res =>{
       console.log(res);

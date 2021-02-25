@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get('/orders', deliveryExecutiveController.getOrders);
 
-router.patch('/accept-order/:id/', deliveryExecutiveController.acceptOrder);
+router.patch('/accept-order-de/:id/', deliveryExecutiveController.acceptOrderDe);
 
 router.patch('/order-status/:id/', deliveryExecutiveController.orderStatus);
 
@@ -23,5 +23,7 @@ router.get('/getRatings/:id', deliveryExecutiveController.getRatings);
 router.post('/send-mail/:mail/:status', deliveryExecutiveController.sendMail);
 
 router.put('/update-de/:id/', deliveryExecutiveController.updateDe);
+
+router.get('/getOtp/:id', deliveryExecutiveController.getOtp);
 
 module.exports = router;

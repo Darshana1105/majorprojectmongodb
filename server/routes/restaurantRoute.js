@@ -14,4 +14,7 @@ router.get('/topFoods',restaurantController.getTopFood);
 
 router.get('/searchRestaurants', restaurantController.searchRestaurants);
 
+router.patch('/accept-order-ro/:id/', restaurantController.acceptOrderRo);
+
+
 module.exports = router;

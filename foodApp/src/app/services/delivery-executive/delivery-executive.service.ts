@@ -15,12 +15,13 @@ export class DeliveryExecutiveService {
   getRestaurantById(id:any):Observable<any>{
     return this.http.get<any>(this.url+"/getRestaurantById/"+id);
   }
-  acceptOrder(oId:any,dId:any):Observable<any>{
+  acceptOrder(oId:any,dId:any,otp:number,email:any):Observable<any>{
     let body = {
       "dId":dId,
-      "status":status
+      "otp":otp,
+      "email":email
     };
-    return this.http.patch<any>(this.url+"/accept-order/"+oId,body)
+    return this.http.patch<any>(this.url+"/accept-order-de/"+oId,body)
   }
   orderStatus(oId:any,status:string):Observable<any>{
     let body = {'orderDateAndTime':Date.now(),'status':status};

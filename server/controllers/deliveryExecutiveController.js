@@ -15,7 +15,7 @@ const orderDataCollection = mongoose.model('order', orderSchema, 'orders');
 
 
 exports.getOrders = (req, res, next) => {
-  orderDataCollection.find({orderStatus:"ordered"}).populate('restaurantDetails'
+  orderDataCollection.find({orderStatus:"accepted-ro"}).populate('restaurantDetails'
   ,['restaurantName','restaurantLocation']).populate('userId',['firstName','email'])
   .exec(function (err,order) {
     if (err) {
@@ -45,12 +45,13 @@ exports.getRecentOrders = (req, res, next) => {
   })
 }
 
-exports.acceptOrder = (req,res,next) => {
+exports.acceptOrderDe = (req,res,next) => {
   let id = mongoose.Types.ObjectId(req.params.id);
   //console.log(req.body.dId)
   let updateData = {
-    orderStatus: "accepted",
-    deliveryExecutive: req.body.dId
+    orderStatus: "accepted-de",
+    deliveryExecutive: req.body.dId,
+    orderOtp : req.body.otp
   }
   orderDataCollection.findByIdAndUpdate(id,updateData,function(err, res) {
     if (err) console.log(err.message);
@@ -58,6 +59,10 @@ exports.acceptOrder = (req,res,next) => {
         console.log("Data updated ", res);
     }
   });
+  sendOtp(req.body.email,req.body.otp);
+  res.status(200).json({
+    status:"sent"
+  })
 }
 
 exports.orderStatus = (req,res,next) => {
@@ -77,10 +82,10 @@ exports.orderStatus = (req,res,next) => {
 
 exports.activeOrders = (req,res,next) =>{
   let id = mongoose.Types.ObjectId(req.params.id);
-  orderDataCollection.find({$and: [{$or:[{orderStatus:"accepted"},{orderStatus:"Picked-up"},
+  orderDataCollection.find({$and: [{$or:[{orderStatus:"accepted-de"},{orderStatus:"Picked-up"},
   {orderStatus:"On-the-Way"}]},{deliveryExecutive:id}]})
-  .populate('restaurantDetails'
-  ,['restaurantName','restaurantLocation']).populate('userId',['firstName','email'])
+  .populate('restaurantDetails',['restaurantName','restaurantLocation'])
+  .populate('userId',['firstName','email','mobileNumber'])
   .exec(function (err,order) {
     if (err) {
         console.error(err);
@@ -139,6 +144,16 @@ exports.sendMail = (req,res,next) =>{
   })
 }
 
+exports.getOtp = (req, res, next) => {
+  let id = mongoose.Types.ObjectId(req.params.id);
+    orderDataCollection.findById(id).select('orderOtp').exec(function (err, otp) {
+      if (err) console.log(err.message);
+    res.status(200).json({
+      otp: otp.orderOtp
+    })
+  })
+}
+
 
 
 
@@ -172,3 +187,33 @@ async function main(id,status,body) {
   console.log("Message sent: %s", info.messageId);
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
+
+async function sendOtp(id,otp) {
+  // Generate test SMTP service account from ethereal.email
+  // Only needed if you don't have a real mail account for testing
+
+  let transporter = nodemailer.createTransport({
+    host: "172.27.172.202",
+    port: 25,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: "CEL@evolvingsols.com",
+      pass: "Gmail#@5689",
+    },
+    tls: {
+      rejectUnauthorized: false
+    },
+  });
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '"Bite Food App 👻" CEL@evolvingsols.com', // sender address
+    to: id, // list of receivers
+    subject: "Bite : Your Order OTP ✔", // Subject line
+    html: "<p>Thanks For Choosing Bite</p><p>Your Order OTP is - </p><h1>"+otp+"</h1>"
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+}
+

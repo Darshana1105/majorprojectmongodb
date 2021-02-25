@@ -58,7 +58,7 @@
         </div>
       </div>
       <mat-card-actions class="text-right p-4">
-        <button mat-raised-button class="accept-button" (click)="acceptOrder([order._id])">Accept</button>
+        <button mat-raised-button class="accept-button" (click)="acceptOrder(order._id,order.userId.email)">Accept</button>
       </mat-card-actions>
     </mat-card>
   </div>
@@ -123,7 +123,8 @@
               </div>
               <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
                 <div class="lead pb-2">
-                  <p class="font-weight-bold">{{aorder.customerName}}</p>
+                  <p class="font-weight-bold">Name - {{aorder.userId.firstName}}
+                    | Contact -{{aorder.userId.mobileNumber}}</p>
                   {{aorder.orderLocation.streetAddress}}
                   <span class="text-muted font-weight-bold border-dark">PinCode - </span>
                   <span class="h5">{{aorder.orderLocation.streetAddress}}</span>
@@ -141,7 +142,7 @@
         </div>
         <form [formGroup]="statusForm" (ngSubmit)=
         "change(aorder._id,aorder.userId.email,aorder.restaurantDetails.restaurantName,
-        aorder.totalAmount)">
+        aorder.totalAmount,aorder.orderOtp)">
           <mat-card-actions >
             <mat-form-field   class="bg-success card ml-3" >
                 <mat-label class="text-white p-3 h5">Order status</mat-label>
