@@ -4,18 +4,22 @@ import { DeliveryReportsComponent } from './components/deliveryExecutive/deliver
 import { DeliveryUserProfileComponent } from './components/deliveryExecutive/delivery-user-profile/delivery-user-profile.component';
 import { DeliveryComponent } from './components/deliveryExecutive/delivery/delivery.component';
 import { LandingMainComponent } from './components/landing-main/landing-main.component';
+import { RestaurantListComponent } from './components/restaurant-list/restaurant-list.component';
 
 const routes: Routes = [
 
-{path:'', component:LandingMainComponent},
-{path:'de-dashboard', component:DeliveryComponent},
-{path:'de-profile', component:DeliveryUserProfileComponent},
-
-{path:'de-reports', component:DeliveryReportsComponent}
+  { path: '', component: LandingMainComponent },
+  {path:'restaurants',component:RestaurantListComponent},
+  { path: 'de-dashboard', component: DeliveryComponent },
+  { path: 'profile', component: DeliveryUserProfileComponent },
+  { path: 'de-reports', component: DeliveryReportsComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled',    onSameUrlNavigation: 'reload',
+
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
