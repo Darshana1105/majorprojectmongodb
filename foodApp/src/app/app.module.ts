@@ -16,6 +16,7 @@ import { ChartsModule } from 'ng2-charts';
 import { LandingMainComponent } from './components/landing-main/landing-main.component';
 import { RestaurantCardComponent } from './components/restaurant-card/restaurant-card.component';
 import { TopFoodCardComponent } from './components/top-food-card/top-food-card.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { TopFoodCardComponent } from './components/top-food-card/top-food-card.c
 
     LandingMainComponent,
     RestaurantCardComponent,
-    TopFoodCardComponent
+    TopFoodCardComponent,
+    LoginComponent
 
   ],
   imports: [

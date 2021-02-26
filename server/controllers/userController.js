@@ -4,6 +4,9 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const auth = require("../helpers/authAPI");
 
+const generateOtp= require("../helpers/generateOtp");
+const sendOtp= require("../helpers/sendOtp");
+
 
 const app = require("../server");
 
@@ -15,19 +18,22 @@ exports.loginUser = async (req, res, next) => {
     let email = req.body.email;
     let password = req.body.password;
 
+    console.log(email);
+    
+
     let user = await userDataCollection.findOne({ 'email': email });
-    console.log("userRole" + user.role);
+    console.log("userRole",user);
 
     if (user && password === user.password) {
         const token = jwt.sign({ userId: user._id, email: user.email, password: user.password, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1d" });
         req.session.token = token;
-        return res.status(200).json({ token: token, firstName: user.firstName });
+        return res.status(200).json({ token: token});
     }
     else if (!user) {
-        res.status(404).json({ message: "User not found" });
+        res.status(404).json({ message: "User not found ! Register yourself first.." });
     }
     else {
-        res.status(400).json({ message: "User or Password is not match" });
+        res.status(400).json({ message: "Email or Password does not match!" });
     }
 }
 
@@ -46,7 +52,8 @@ exports.getUsers = async (req, res, next) => {
 
 // To register user
 exports.addUser = (req, res, next) => {
-
+    console.log(req.body);
+    
     let userObj;
     if (req.body.role == 'de') {
         userObj = new userDataCollection({
@@ -61,6 +68,8 @@ exports.addUser = (req, res, next) => {
                 vehicleNumber: req.body.vehicleNumber,
                 deliveryExecutiveLocation: {
                     streetAddress: req.body.streetAddress,
+                    landmark: req.body.landmark,
+                    area: req.body.area,
                     city: req.body.city,
                     zip: req.body.zip,
                     state: req.body.state,
@@ -85,7 +94,10 @@ exports.addUser = (req, res, next) => {
     }
 
     userObj.save(function (err, user) {
-        if (err) console.log(err.message);
+        if (err){
+            console.log(err.message);
+            res.send(err);
+        } 
         else {
             console.log("User Data======>", user);
         }
@@ -96,7 +108,6 @@ exports.addUser = (req, res, next) => {
 
 // update profile data of user
 exports.updateUser = async (req, res, next) => {
-    console.log(">>>>>>>>>",req.body);
     
     let id = req.body.userId;
     let updateData = {
@@ -104,7 +115,23 @@ exports.updateUser = async (req, res, next) => {
         lastName: req.body.lastName,
         mobileNumber: req.body.mobileNumber,
     }
-    // await userDataCollection.findByIdAndUpdate(id, updateData);
+    await userDataCollection.findByIdAndUpdate(id, updateData);
+}
+
+exports.resetPassword = async (req, res, next) => {
+    let email = req.body.email;
+    let newPassword = req.body.newPassword;
+    let updateData = {
+        password : newPassword
+    }
+    let user = await userDataCollection.findOne({ 'email': email });
+    if(user){
+        let data=await userDataCollection.updateOne({email:email}, updateData);
+        res.send(data);
+    }
+    else{
+        res.send("User doesn't exist, register first!");
+    }    
 }
 
 // Add to cart
@@ -185,7 +212,7 @@ exports.clearCart = async (req, res, next) => {
 
 //Get user using id
 exports.getUserById = (req, res, next) => {
-    let id = mongoose.Types.ObjectId(req.params.id);
+    let id = mongoose.Types.ObjectId(req.body.id);
     userDataCollection.findById(id, function (err, user) {
         if (err) console.log(err.message);
         res.status(200).json({
@@ -193,3 +220,14 @@ exports.getUserById = (req, res, next) => {
         })
     })
 }
+
+exports.sendOtpForResetPassword= (req,res,next)=>{
+    otp= generateOtp.generateOtp();
+    email= req.body.email;
+console.log(email);
+
+    sendOtp.sendOtpForResetPassword(email,otp);
+    
+    res.send(otp);
+}
+

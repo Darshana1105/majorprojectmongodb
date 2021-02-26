@@ -11,6 +11,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatDialogModule} from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const materialComponents = [
@@ -26,6 +29,9 @@ const materialComponents = [
   MatSelectModule,
   MatGridListModule,
   BrowserAnimationsModule,
+  MatTabsModule,
+  MatRadioModule,
+  MatDialogModule
 ];
 
 @NgModule({
