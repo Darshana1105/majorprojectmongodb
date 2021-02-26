@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
-import { DeliveryExecutiveService } from 'src/app/services/delivery-executive/delivery-executive.service';
+import { DeliveryExecutiveService } from 'src/app/utilities/delivery-executive/delivery-executive.service';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { DeliveryExecutiveService } from 'src/app/services/delivery-executive/de
 export class DeliveryReportsComponent implements OnInit {
 
   constructor(private _ordersServ: DeliveryExecutiveService){}
-
+    
   public orders:any;
   public dId = "6030c1a0a56123fa757da6ba";
   public ratings:any;

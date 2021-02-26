@@ -2,7 +2,7 @@ import { formatCurrency } from '@angular/common';
 import { Component, createPlatformFactory, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { element } from 'protractor';
-import { DeliveryExecutiveService } from 'src/app/services/delivery-executive/delivery-executive.service';
+import { DeliveryExecutiveService } from 'src/app/utilities/delivery-executive/delivery-executive.service';
 
 
 @Component({
@@ -23,7 +23,7 @@ export class DeliveryUserProfileComponent implements OnInit {
   deRatings:any;
   ngOnInit(): void {
 
-    this._ordersServ.getUserById("6030c1a0a56123fa757da6ba").subscribe(res  =>{
+    this._ordersServ.getUserById("60377fd6f93945228af3e61f").subscribe(res  =>{
       console.log(res.user);
       this.userdata = res.user;
       this.Ratings();
@@ -53,24 +53,21 @@ export class DeliveryUserProfileComponent implements OnInit {
       firstName:this.postData.firstName,
       lastName:this.postData.lastName,
       email:this.postData.email,
-      birthDate:this.postData.birthDate,
       mobileNumber:this.postData.mobileNumber,
-      gender:this.postData.gender,
-      deliveryExecutive:{
-        vehicleNumber:this.postData.vehicleNumber,
-        deliveryExecutiveLocation:{
-          streetAddress:this.postData.streetAddress,
-          city:this.postData.city,
-          zip:this.postData.pincode,
-          state:this.postData.state
+        $set:{
+            "deliveryExecutive.vehicleNumber" : this.postData.vehicleNumber,
+            "deliveryExecutive.deliveryExecutiveLocation.streetAddress" : this.postData.streetAddress,
+            "deliveryExecutive.deliveryExecutiveLocation.city" : this.postData.city,
+            "deliveryExecutive.deliveryExecutiveLocation.state" : this.postData.state,
+            "deliveryExecutive.deliveryExecutiveLocation.country" : this.postData.country,
+            "deliveryExecutive.deliveryExecutiveLocation.zip" : this.postData.pincode
         }
-      }
-
     }
-    this._ordersServ.updateDe("6030c1a0a56123fa757da6ba", dataDe ).subscribe(res => {
+
+    this._ordersServ.updateDe("60377fd6f93945228af3e61f", dataDe ).subscribe(res => {
     console.log(res);
-    })
-    // console.log(this.postData);
+    alert("Data Updated Successfully");
+    });
   }
  
   form(){
@@ -78,17 +75,14 @@ export class DeliveryUserProfileComponent implements OnInit {
         firstName: new FormControl(this.userdata.firstName,Validators.required),
         lastName: new FormControl(this.userdata.lastName,Validators.required),
         email:new FormControl(this.userdata.email,[Validators.required, Validators.email]),
-        birthDate: new FormControl(this.userdata.birthDate,Validators.required),
         mobileNumber: new FormControl(this.userdata.mobileNumber,[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
         vehicleNumber:new FormControl(this.userdata.deliveryExecutive.vehicleNumber,Validators.required),
         streetAddress:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.streetAddress,Validators.required),
         city:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.city,Validators.required),
         pincode:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.zip,[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{6}$")]),
         state:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.state,Validators.required),
-        gender:new FormControl(this.userdata.gender),
-
+        country:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.country,Validators.required),
     });
-    console.log("this.userdata");
   }
 
   get firstName() { return this.profileForm.get('firstName'); }

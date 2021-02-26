@@ -50,4 +50,7 @@ export class DeliveryExecutiveService {
   updateDe(dId:any,data:any):Observable<any>{
     return this.http.put<any>(this.url+"/update-de/"+dId,data)
   }
+  getOrdersByRes(id:any):Observable<any>{
+    return this.http.get<any>(this.url+"/get-orders-res/"+id);
+  }
 }

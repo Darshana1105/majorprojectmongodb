@@ -1,8 +1,11 @@
+$theme-red : #cc3528;
+$color-white : #fff;
+
 table th{
   font-size: 1.2rem;
   font-weight: 400;
-  background-color: #cc3528;
-  color: white;
+  background-color: $theme-red;
+  color: $color-white;
 }
 .jumbotron{
   overflow: auto;

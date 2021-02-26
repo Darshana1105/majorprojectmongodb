@@ -1,17 +1,30 @@
+$theme-red : #cc3528;
+$color-white : #fff;
+$color-black : #000;
+$color-facebook-bg :#3B5998 ;
+$color-footer-text : #7e7e7e;
+$color-footer-bg: #eee6e5 ; 
+$color-twitter-bg : #55ACEE;
+$value-10 : 10%;
+$value-30px : 30px;
+$value-100 : 100%;
+$value-50 : 50% ;
+$value-20px : 20px;
+
 ul {
     margin: 0px;
     padding: 0px;
 }
 .footer-section {
-  background: #eee6e5;
+  background: $color-footer-bg;
   position: relative;
 }
 .footer-cta {
-  border-bottom: 1px solid #373636;
+  border-bottom: 1px solid $theme-red;
 }
 .single-cta i {
-  color: #cc3528;
-  font-size: 30px;
+  color: $theme-red;
+  font-size: $value-30px;
   float: left;
   margin-top: 8px;
 }
@@ -20,14 +33,10 @@ ul {
   display: inline-block;
 }
 .cta-text h4 {
-  color: #000;
-  font-size: 20px;
+  color: $color-black;
+  font-size:$value-20px;
   font-weight: 600;
   margin-bottom: 2px;
-}
-.cta-text span {
-  color: #757575;
-  font-size: 15px;
 }
 .footer-content {
   position: relative;
@@ -37,12 +46,12 @@ ul {
   position: absolute;
   top: 0;
   left: 0;
-  height: 330px;
+  height: $value-30px;
   background-size: cover;
-  background-position: 100% 100%;
+  background-position: $value-100 $value-100;
 }
 .footer-logo {
-  margin-bottom: 30px;
+  margin-bottom: $value-30px;
 }
 .footer-logo img {
     max-width: 200px;
@@ -50,19 +59,19 @@ ul {
 .footer-text p {
   margin-bottom: 14px;
   font-size: 14px;
-      color: #7e7e7e;
+  color: $color-footer-text;
   line-height: 28px;
 }
 .footer-social-icon span {
-  color: #000;
+  color: $color-black;
   display: block;
-  font-size: 20px;
+  font-size:$value-20px;
   font-weight: 700;
   font-family: 'Poppins', sans-serif;
-  margin-bottom: 20px;
+  margin-bottom:$value-20px;
 }
 .footer-social-icon a {
-  color: #000;
+  color: $color-black;
   font-size: 16px;
   margin-right: 15px;
 }
@@ -71,48 +80,48 @@ ul {
   width: 40px;
   text-align: center;
   line-height: 38px;
-  border-radius: 50%;
+  border-radius: $value-50;
 }
 .facebook-bg{
-    background: #3B5998;
-    color: #fff;
+    background: $color-facebook-bg;
+    color: $color-white;
     border-radius: 15px;
-    height: 30px;
-    width: 30px;
+    height: $value-30px;
+    width: $value-30px;
 }
 .twitter-bg{
-    color: #fff;
-    background: #55ACEE;
+    color: $color-white;
+    background: $color-twitter-bg ;
     border-radius: 15px;
-    height: 30px;
-    width: 30px;
+    height: $value-30px;
+    width: $value-30px;
 }
 .insta-bg{
-    color: #fff;
-    background: #cc3528;
+    color: $color-white;
+    background: $theme-red;
     border-radius: 15px;
-    height: 30px;
-    width: 30px;
+    height: $value-30px;
+    width: $value-30px;
 }
 .mail-bg{
-    color: #cc3528;
-    width: 10%;
-    height: 10%;
+    color: $theme-red;
+    width: $value-10;
+    height: $value-10;
 }
 .phone-bg{
-    color: #cc3528;
-    width: 10%;
-    height: 10%;
+    color: $theme-red;
+    width: $value-10;
+    height: $value-10;
 }
 .marker-bg{
-    color: #cc3528;
-    width: 10%;
-    height: 10%;
+    color: $theme-red;
+    width: $value-10;
+    height: $value-10;
 }
 
 .footer-widget-heading h3 {
-  color: #000;
-  font-size: 20px;
+  color: $color-black;
+  font-size:$value-20px;
   font-weight: 600;
   margin-bottom: 40px;
   position: relative;
@@ -124,71 +133,58 @@ ul {
   bottom: -15px;
   height: 2px;
   width: 50px;
-  background: #cc3528;
-}
-.footer-widget ul li {
-  display: inline-block;
-  float: left;
-  width: 50%;
-  margin-bottom: 12px;
-}
-.footer-widget ul li a:hover{
-  color: #cc3528;
-}
-.footer-widget ul li a {
-  color: #878787;
-  text-transform: capitalize;
+  background: $theme-red;
 }
 .subscribe-form {
   position: relative;
   overflow: hidden;
 }
 .subscribe-form input {
-  width: 100%;
+  width: $value-100;
   padding: 14px 28px;
-  background: #fff;
-  border: 1px solid #2E2E2E;
-  color: #000;
+  background: $color-white;
+  border: 1px solid $color-black;
+  color: $color-black;
 }
 .subscribe-form button {
     position: absolute;
     right: 0;
-    background: #cc3528;
-    padding: 13px 20px;
-    border: 1px solid #cc3528;
-    color: #fff;
+    background: $theme-red;
+    padding: 13px$value-20px;
+    border: 1px solid $theme-red;
+    color: $color-white;
     top: 0;
 }
 .subscribe-form button:hover {
-    background: #f24b3c;
+    background: $theme-red;
 }
 .subscribe-form button i {
-  color: #000;
+  color: $color-black;
   font-size: 22px;
   transform: rotate(-6deg);
 }
 .copyright-area{
-  background: #202020;
+  background: $color-black;
   padding: 25px 0;
 }
 .copyright-text p {
   margin: 0;
   font-size: 14px;
-  color: #878787;
+  color: $color-footer-text ;
 }
 .copyright-text p a{
-  color: #cc3528;
+  color: $theme-red;
 }
 .footer-menu li {
   display: inline-block;
-  margin-left: 20px;
+  margin-left:$value-20px;
 }
 .footer-menu li:hover a{
-  color: #cc3528;
+  color: $theme-red;
 }
 .footer-menu li a {
   font-size: 14px;
-  color: #878787;
+  color: $color-footer-text;
 }
 
 @media (max-width: 767px) { 

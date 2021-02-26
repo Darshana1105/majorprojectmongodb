@@ -106,11 +106,7 @@ exports.searchRestaurants = async (req, res, next) => {
         }
     }
     ]});
-        // .catch((err) => {
-        //     res.send(err)
-        // });
-    // let searchRestaurants= await restaurantDataCollection.aggregate([{"search city":{$in:[city,'$restaurantLocation.city']}}]).exec(function(err,data){
-
+  
     console.log(searchRestaurants);
 
     res.send(searchRestaurants);
@@ -142,17 +138,38 @@ exports.getTopFood = async (req, res, next) => {
 
 exports.acceptOrderRo = (req,res,next) => {
   let id = mongoose.Types.ObjectId(req.params.id);
-  //console.log(req.body.dId)
   let updateData = {
     orderStatus: req.body.status,
   }
-  orderDataCollection.findByIdAndUpdate(id,updateData,function(err, res) {
+  orderDataCollection.findByIdAndUpdate(id,updateData,function(err, order) {
     if (err) console.log(err.message);
     else {
-        console.log("Data updated ", res);
+        res.status(200).json({"Data updated ": order});
     }
   });
+  
 }
+
+exports.getOrdersByRes = (req, res, next) => {
+    let id = mongoose.Types.ObjectId(req.params.id);
+    //console.log(id);
+    orderDataCollection.find({$and:[{orderStatus:"ordered"},{restaurantDetails:id}]}).populate('restaurantDetails'
+  , ['restaurantName', 'restaurantLocation']).populate('userId', ['firstName', 'email'])
+      .exec(function (err, order) {
+        if (err) {
+          console.error(err);
+          
+        }
+        //console.log(order);
+        res.status(200).json({
+          orders: order
+        });
+      })
+  }
+
+
+
+
 // exports.getTopFood = (req, res, next) => {
 //     restaurantDataCollection.aggregate([
 //         {

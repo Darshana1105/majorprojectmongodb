@@ -1,3 +1,9 @@
+$shadow-color :  rgba(0,0,0,0.75);
+$user-card-red :  rgb(240, 116, 116);
+$color-black : #000;
+$header-2-section-color :  rgb(228, 203, 203);
+$value-15 : 15% ; 
+$value-0 : 0%;
 
 .div-animate-right{position:relative;animation:animateright 1s}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}
 .div-animate-left{position:relative;animation:animateleft 1s}@keyframes animateleft{from{left:-300px;opacity:0} to{left:0;opacity:1}}
@@ -5,12 +11,11 @@
     clip-path: circle(74.6% at 25% 49%);
 }
 .header-2-section{
-
     margin-right: -9%;
     margin-left: -8.3%;
-    background-color: rgb(228, 203, 203);
-    height: 15%;
-    min-height: 15%;
+    background-color: $header-2-section-color;
+    height: $value-15;
+    min-height: $value-15;
     padding: 50px;
     clip-path: circle(73.6% at 93% 49%);
     text-align: right;
@@ -24,12 +29,12 @@
     height: auto;
 }
 .user-static-card{
-    background-color: rgb(240, 116, 116);
+    background-color:$user-card-red;
     border-radius: 3px;
     padding: 3%;
-    -webkit-box-shadow: 10px 10px 24px -10px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 24px -10px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 24px -10px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 10px 10px 24px -10px $shadow-color;
+    -moz-box-shadow: 10px 10px 24px -10px $shadow-color;
+    box-shadow: 10px 10px 24px -10px $shadow-color;
 }
 
 .username-static{
@@ -38,7 +43,7 @@
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: black!important;
+    color: $color-black !important;
 }
 .custom-padding{
     margin-right: none;
@@ -53,16 +58,16 @@
         width: 100%;
     }
     .header-2-section{
-        margin-left: 0%;
-        margin-right: 0%;
+        margin-left: $value-0;
+        margin-right: $value-0;
         background-color: rgb(228, 203, 203);
-        height: 15%;
-        min-height: 15%;
-        padding: 0px;
+        height: $value-15;
+        min-height: $value-15;
+        padding: $value-0;
         clip-path: none;
     }
     .form-div{
-        margin-left: 0%;
+        margin-left: $value-0;
     }
     .custom-padding{
         margin-right: 10%;

@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Food } from '../interfaces/food';
-import { Restaurant } from '../interfaces/restaurant';
+import { Food } from '../../interfaces/food';
+import { Restaurant } from '../../interfaces/restaurant';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +27,9 @@ export class RestaurantService {
   }
   acceptOrder(oId:any):Observable<any>{
     let body = {
-      status:"accepted-ro"
+      "status":"accepted-ro"
     };
-    return this.httpClient.patch<any>(this.baseUrl+"/accept-order-ro/"+oId,body)
+    console.log(body,oId)
+    return this.httpClient.patch<any>(this.baseUrl+"accept-order-ro/"+oId,body)
   }
 }

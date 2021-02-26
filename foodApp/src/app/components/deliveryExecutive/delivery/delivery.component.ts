@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
-import { DeliveryExecutiveService } from 'src/app/services/delivery-executive/delivery-executive.service';
+import { DeliveryExecutiveService } from 'src/app/utilities/delivery-executive/delivery-executive.service';
 
 @Component({
   selector: 'app-delivery',
