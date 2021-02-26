@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: '', component: LandingMainComponent },
   { path: 'de-dashboard', component: DeliveryComponent },
   { path: 'profile', component: DeliveryUserProfileComponent },
+  { path: 'login', component:LoginComponent },
   { path: 'de-reports', component: DeliveryReportsComponent }
 ];
 

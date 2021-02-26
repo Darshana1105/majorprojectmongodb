@@ -96,6 +96,8 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid) {
       return;
     }
+    console.log("In submit button");
+    
     this._userService.userLogin(this.loginForm.value).subscribe((data) => {
       console.log("Data:", data);
       this._sessionService.setLocalSession(data.token);
