@@ -1,0 +1,58 @@
+// .rest-menu-div{
+//     width: max-content;
+// }
+
+.rest-menu-image img{
+    height: 20vh;
+    width: 100%;
+    object-fit: cover;
+    // min-width: 200px;
+    min-height: 200px;
+    max-width: 300px;
+    border-radius: 8px;
+}
+
+.rest-menu-content-subdiv1 h1{
+    font-size: x-large;
+    font-weight: 450;
+    color: black;
+}
+
+.rest-menu-content-subdiv1 h2, h3{
+    font-size: medium;
+    font-weight: 200;
+}
+
+
+
+.rest-menu-content-subdiv1 p{
+    font-size: medium;
+    font-weight: 200;
+}
+
+.add-to-cart-button{
+    border-radius: 8px;
+    color: rgb(244,67,54);
+    border: 1px solid rgb(244,67,54);
+}
+
+@media (min-width: 576px){ .col-sm-6 button {
+    // align-self: center;
+    }
+}
+
+.cart-qty-button{
+    border-radius: 8px;
+    color: rgb(244,67,54);
+    border: 1px solid rgb(244,67,54);
+    padding: 0 4px;
+    font-size: medium;
+}
+
+::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content{
+    line-height: 34px;
+}
+
+::ng-deep .cart-count-item .mat-button-toggle-label-content {
+    cursor: default;
+}

@@ -12,6 +12,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatDialogModule} from '@angular/material/dialog';
 
 const materialComponents = [
   MatButtonModule,
@@ -26,6 +32,12 @@ const materialComponents = [
   MatSelectModule,
   MatGridListModule,
   BrowserAnimationsModule,
+  MatTabsModule,
+  MatChipsModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatButtonToggleModule,
+  MatDialogModule
 ];
 
 @NgModule({

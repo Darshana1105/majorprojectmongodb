@@ -5,14 +5,17 @@ import { DeliveryUserProfileComponent } from './components/deliveryExecutive/del
 import { DeliveryComponent } from './components/deliveryExecutive/delivery/delivery.component';
 import { LandingMainComponent } from './components/landing-main/landing-main.component';
 import { RestaurentOwnerHomeComponent } from './components/restaurent-owner-home/restaurent-owner-home.component';
+import { RestaurantHomeComponent } from './components/restaurant-home/restaurant-home.component';
 
 const routes: Routes = [
 
-{path:'', component:LandingMainComponent},
-{path:'de-home', component:DeliveryComponent},
-{path:'de-profile', component:DeliveryUserProfileComponent},
-{path:'ro-home', component:RestaurentOwnerHomeComponent},
-{path:'de-reports', component:DeliveryReportsComponent}
+  { path: '', component: LandingMainComponent },
+  { path: 'de-home', component: DeliveryComponent },
+  { path: 'de-profile', component: DeliveryUserProfileComponent },
+  { path: 'ro-home', component: RestaurentOwnerHomeComponent },
+  { path: 'de-reports', component: DeliveryReportsComponent },
+{ path: 'restaurant/:id', component: RestaurantHomeComponent }
+
 ];
 
 @NgModule({
