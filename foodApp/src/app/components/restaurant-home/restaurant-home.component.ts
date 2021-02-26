@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StarRatingComponent } from 'ng-starrating';
 import { element } from 'protractor';
 import { Observable } from 'rxjs';
-import { RestaurantService } from 'src/app/utilities/restaurant.service';
+import { RestaurantService } from 'src/app/utilities/restaurant/restaurant.service';
 import { UserService } from 'src/app/utilities/user.service';
 import { AddRatingDialogComponent } from '../add-rating-dialog/add-rating-dialog.component';
 
