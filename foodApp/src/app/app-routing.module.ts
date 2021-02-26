@@ -8,15 +8,17 @@ import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
 
-{path:'', component:LandingMainComponent},
-{path:'login', component:LoginComponent},
-{path:'de-dashboard', component:DeliveryComponent},
-{path:'de-profile', component:DeliveryUserProfileComponent},
-{path:'de-reports', component:DeliveryReportsComponent}
+  { path: '', component: LandingMainComponent },
+  { path: 'de-dashboard', component: DeliveryComponent },
+  { path: 'profile', component: DeliveryUserProfileComponent },
+  { path: 'de-reports', component: DeliveryReportsComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled',    onSameUrlNavigation: 'reload',
+
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
