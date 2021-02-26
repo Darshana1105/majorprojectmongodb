@@ -1,11 +1,18 @@
+.card-clickable {
+  padding: 0;
+  line-height: initial;
+  font-weight: initial;
+  width: 100%;
+  margin: 3rem 0;
+  border-radius: 15px;
+  overflow: hidden;
+
 .top-food-card {
     // max-width: 300px;
-    margin: 3rem 0;
     background: rgba(255, 255, 255);
     // border: transparent;
     box-shadow: 0 0 0;
-    border-radius: 15px;
-    overflow: hidden;
+   
   }
   
   .dish-image.mat-card-image {
@@ -14,4 +21,4 @@
     height: 25vh;
     object-fit: cover;
   }
-  
+}

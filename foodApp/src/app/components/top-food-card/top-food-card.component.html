@@ -1,4 +1,6 @@
-<mat-card *ngIf='foodItem!=undefined' class="top-food-card text-left">
+<button mat-button class="card-clickable" *ngIf='foodItem!=undefined' routerLink='/restaurant/{{foodItem.restaurantId}}'  >
+
+<mat-card *ngIf='foodItem!=undefined' class="top-food-card text-left"  >
     <img mat-card-image class="dish-image shadow-lg  overflow-hidden" src="../../../assets/images/pizza.jpg"
       alt="Photo of a Shiba Inu">
     <mat-card-content>
@@ -24,3 +26,4 @@
 
     </mat-card-content>
   </mat-card>
+  </button>

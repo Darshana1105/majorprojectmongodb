@@ -25,6 +25,8 @@ import { FoodItemComponent } from './components/food-item/food-item.component';
 import { UpperCaseConverterPipe } from './utilities/upper-case-converter.pipe';
 import { UpperCaseConverterButtonPipe } from './utilities/upper-case-converter-button.pipe';
 import { PureVegFilterPipe } from './utilities/pure-veg-filter.pipe';
+import { ViewCartComponent } from './components/view-cart/view-cart.component';
+import { ViewCartItemComponent } from './components/view-cart-item/view-cart-item.component';
 
 
 @NgModule({
@@ -46,7 +48,10 @@ import { PureVegFilterPipe } from './utilities/pure-veg-filter.pipe';
     FoodItemComponent,
     UpperCaseConverterPipe,
     UpperCaseConverterButtonPipe,
-    PureVegFilterPipe
+    PureVegFilterPipe,
+    ViewCartComponent,
+    ViewCartItemComponent
+
 
   ],
   imports: [

@@ -3,6 +3,7 @@ import { Food } from "./food";
 import { Rating } from "./rating";
 
 export interface Restaurant {
+    _id:string
     restaurantName:string
     restaurantLocation:Address
     workingHours:{start:number,end:number}

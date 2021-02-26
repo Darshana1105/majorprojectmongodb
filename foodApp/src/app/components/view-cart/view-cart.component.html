@@ -1,0 +1,53 @@
+<mat-card class="cart-details mx-auto mt-3 mb-3 text-secondary col-6">
+    <!-- <h1 class="mt-5 mb-0 text-center">Cart Details</h1>
+    <h3 class="text-secondary text-center mt-0">2 Items</h3> -->
+    <ng-container *ngIf='cartItems.length>0' >
+    <mat-card-title class="text-secondary text-center mt-5 mb-0">
+        Cart Details
+    </mat-card-title>
+        <mat-card-subtitle class="text-secondary text-center mt-0">
+            <h2>{{cartItems.length}} Item{{cartItems.length>1?'s':''}}</h2>
+            <hr class="ruler">
+        </mat-card-subtitle>
+
+        <mat-card-content class="min-width">
+            <div>
+                <!-- <ng-container *ngIf='cartItems.length!=0'> -->
+                    <ng-container *ngFor='let cartItem of cartItems'>
+                        <app-view-cart-item class="min-width" [foodItem]='foodItemOfId(cartItem.foodId)' [cartItem]='cartItem'  (onDecrease)='decrementItem($event)' (onIncrease)='incrementItem($event)' (onRemove)='removeItem($event)'>
+                        </app-view-cart-item>
+                    </ng-container>
+                <!-- </ng-container> -->
+
+                
+                <!-- <app-view-cart-item></app-view-cart-item>
+            <app-view-cart-item></app-view-cart-item> -->
+
+                <hr class="ruler text-secondary mt-5 mb-1">
+
+                <div class="total text-secondary mt-3 justify-content-between d-flex">
+                    <div class="total-1 col-8">
+                        <h3 class="mb-0"><b>Subtotal</b></h3>
+                        <h5 class="mt-0">Extra Charges may apply</h5>
+                    </div>
+
+                    <div class="total-2 col-4 text-right">
+                        <h3><b>{{getSubTotal()|currency:"INR":"symbol"}}</b></h3>
+                    </div>
+                </div>
+                <div class="row text-center justify-content-center mt-4">
+                    <button mat-raised-button  class="bg-success text-white checkout-button col-md-5 col-8 m-2" routerLink='/orderBill' >CHECKOUT</button>
+                    
+                        
+                    <button mat-raised-button color="accent" class="checkout-button col-md-3 col-8 m-2" (click)='clearCart()'>CLEAR CART</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </ng-container>
+    <ng-container *ngIf='cartItems.length==0'>
+        <img src="../../../assets/images/emptyCart.png" alt="" class="mx-auto d-block">
+        <div>
+            <button mat-raised-button color="warn"  class="mx-auto d-block" routerLink = "/" >Back to Browse</button>
+        </div>
+    </ng-container>
+</mat-card>

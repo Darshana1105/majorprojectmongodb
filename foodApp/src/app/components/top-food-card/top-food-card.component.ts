@@ -13,6 +13,7 @@ export class TopFoodCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

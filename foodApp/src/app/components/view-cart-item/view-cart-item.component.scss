@@ -1,0 +1,22 @@
+.veg-icon{
+    height: 15px;
+    width: 15px;
+}
+
+.cart-qty-div{
+    min-width: max-content;
+}
+
+.cart-qty-button{
+    border-radius: 8px;
+    color: rgb(244,67,54);
+    border: 1px solid rgb(244,67,54);
+    padding: 0 4px;
+    font-size: medium;
+    min-width: max-content;
+}
+
+.cart-item-delete-btn{
+    line-height: 40px;
+    cursor: pointer;
+}
