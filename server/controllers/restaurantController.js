@@ -6,8 +6,6 @@ const app = require("../server");
 const orderSchema = require('../models/orderModel');
 const orderDataCollection = mongoose.model('order', orderSchema, 'orders');
 
-
-
 restaurantSchema.index({ '$**': 'text' });
 const restaurantDataCollection = mongoose.model('restaurant', restaurantSchema, 'restaurants');
 
@@ -71,6 +69,28 @@ exports.addRestaurant = (req, res, next) => {
     })
 }
 
+exports.addRestaurantRating = async (req, res, next) => {
+    let restaurantId = req.body.restaurantId;
+
+    let restaurantRatings = {
+        userId: req.body.userId,
+        rating: req.body.restaurantRating
+    }
+
+    let restaurantData = await restaurantDataCollection.findById(restaurantId);
+    let restaurantRating = restaurantData.restaurantRatings.find((x) => x.userId == req.body.userId);
+
+    // console.log(restaurantRating);
+
+    if (restaurantRating == undefined) {
+        await restaurantDataCollection.findByIdAndUpdate(restaurantId, { $push: { restaurantRatings: restaurantRatings } });
+    } else {
+        await restaurantDataCollection.updateOne({"_id":restaurantId, "restaurantRatings.userId":req.body.userId}, { $set: { 'restaurantRatings.$.rating': req.body.restaurantRating } });
+    }
+
+
+}
+
 exports.getTopRestaurants = (req, res, next) => {
     restaurantDataCollection.aggregate([
         {
@@ -100,15 +120,18 @@ exports.getTopRestaurants = (req, res, next) => {
 exports.searchRestaurants = async (req, res, next) => {
     let search = req.body.search;
     let city = req.body.city;
-    let searchRestaurants = await restaurantDataCollection.find({$and:[{'restaurantLocation.city': city },
-        {$text:{
-            $search: search
+    let searchRestaurants = await restaurantDataCollection.find({
+        $and: [{ 'restaurantLocation.city': city },
+        {
+            $text: {
+                $search: search
+            }
         }
-    }
-    ]});
-        // .catch((err) => {
-        //     res.send(err)
-        // });
+        ]
+    });
+    // .catch((err) => {
+    //     res.send(err)
+    // });
     // let searchRestaurants= await restaurantDataCollection.aggregate([{"search city":{$in:[city,'$restaurantLocation.city']}}]).exec(function(err,data){
 
     console.log(searchRestaurants);
@@ -116,6 +139,26 @@ exports.searchRestaurants = async (req, res, next) => {
     res.send(searchRestaurants);
 }
 
+exports.getFoodByRestaurant = async (req, res, next) => {
+    let id = mongoose.Types.ObjectId(req.query.id);
+
+    let foodList = [];
+
+    let restaurant = await restaurantDataCollection.findById(id);
+    let avgRating = 0;
+
+    restaurant.menuDetails.forEach((food) => {
+        avgRating = food.foodRating.reduce((total, current) => total + current.rating, 0) / food.foodRating.length;
+        foodList.push({ restaurantId: id, food: food, avgRating: avgRating });
+    })
+
+    foodList = foodList.sort(function (a, b) {
+        return (a.avgRating < b.avgRating) ? 1 : -1;
+    });
+
+    res.send(foodList);
+
+}
 
 exports.getTopFood = async (req, res, next) => {
     let city = "Ahmedabad";
@@ -139,20 +182,19 @@ exports.getTopFood = async (req, res, next) => {
 
     res.send(foodlist);
 }
-
 exports.acceptOrderRo = (req,res,next) => {
-  let id = mongoose.Types.ObjectId(req.params.id);
-  //console.log(req.body.dId)
-  let updateData = {
-    orderStatus: req.body.status,
-  }
-  orderDataCollection.findByIdAndUpdate(id,updateData,function(err, res) {
-    if (err) console.log(err.message);
-    else {
-        console.log("Data updated ", res);
+    let id = mongoose.Types.ObjectId(req.params.id);
+    //console.log(req.body.dId)
+    let updateData = {
+      orderStatus: req.body.status,
     }
-  });
-}
+    orderDataCollection.findByIdAndUpdate(id,updateData,function(err, res) {
+      if (err) console.log(err.message);
+      else {
+          console.log("Data updated ", res);
+      }
+    });
+  }
 // exports.getTopFood = (req, res, next) => {
 //     restaurantDataCollection.aggregate([
 //         {

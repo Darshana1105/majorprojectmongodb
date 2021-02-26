@@ -6,6 +6,8 @@ router.get('/getRestaurants', restaurantController.getRestaurants);
 
 router.post('/addRestaurant', restaurantController.addRestaurant);
 
+router.put('/addRestaurantRating', restaurantController.addRestaurantRating);
+
 router.get('/topRestaurants', restaurantController.getTopRestaurants);
 
 router.get('/getRestaurantById', restaurantController.getRestaurantById);
@@ -16,5 +18,6 @@ router.get('/searchRestaurants', restaurantController.searchRestaurants);
 
 router.patch('/accept-order-ro/:id/', restaurantController.acceptOrderRo);
 
+router.get('/getFoodByRestaurant', restaurantController.getFoodByRestaurant);
 
 module.exports = router;

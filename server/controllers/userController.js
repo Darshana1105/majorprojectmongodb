@@ -78,7 +78,7 @@ exports.updateUser = async (req, res, next) => {
 }
 
 
-// user authentication login
+// user authentication login 
 exports.loginUser = async (req, res, next) => {
     let email = req.body.email;
     let password = req.body.password;
@@ -100,83 +100,119 @@ exports.loginUser = async (req, res, next) => {
 
 // Add to cart
 exports.addToCart = async (req, res, next) => {
-    let id = req.body.userId;
-    const foodItem = req.body.foodItem;
+    let id = req.query.userId;
     const restaurantId = req.body.restaurantId;
+    const foodId = req.body.foodId;
+    const foodItem = {
+        foodId:foodId,
+        quantity : 1
+    };
+    console.log(">>>>>>" + req.query.role);
 
-    if (req.body.role == "user") {
+    let result;
+    if (req.query.role == "user") {
 
         let existingCart = await userDataCollection.findById(id, { cart: 1 });
-        console.log(existingCart);
         if (existingCart.cart == undefined) {
 
+            // foodItem.quantity = 1;
             let cart = {
                 // userId:req.body.userId,
                 restaurantId: restaurantId,
                 foodList: [foodItem]
             }
-            let result = await userDataCollection.findByIdAndUpdate(id, { "cart": cart });
-            console.log(result);
+            result = await userDataCollection.findByIdAndUpdate(id, { "cart": cart });
         } else {
             if (existingCart.cart.restaurantId.toString() === restaurantId) {
                 let foodIndex = existingCart.cart.foodList.findIndex((food) => {
-                    return food.foodId.toString() == foodItem.foodId;
+                    return food.foodId.toString() == foodId;
                 });
 
                 if (foodIndex != -1) {
-                    if (foodItem.quantity) {
+                    // if (foodItem.quantity) {
 
-                    }
+                    // }
                     existingCart.cart.foodList[foodIndex].quantity += 1;
                 }
                 else {
                     existingCart.cart.foodList.push(foodItem);
                 }
-                await userDataCollection.findByIdAndUpdate(id, { "cart": existingCart.cart });
+                result = await userDataCollection.findByIdAndUpdate(id, { "cart": existingCart.cart });
+
             } else {
 
             }
 
         }
     }
+    res.send(result);
 }
 
 exports.reduceCartItem = async (req, res, next) => {
-    let id = req.body.userId;
-    const foodItem = req.body.foodItem;
+    let id = mongoose.Types.ObjectId(req.query.userId);
+    const foodItem = req.body;
     const restaurantId = req.body.restaurantId;
+    const foodId = req.body.foodId;
 
-    if (req.body.role == "user") {
+    let result;
+
+    if (req.query.role == "user") {
         let existingCart = await userDataCollection.findById(id, { cart: 1 });
 
         if (existingCart.cart.foodList.length == 1 && existingCart.cart.foodList[0].quantity == 1) {
-            await userDataCollection.findByIdAndUpdate(id, { "cart": undefined });
+            result = await userDataCollection.updateOne({ _id: id }, { $unset: { cart: 1 } });
         }
         else {
             let foodIndex = existingCart.cart.foodList.findIndex((food) => {
-                return food.foodId.toString() == foodItem.foodId;
+                return food.foodId.toString() == foodId;
             });
             if (existingCart.cart.foodList[foodIndex].quantity == 1) {
-                existingCart.cart.foodList = existingCart.cart.foodList.filter((x) => { return x.foodId.toString() != foodItem.foodId });
+                existingCart.cart.foodList = existingCart.cart.foodList.filter((x) => { return x.foodId.toString() != foodId });
             }
             else {
                 existingCart.cart.foodList[foodIndex].quantity -= 1;
             }
-            await userDataCollection.findByIdAndUpdate(id, { "cart": existingCart.cart });
+            result = await userDataCollection.findByIdAndUpdate(id, { "cart": existingCart.cart });
         }
 
     }
+    res.send(result)
 }
 
+
+exports.removeItem =async (req, res, next) => {
+
+    let id = mongoose.Types.ObjectId(req.query.userId);
+    const foodItem = req.body;
+    const restaurantId = req.body.restaurantId;
+    const foodId = req.body.foodId;
+
+    if (req.query.role == "user") {
+        let existingCart = await userDataCollection.findById(id, { cart: 1 });
+
+        let foodIndex = existingCart.cart.foodList.findIndex((food) => {
+            return food.foodId.toString() == foodId;
+        });
+
+        existingCart.cart.foodList = existingCart.cart.foodList.filter((x) => { return x.foodId.toString() != foodId });
+        result = await userDataCollection.findByIdAndUpdate(id, { "cart": existingCart.cart });
+    }
+    res.send(result);
+}
+
+
+
 exports.clearCart = async (req, res, next) => {
-    let id = req.body.userId;
-    await userDataCollection.findByIdAndUpdate(id, { "cart": undefined });
+    let id = mongoose.Types.ObjectId(req.query.userId);
+    console.log(id);
+    let result = await userDataCollection.updateOne({ _id: id }, { $unset: { cart: 1 } });
+    res.send(result);
 }
 
 
 //Get user using id
 exports.getUserById = (req, res, next) => {
-    let id = mongoose.Types.ObjectId(req.params.id);
+    let id = mongoose.Types.ObjectId(req.query.id);
     userDataCollection.findById(id, function (err, user) {
         if (err) console.log(err.message);
         res.status(200).json({

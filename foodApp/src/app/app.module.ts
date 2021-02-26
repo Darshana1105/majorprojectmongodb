@@ -11,11 +11,18 @@ import { MaterialModule } from './material/material.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { DeliveryUserProfileComponent } from './components/deliveryExecutive/delivery-user-profile/delivery-user-profile.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { LandingMainComponent } from './components/landing-main/landing-main.component';
 import { RestaurantCardComponent } from './components/restaurant-card/restaurant-card.component';
 import { TopFoodCardComponent } from './components/top-food-card/top-food-card.component';
+import { RestaurantHomeComponent } from './components/restaurant-home/restaurant-home.component';
+import { AddRatingDialogComponent } from './components/add-rating-dialog/add-rating-dialog.component';
+import { RatingModule } from 'ng-starrating';
+import { FoodItemComponent } from './components/food-item/food-item.component';
+import { UpperCaseConverterPipe } from './utilities/upper-case-converter.pipe';
+import { UpperCaseConverterButtonPipe } from './utilities/upper-case-converter-button.pipe';
+import { PureVegFilterPipe } from './utilities/pure-veg-filter.pipe';
 
 
 @NgModule({
@@ -27,10 +34,15 @@ import { TopFoodCardComponent } from './components/top-food-card/top-food-card.c
     DeliveryReportsComponent,
     FooterComponent,
     DeliveryUserProfileComponent,
-
     LandingMainComponent,
     RestaurantCardComponent,
-    TopFoodCardComponent
+    TopFoodCardComponent,
+    RestaurantHomeComponent,
+    AddRatingDialogComponent,
+    FoodItemComponent,
+    UpperCaseConverterPipe,
+    UpperCaseConverterButtonPipe,
+    PureVegFilterPipe
 
   ],
   imports: [
@@ -41,7 +53,10 @@ import { TopFoodCardComponent } from './components/top-food-card/top-food-card.c
     HttpClientModule,
     ReactiveFormsModule,
     ChartsModule,
+    RatingModule,
+    FormsModule
 
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

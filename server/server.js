@@ -4,7 +4,7 @@ const express = require('express');
 const userRoute = require('./routes/userRoute');
 const restaurantRoute = require('./routes/restaurantRoute');
 const deliverExecutiveRoute = require('./routes/deliveryExecutiveRoute');
-const orderRoute = require('./routes/orderRoute');
+const orderRoute = require ('./routes/orderRoute');
 const cors = require("cors");
 
 dotenv.config();
@@ -24,7 +24,7 @@ db.on('error', console.error.bind(console, 'connection error'));
 const app = express();
 app.use(express.json());
 
-app.use(cors())
+app.use(cors());
 
 app.use(userRoute);
 
@@ -35,40 +35,18 @@ app.use(deliverExecutiveRoute);
 app.use(orderRoute);
 
 
-app.use("/", function (req, res) {
+app.use("/", function(req, res){
     res.send("<h1>This is Home</h1>");
 })
 
 // Error Middleware
 
-app.listen(3000, function (err) {
-    if (err) {
+app.listen(3000, function(err){
+    if(err){
         // throw err;
         console.log(err);
     }
-    else {
+    else{
         console.log("Server is running on 3000...");
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
