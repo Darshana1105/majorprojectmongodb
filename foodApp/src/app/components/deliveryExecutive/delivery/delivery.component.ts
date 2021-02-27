@@ -39,7 +39,7 @@ export class DeliveryComponent implements OnInit {
       });
     }
   });
-  //  setInterval(() => { this.gOrders(); }, 2000);
+   setInterval(() => { this.gOrders(); }, 2000);
   
  }
  Acount = 0;
