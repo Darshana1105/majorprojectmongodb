@@ -14,7 +14,8 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
 export class RestaurantListComponent implements OnInit {
   restaurants:Array<Restaurant>;
   selectedFilters:Array<string>=[];
-
+  selectedCity:string='';
+  searchText:string='';
   constructor(private filter_dialog:MatDialog,private _restaurantService:RestaurantService) { 
     this.restaurants=[];
   }
@@ -33,10 +34,23 @@ export class RestaurantListComponent implements OnInit {
 
   onSearchChange(event:string){
     console.log(event);
+    this.searchText=event;
+    this._restaurantService.searchRestaurants(this.selectedCity,this.searchText).subscribe((data)=>{
+      console.log(data);
+      
+    });
   }
-
+  
   onCitySelect(event:string){
     console.log(event);
+    this.selectedCity=event;
+    this._restaurantService.searchRestaurants(this.selectedCity,this.searchText).subscribe((data)=>{
+      console.log(data);
+      
+    },(err)=>{
+      console.log(err);
+      
+    });
   }
 
   openDialog(){

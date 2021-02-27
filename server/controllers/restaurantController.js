@@ -94,8 +94,9 @@ exports.getTopRestaurants = (req, res, next) => {
 
 
 exports.searchRestaurants = async (req, res, next) => {
-    let search = req.body.search;
-    let city = req.body.city;
+    let search = req.query.search;
+    let city = req.query.city;
+    console.log(req.query);
     let searchRestaurants = await restaurantDataCollection.find({$and:[{'restaurantLocation.city': city },
         {$text:{
             $search: search
@@ -107,7 +108,6 @@ exports.searchRestaurants = async (req, res, next) => {
         // });
     // let searchRestaurants= await restaurantDataCollection.aggregate([{"search city":{$in:[city,'$restaurantLocation.city']}}]).exec(function(err,data){
 
-    console.log(searchRestaurants);
 
     res.send(searchRestaurants);
 }
