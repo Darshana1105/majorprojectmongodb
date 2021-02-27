@@ -5,6 +5,7 @@ const userRoute = require('./routes/userRoute');
 const restaurantRoute = require('./routes/restaurantRoute');
 const deliverExecutiveRoute = require('./routes/deliveryExecutiveRoute');
 const orderRoute = require('./routes/orderRoute');
+const categoryRoute = require('./routes/categoryRoute');
 const cors = require("cors");
 
 dotenv.config();
@@ -33,6 +34,8 @@ app.use(restaurantRoute);
 app.use(deliverExecutiveRoute);
 
 app.use(orderRoute);
+
+app.use(categoryRoute);
 
 
 app.use("/", function (req, res) {
