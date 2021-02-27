@@ -18,16 +18,16 @@ import { AddRatingDialogComponent } from '../add-rating-dialog/add-rating-dialog
 })
 export class RestaurantHomeComponent implements OnInit, OnDestroy {
 
-  restaurantData: any = "";
-  foodData: any = "";
+  restaurantData: any;
+  foodData: any;
   restaurantId: string = "";
   // userId: any = "602a55efc358f7284c32af28";
   userData: any = "";
   userObs;
-  rating:number = 0;
-  pureVegChecked:boolean = false;
+  rating: number = 0;
+  pureVegChecked: boolean = false;
 
-  constructor(private routes: ActivatedRoute, private _restaurantService: RestaurantService, private _userService: UserService, public dialog: MatDialog) {    
+  constructor(private routes: ActivatedRoute, private _restaurantService: RestaurantService, private _userService: UserService, public dialog: MatDialog) {
     routes.params.subscribe((param) => {
       this.restaurantId = param['id'];
     });
@@ -72,23 +72,26 @@ export class RestaurantHomeComponent implements OnInit, OnDestroy {
 
   getPopularDishes(): string[] {
     let data: string[] = [];
-    this.foodData.forEach((element:any) => {
-      data.push(element.food.foodName);
-    });
-    data = data.filter((data,idx) => idx < 4);
+    if (this.foodData != undefined) {
+      this.foodData.forEach((element: any) => {
+        data.push(element.food.foodName);
+      });
+    }
+    data = data.filter((data, idx) => idx < 4);
+
     return data;
   }
 
   addRating() {
     const dialogRef = this.dialog.open(AddRatingDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
-      
-      this.rating = result;      
+
+      this.rating = result;
     });
-    
+
   }
 
-  getRating(event:number){
+  getRating(event: number) {
     this.rating = event;
   }
 

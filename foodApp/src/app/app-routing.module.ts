@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'profile', component: DeliveryUserProfileComponent },
   { path: 'ro-home', component: RestaurentOwnerHomeComponent },
   { path: 'de-reports', component: DeliveryReportsComponent },
+  { path: 'de-dashboard', component: DeliveryComponent },
 { path: 'restaurant/:id', component: RestaurantHomeComponent }
 
 ];

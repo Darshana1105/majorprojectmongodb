@@ -15,8 +15,7 @@ const orderDataCollection = mongoose.model('order', orderSchema, 'orders');
 
 
 exports.getOrders = (req, res, next) => {
-  orderDataCollection.find({orderStatus:"accepted-ro"}).populate('restaurantDetails'
-  ,['restaurantName','restaurantLocation']).populate('userId',['firstName','email'])
+  orderDataCollection.find({orderStatus:"accepted-ro"}).populate('userId',['firstName','email'])
   .exec(function (err,order) {
     if (err) {
         console.error(err);
@@ -29,10 +28,9 @@ exports.getOrders = (req, res, next) => {
 }
 
 exports.getRecentOrders = (req, res, next) => {
-  let id = mongoose.Types.ObjectId(req.params.id);
+  let id = mongoose.Types.ObjectId(req.body.userId);
   orderDataCollection.find({orderStatus:"delivered",deliveryExecutive:id})
-  .populate('restaurantDetails'
-  ,['restaurantName','restaurantLocation']).populate('userId',['firstName'])
+  .populate('userId',['firstName'])
   .limit(2)
   .exec(function (err,order) {
     if (err) {
@@ -46,11 +44,11 @@ exports.getRecentOrders = (req, res, next) => {
 }
 
 exports.acceptOrderDe = (req,res,next) => {
-  let id = mongoose.Types.ObjectId(req.params.id);
+  let id = mongoose.Types.ObjectId(req.params.oid);
   //console.log(req.body.dId)
   let updateData = {
     orderStatus: "accepted-de",
-    deliveryExecutive: req.body.dId,
+    deliveryExecutive: req.body.userId,
     orderOtp : req.body.otp
   }
   orderDataCollection.findByIdAndUpdate(id,updateData,function(err, res) {
@@ -59,14 +57,14 @@ exports.acceptOrderDe = (req,res,next) => {
         console.log("Data updated ", res);
     }
   });
-  sendOtp(req.body.email,req.body.otp);
+  sendOtp(req.body.uemail,req.body.otp);
   res.status(200).json({
     status:"sent"
   })
 }
 
 exports.orderStatus = (req,res,next) => {
-  let id = mongoose.Types.ObjectId(req.params.id);
+  let id = mongoose.Types.ObjectId(req.params.oid);
   console.log(req.body)
   let updateData = {
     orderStatus: req.body.status,
@@ -81,10 +79,9 @@ exports.orderStatus = (req,res,next) => {
 }
 
 exports.activeOrders = (req,res,next) =>{
-  let id = mongoose.Types.ObjectId(req.params.id);
+  let id = mongoose.Types.ObjectId(req.body.userId);
   orderDataCollection.find({$and: [{$or:[{orderStatus:"accepted-de"},{orderStatus:"Picked-up"},
   {orderStatus:"On-the-Way"}]},{deliveryExecutive:id}]})
-  .populate('restaurantDetails',['restaurantName','restaurantLocation'])
   .populate('userId',['firstName','email','mobileNumber'])
   .exec(function (err,order) {
     if (err) {
@@ -98,10 +95,9 @@ exports.activeOrders = (req,res,next) =>{
 }
 
 exports.deliveredOrders = (req,res,next) =>{
-  let id = mongoose.Types.ObjectId(req.params.id);
+  let id = mongoose.Types.ObjectId(req.body.userId);
   orderDataCollection.find({$and:[{orderStatus:"delivered"},{deliveryExecutive:id}]})
   .select('_id restaurantDetails orderDateAndTime orderLocation totalAmount')
-  .populate('restaurantDetails',['restaurantName'])
   .exec(function (err,order) {
     if (err) {
         console.error(err);
@@ -114,7 +110,7 @@ exports.deliveredOrders = (req,res,next) =>{
 }
 
 exports.getRatings = (req,res,next) => {
-    let id = mongoose.Types.ObjectId(req.params.id);
+    let id = mongoose.Types.ObjectId(req.body.userId);
     userDataCollection.findById(id).select('deliveryExecutive').exec(function (err, rating) {
       if (err) console.log(err.message);
     res.status(200).json({
@@ -124,7 +120,7 @@ exports.getRatings = (req,res,next) => {
 }
 
 exports.updateDe = (req,res,next) => {
-  let id = mongoose.Types.ObjectId(req.params.id);
+  let id = mongoose.Types.ObjectId(req.body.userId);
   //console.log(req.body)
   let updateData = req.body;
 
@@ -145,7 +141,7 @@ exports.sendMail = (req,res,next) =>{
 }
 
 exports.getOtp = (req, res, next) => {
-  let id = mongoose.Types.ObjectId(req.params.id);
+  let id = mongoose.Types.ObjectId(req.params.oid);
     orderDataCollection.findById(id).select('orderOtp').exec(function (err, otp) {
       if (err) console.log(err.message);
     res.status(200).json({

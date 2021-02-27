@@ -6,10 +6,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class UpperCaseConverterPipe implements PipeTransform {
 
   transform(value: String[]): String[] {
-    let data:string[] = [];
-    value.forEach((elem)=>{
-      data.push(elem.charAt(0).toUpperCase() + elem.slice(1));
-    });
+    let data: string[] = [];
+    if (value != undefined)
+      value.forEach((elem) => {
+        data.push(elem.charAt(0).toUpperCase() + elem.slice(1));
+      });
     return data;
   }
 }

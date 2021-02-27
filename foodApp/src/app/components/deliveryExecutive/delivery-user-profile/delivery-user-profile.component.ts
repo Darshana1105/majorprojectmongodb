@@ -3,6 +3,7 @@ import { Component, createPlatformFactory, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { element } from 'protractor';
 import { DeliveryExecutiveService } from 'src/app/utilities/delivery-executive/delivery-executive.service';
+import { UserService } from 'src/app/utilities/user.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class DeliveryUserProfileComponent implements OnInit {
   profileForm: any;
   avgRating: number = 0;
 
-  constructor(private _ordersServ: DeliveryExecutiveService) {}
+  constructor(private _ordersServ: DeliveryExecutiveService,private _userService: UserService) {}
   userdata:any
   userName:any
   postData:any
@@ -23,12 +24,12 @@ export class DeliveryUserProfileComponent implements OnInit {
   deRatings:any;
   ngOnInit(): void {
 
-    this._ordersServ.getUserById("60377fd6f93945228af3e61f").subscribe(res  =>{
-      console.log(res.user);
-      this.userdata = res.user;
-      this.Ratings();
-      if(this.userdata){
-      this.form();
+    this._userService.getUser().subscribe(res  =>{
+      if(res!=null)
+      {
+        this.userdata = res;
+        this.Ratings();
+        this.form();
       }
     });
   }
@@ -64,7 +65,7 @@ export class DeliveryUserProfileComponent implements OnInit {
         }
     }
 
-    this._ordersServ.updateDe("60377fd6f93945228af3e61f", dataDe ).subscribe(res => {
+    this._ordersServ.updateDe( dataDe ).subscribe(res => {
     console.log(res);
     alert("Data Updated Successfully");
     });

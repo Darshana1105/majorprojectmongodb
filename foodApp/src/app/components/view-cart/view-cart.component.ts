@@ -37,7 +37,7 @@ export class ViewCartComponent implements OnInit, OnDestroy {
     //   })
     // })
     this.userObs = this._userService.getUser().subscribe((user) => {
-      if (user.cart != undefined && user.cart!=null) {
+      if (user?.cart != undefined && user?.cart!=null) {
         
         
       this.restaurantId = user.cart.restaurantId

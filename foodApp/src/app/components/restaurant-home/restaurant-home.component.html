@@ -7,42 +7,42 @@
         <mat-grid-list class="restaurant-image-grid" cols="4" rowHeight="200px">
             <mat-grid-tile class="restaurant-image-tile" rowspan="2" colspan="2">
                 <div>
-                    <img *ngIf='restaurantData?.restaurantImages[0]!=undefined'
+                    <img *ngIf='restaurantData?.restaurantImages!=undefined && restaurantData?.restaurantImages[0]!=undefined'
                         [src]='restaurantData?.restaurantImages[0]'>
-                    <img *ngIf='restaurantData?.restaurantImages[0]==undefined'
+                    <img *ngIf='restaurantData?.restaurantImages==undefined || restaurantData?.restaurantImages[0]==undefined'
                         src='../../../assets/images/image-not-found.jpeg'>
                 </div>
             </mat-grid-tile>
             <mat-grid-tile class="restaurant-image-tile" rowspan="1" colspan="1">
                 <div>
 
-                    <img *ngIf='restaurantData?.restaurantImages[1]!=undefined'
+                    <img *ngIf='restaurantData?.restaurantImages!=undefined && restaurantData?.restaurantImages[1]!=undefined'
                         [src]='restaurantData?.restaurantImages[1]' alt=''>
-                    <img *ngIf='restaurantData?.restaurantImages[1]==undefined'
+                    <img *ngIf='restaurantData?.restaurantImages==undefined || restaurantData?.restaurantImages[1]==undefined'
                         src='../../../assets/images/image-not-found.jpg'>
                 </div>
             </mat-grid-tile>
             <mat-grid-tile class="restaurant-image-tile" rowspan="1" colspan="1">
                 <div>
-                    <img *ngIf='restaurantData?.restaurantImages[2]!=undefined'
+                    <img *ngIf='restaurantData?.restaurantImages!=undefined && restaurantData?.restaurantImages[2]!=undefined'
                         [src]='restaurantData?.restaurantImages[2]'>
-                    <img *ngIf='restaurantData?.restaurantImages[2]==undefined'
+                    <img *ngIf='restaurantData?.restaurantImages==undefined || restaurantData?.restaurantImages[2]==undefined'
                         src='../../../assets/images/image-not-found.jpg'>
                 </div>
             </mat-grid-tile>
             <mat-grid-tile class="restaurant-image-tile" rowspan="1" colspan="1">
                 <div>
-                    <img *ngIf='restaurantData?.restaurantImages[3]!=undefined'
+                    <img *ngIf='restaurantData?.restaurantImages!=undefined && restaurantData?.restaurantImages[3]!=undefined'
                         [src]='restaurantData?.restaurantImages[3]'>
-                    <img *ngIf='restaurantData?.restaurantImages[3]==undefined'
+                    <img *ngIf='restaurantData?.restaurantImages==undefined || restaurantData?.restaurantImages[3]==undefined'
                         src='../../../assets/images/image-not-found.jpg'>
                 </div>
             </mat-grid-tile>
             <mat-grid-tile class="restaurant-image-tile" rowspan="1" colspan="1">
                 <div>
-                    <img *ngIf='restaurantData?.restaurantImages[4]!=undefined'
+                    <img *ngIf='restaurantData?.restaurantImages!=undefined && restaurantData?.restaurantImages[4]!=undefined'
                         [src]='restaurantData?.restaurantImages[4]'>
-                    <img *ngIf='restaurantData?.restaurantImages[4]==undefined'
+                    <img *ngIf='restaurantData?.restaurantImages==undefined || restaurantData?.restaurantImages[4]==undefined'
                         src='../../../assets/images/image-not-found.jpg'>
                 </div>
             </mat-grid-tile>
@@ -53,28 +53,28 @@
         <div class="left-rest-div col-8">
             <section class="rest-info">
                 <section>
-                    <h1 class="restaurant-name mt-2">{{restaurantData.restaurantName}}</h1>
+                    <h1 class="restaurant-name mt-2">{{restaurantData?.restaurantName}}</h1>
                     <div>
                         <!-- <ng-container *ngFor = 'let cat of restaurantData.restaurantCategory'> -->
                         <h3 class="restaurant-info text-secondary">
-                            {{restaurantData.restaurantCategory | upperCaseConverter}}
+                            {{restaurantData?.restaurantCategory | upperCaseConverter}}
                         </h3>
                         <!-- </ng-container> -->
 
                     </div>
-                    <h3 class="restaurant-info text-secondary">{{restaurantData.restaurantLocation.area}},
-                        {{restaurantData.restaurantLocation.city}}</h3>
+                    <h3 class="restaurant-info text-secondary">{{restaurantData?.restaurantLocation?.area}},
+                        {{restaurantData?.restaurantLocation?.city}}</h3>
                 </section>
                 <section>
                     <h3 class="restaurant-info text-secondary">
-                        <span class="text-success" *ngIf="restaurantData.activityStatus == true">
+                        <span class="text-success" *ngIf="restaurantData?.activityStatus == true">
                             Open
                         </span>
-                        <span class="text-warning" *ngIf="restaurantData.activityStatus == false">
+                        <span class="text-warning" *ngIf="restaurantData?.activityStatus == false">
                             Closed
                         </span>
-                        - ( Open from {{restaurantData.workingHours.start}}:00 to
-                        {{restaurantData.workingHours.end}}:00 )
+                        - ( Open from {{restaurantData?.workingHours?.start}}:00 to
+                        {{restaurantData?.workingHours?.end}}:00 )
                     </h3>
                 </section>
             </section>
@@ -83,13 +83,13 @@
 
         <div class="right-rest-rating mt-3 d-flex col-4">
             <section>
-                <star-rating class="mt-5" [value]=restaurantData.rating_avg [totalstars]=5 checkedcolor="orangered"
+                <star-rating class="mt-5" [value]=restaurantData?.rating_avg [totalstars]=5 checkedcolor="orangered"
                     uncheckedcolor="lightgrey" size="30px" [readonly]=true (rate)="onRate($event)"></star-rating>
 
-                <h3 class="text-center text-secondary">({{restaurantData.restaurantRatings.length}} Ratings)
+                <h3 class="text-center text-secondary">({{restaurantData?.restaurantRatings?.length}} Ratings)
                 </h3>
             </section>
-            <h2 class="rating-avg bold mt-2">{{restaurantData.rating_avg}}</h2>
+            <h2 class="rating-avg bold mt-2">{{restaurantData?.rating_avg}}</h2>
         </div>
     </section>
 
@@ -105,7 +105,7 @@
         <mat-tab-group dynamicHeight mat-align-tabs="center" color="warn" class="rest-mat-tab pb-5">
             <mat-tab label="Overview" color="warn" class="label-danger main-rest-content">
                 <h1 class="mt-2">Cuisines</h1>
-                <ng-container *ngFor="let category of restaurantData.restaurantCategory">
+                <ng-container *ngFor="let category of restaurantData?.restaurantCategory">
                     <button mat-stroked-button color="accent" class="cuisine-button">{{category |
                         upperCaseConverterButton}}</button>
                 </ng-container>

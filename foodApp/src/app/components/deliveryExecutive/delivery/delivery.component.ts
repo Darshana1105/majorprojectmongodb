@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { DeliveryExecutiveService } from 'src/app/utilities/delivery-executive/delivery-executive.service';
+import { UserService } from 'src/app/utilities/user.service';
 
 @Component({
   selector: 'app-delivery',
@@ -15,26 +16,31 @@ export class DeliveryComponent implements OnInit {
 });
   recentOrders:any = [];
 
- constructor(private _ordersServ: DeliveryExecutiveService,private formBuilder: FormBuilder) { }
+ constructor(private _ordersServ: DeliveryExecutiveService,private _userService:UserService,private formBuilder: FormBuilder) { }
  orders:any = [];
  ngOnInit(): void {
-  this._ordersServ.activeOrders(this.dId).subscribe(res  =>{
-    this.Acount = res.orders.length;
-    this.activeOrders = res.orders;
-    console.log(this.activeOrders);
-
+  this._userService.getUser().subscribe((data)=>{
+    if(data!=undefined && data.role=='de')
+    {
+      this._ordersServ.activeOrders().subscribe(res  =>{
+        this.Acount = res.orders.length;
+        this.activeOrders = res.orders;
+        console.log(this.activeOrders);
+    
+      });
+       this._ordersServ.getOrders().subscribe(res  =>{
+         this.Ocount = res.orders.length;
+         this.orders = res.orders;
+         console.log(res.orders);
+       });
+       this._ordersServ.getRecent().subscribe(res  =>{
+        this.recentOrders = res.orders;
+        console.log(res.orders);
+      });
+    }
   });
-   this._ordersServ.getOrders().subscribe(res  =>{
-     this.Ocount = res.orders.length;
-     this.orders = res.orders;
-     console.log(res.orders);
-   });
-   this._ordersServ.getRecent(this.dId).subscribe(res  =>{
-    this.recentOrders = res.orders;
-    console.log(res.orders);
-  });
-   setInterval(() => { this.gOrders(); }, 2000);
-   setInterval(() => { this.gOrders(); }, 2000);
+  //  setInterval(() => { this.gOrders(); }, 2000);
+  
  }
  Acount = 0;
  Ocount = 0;
@@ -46,7 +52,7 @@ export class DeliveryComponent implements OnInit {
      }
 
    });
-   this._ordersServ.activeOrders(this.dId).subscribe(res  =>{
+   this._ordersServ.activeOrders().subscribe(res  =>{
     if(res.orders.length!=this.Acount){
       this.Acount = res.orders.length;
       this.activeOrders = res.orders;
@@ -60,7 +66,7 @@ export class DeliveryComponent implements OnInit {
     console.log(value,email);
     if(this.Acount<3){
       let val = Math.floor(1000 + Math.random() * 9000);
-      this._ordersServ.acceptOrder(value,this.dId,val,email).subscribe(res =>{
+      this._ordersServ.acceptOrder(value,val,email).subscribe(res =>{
         console.log(res);
       })
       //console.log(value)

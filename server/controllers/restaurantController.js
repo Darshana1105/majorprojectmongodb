@@ -183,7 +183,7 @@ exports.getTopFood = async (req, res, next) => {
     res.send(foodlist);
 }
 exports.acceptOrderRo = (req,res,next) => {
-  let id = mongoose.Types.ObjectId(req.params.id);
+  let id = mongoose.Types.ObjectId(req.body.userId);
   let updateData = {
     orderStatus: req.body.status,
   }
@@ -199,8 +199,7 @@ exports.acceptOrderRo = (req,res,next) => {
 exports.getOrdersByRes = (req, res, next) => {
     let id = mongoose.Types.ObjectId(req.params.id);
     //console.log(id);
-    orderDataCollection.find({$and:[{orderStatus:"ordered"},{restaurantDetails:id}]}).populate('restaurantDetails'
-  , ['restaurantName', 'restaurantLocation']).populate('userId', ['firstName', 'email'])
+    orderDataCollection.find({$and:[{orderStatus:"ordered"},{restaurantDetails:id}]}).populate('userId', ['firstName', 'email'])
       .exec(function (err, order) {
         if (err) {
           console.error(err);
