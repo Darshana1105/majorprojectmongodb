@@ -47,7 +47,46 @@ export class LoginComponent implements OnInit {
       password: [null, Validators.required]
     });
 
-
+    this.registerForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      mobileNumber: ['', [Validators.required, Validators.pattern(this.phoneRegx)]],
+      gender: ['', Validators.required],
+      role: ['user'],
+      streetAddress: [''],
+      city: [''],
+      state: [''],
+      country: [''],
+      zip: ['', [Validators.pattern(this.zipRegx)]],
+      landmark: [''],
+      area: [''],
+      vehicleNumber: ['']
+    });
+    this.registerForm.get('role').valueChanges.subscribe((val: any) => {
+      if (val == 'de') {
+        this.registerForm.get('streetAddress').setValidators(Validators.required);
+        this.registerForm.get('city').setValidators(Validators.required);
+        this.registerForm.get('state').setValidators(Validators.required);
+        this.registerForm.get('country').setValidators(Validators.required);
+        this.registerForm.get('zip').setValidators(Validators.required);
+        this.registerForm.get('vehicleNumber').setValidators(Validators.required);
+        this.registerForm.get('landmark').setValidators(Validators.required);
+        this.registerForm.get('area').setValidators(Validators.required);
+      }
+      else {
+        this.registerForm.get('streetAddress').clearValidators(Validators.required);
+        this.registerForm.get('city').clearValidators(Validators.required);
+        this.registerForm.get('state').clearValidators(Validators.required);
+        this.registerForm.get('country').clearValidators(Validators.required);
+        this.registerForm.get('zip').clearValidators(Validators.required);
+        this.registerForm.get('vehicleNumber').clearValidators(Validators.required);
+        this.registerForm.get('landmark').clearValidators(Validators.required);
+        this.registerForm.get('area').clearValidators(Validators.required);
+      }
+    })
+  
   }
 
 
@@ -74,7 +113,25 @@ export class LoginComponent implements OnInit {
 
   get f() { return this.registerForm.controls; }
 
-  // register
+
+// register
+onSubmit() {
+  if (!this.registerForm.valid) {
+    return;
+  }
+  this.submitted = true;
+
+  this._userService.addUser(this.registerForm.value).subscribe((data) => {
+    if (data.code && data.code == 11000) {
+      this.isUserExist = true;
+    }
+    else {
+      this.isUserExist = false;
+      this.currentIndex = 0;
+    }
+  });
+
+}
 
   forgotpassword: boolean=false;
 

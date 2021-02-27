@@ -63,6 +63,8 @@ exports.addUser = (req, res, next) => {
                 vehicleNumber: req.body.vehicleNumber,
                 deliveryExecutiveLocation: {
                     streetAddress: req.body.streetAddress,
+                    landmark: req.body.landmark,
+                    area: req.body.area,
                     city: req.body.city,
                     zip: req.body.zip,
                     state: req.body.state,
@@ -87,7 +89,8 @@ exports.addUser = (req, res, next) => {
     }
 
     userObj.save(function (err, user) {
-        if (err) console.log(err.message);
+        if (err){ console.log(err.message);
+            res.send(err);   }
         else {
             console.log("User Data======>", user);
         }

@@ -85,6 +85,9 @@ export class UserService {
     return this.http.put<any>(this.baseUrl+'resetPassword',newData);
   }
 
+  addUser(userData: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'addUser', userData);
+  }
 
   decrementCartItem(foodItem:any):Observable<any>{
     let token = this._sessionService.getJWTToken();
