@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
@@ -17,6 +17,11 @@ export const _filter = (opt: string[], value: string): string[] => {
 })
 export class SearchBarComponent implements OnInit {
   searchedcity = new FormControl();
+  searchedText = new FormControl();
+
+  @Output() onCitySelect: EventEmitter<string> = new EventEmitter<string>();
+  @Output() onSearchChange: EventEmitter<string> = new EventEmitter<string>();
+
   stateGroup: Array<any> = [
     {
       state: "Andaman and Nicobar Islands",
@@ -692,9 +697,15 @@ export class SearchBarComponent implements OnInit {
 
   stateGroupOptions!: Observable<any[]>;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+    this.searchedText.valueChanges.subscribe((data) => {
+      this.onSearchChange.emit(data);
+    });
+
+
     this.stateGroupOptions = this.searchedcity!.valueChanges
       .pipe(
         startWith(''),
@@ -702,13 +713,18 @@ export class SearchBarComponent implements OnInit {
       );
   }
 
+
+  onCitySelection(event: any) {
+
+    this.onCitySelect.emit(event.option.value)
+  }
+
   private _filterGroup(value: string): Array<any> {
     if (value) {
-      
+
       return this.stateGroup
         .map((group: any) => {
-          console.log(group);
-          
+
           return ({ state: group.state, cities: _filter(group.cities, value) });
         })
         .filter((group: any) => group.cities.length > 0);

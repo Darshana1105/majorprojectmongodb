@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Restaurant } from 'src/app/interfaces/restaurant';
 import { RestaurantService } from 'src/app/utilities/restaurant.service';
@@ -21,7 +22,6 @@ export class RestaurantListComponent implements OnInit {
   ngOnInit(): void {
     this._restaurantService.getAllRestaurants().subscribe((data)=>{
       console.log(data);
-      
       this.restaurants = data;
     },
     (err)=>{
@@ -29,6 +29,14 @@ export class RestaurantListComponent implements OnInit {
       
     }
     )
+  }
+
+  onSearchChange(event:string){
+    console.log(event);
+  }
+
+  onCitySelect(event:string){
+    console.log(event);
   }
 
   openDialog(){
