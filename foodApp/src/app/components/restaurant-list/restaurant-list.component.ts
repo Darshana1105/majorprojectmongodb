@@ -12,6 +12,7 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
 })
 export class RestaurantListComponent implements OnInit {
   restaurants:Array<Restaurant>;
+  selectedFilters:Array<string>=[];
 
   constructor(private filter_dialog:MatDialog,private _restaurantService:RestaurantService) { 
     this.restaurants=[];
@@ -31,7 +32,15 @@ export class RestaurantListComponent implements OnInit {
   }
 
   openDialog(){
-    this.filter_dialog.open(FilterDialogComponent);
+    this.filter_dialog.open(FilterDialogComponent,{
+      width:'60vw',
+      maxWidth:'1200px',
+      height:'50vh',
+      minHeight:'max-content',
+      maxHeight:'100%',
+      hasBackdrop:true,
+      data:this.selectedFilters
+    });
   }
 
 }
