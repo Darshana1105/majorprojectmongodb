@@ -1,0 +1,31 @@
+.otp-button{
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.login-button{
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+.forget-title{
+    color: rgb(244,67,54);
+}
+
+.dialog-title{
+    color: rgb(244,67,54);
+}
+
+::ng-deep .mat-tab-label, .mat-tab-link{
+    color: rgb(244,67,54);
+}
+
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+    background-color: rgb(244,67,54);
+}
+
+.forgot-tab{
+    justify-content: center;
+    text-align: center
+}
+

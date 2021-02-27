@@ -11,7 +11,7 @@ const routes: Routes = [
 
   { path: '', component: LandingMainComponent },
   { path: 'de-home', component: DeliveryComponent },
-  { path: 'de-profile', component: DeliveryUserProfileComponent },
+  { path: 'profile', component: DeliveryUserProfileComponent },
   { path: 'ro-home', component: RestaurentOwnerHomeComponent },
   { path: 'de-reports', component: DeliveryReportsComponent },
 { path: 'restaurant/:id', component: RestaurantHomeComponent }

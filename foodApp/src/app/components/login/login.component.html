@@ -1,0 +1,133 @@
+<section class="bg-light">
+    <div class="row mx-0">
+        <h2 mat-dialog-title class="col dialog-title">Welcome To Bon Appetit!</h2>
+
+        <!-- <button mat-fab color="warn" mat-dialog-close align="end"> -->
+        <mat-icon mat-dialog-close class="">close</mat-icon>
+        <!-- </button> -->
+
+    </div>
+    <mat-dialog-content class="mat-typography">
+        <ng-container *ngIf='!forgotpassword'>
+            <mat-tab-group dynamicHeight [(selectedIndex)]='currentIndex'>
+
+                <!-- Login form -->
+                <mat-tab label="Login" class="login-title">
+                    <div class="example-container">
+                        <div class="form-container">
+                            <form [formGroup]="loginForm" (submit)="submit()">
+                                <div class="row m-1 mt-2 p-2">
+                                    <mat-form-field class="form-field col-md-12" appearance="outline" color="primary">
+                                        <mat-label> E-mail
+                                        </mat-label>
+                                        <input matInput formControlName="email" required>
+                                        <mat-error
+                                            *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">
+                                            <span *ngIf="loginForm.controls.email.errors.required">This field is
+                                                mandatory.</span>
+                                            <span *ngIf="loginForm.controls.email.errors.pattern">This field is
+                                                invalid.</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="row m-1 p-2">
+                                    <mat-form-field class="form-field col-md-12" appearance="outline" color="primary">
+                                        <mat-label> Password
+                                        </mat-label>
+                                        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                                        <mat-icon matSuffix (click)="hide = !hide" color="warn">
+                                            {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        <mat-error
+                                            *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+                                            <span *ngIf="loginForm.controls.password.errors.required">This field is
+                                                mandatory.</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <mat-error>
+                                    <span *ngIf="errMsg">{{errMsg}}</span>
+                                </mat-error>
+                                <div *ngIf=''>{{errMsg}}</div>
+                                <div class="d-flex justify-content-between">
+                                    <button mat-raised-button color="warn" class="login-button mt-3 mb-2"
+                                        type="submit">LogIn</button>
+                                    <button mat-raised-button color="warn" class="login-button mt-3 mb-2" type="button"
+                                        (click)='forgotPassword()'>Forgot Password</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </mat-tab>
+
+
+
+                <!-- Register form -->
+                
+            </mat-tab-group>
+        </ng-container>
+
+
+        <!-- Forgot Password  -->
+
+        <ng-container *ngIf='forgotpassword'>
+            <mat-tab-group>
+
+                <mat-tab label="Reset Password" color="warn" class="forgot-tab">
+                    <div>
+                        <div class="forget-password">
+
+                            <mat-form-field class="form-field col-md-6" appearance="outline" color="warn">
+
+                                <mat-label> E-mail</mat-label>
+                                <input matInput [formControl]="email" required [readonly]='readonlyEmail'>
+
+                            </mat-form-field>
+                            <button mat-raised-button color="warn" class="otp-button"
+                                (click)='sendOtpForResetpassword()'>Send
+                                OTP</button>
+                        </div>
+                        <mat-form-field class="form-field col-md-6" appearance="outline" color="warn">
+                            <mat-label> OTP
+                            </mat-label>
+                            <input matInput [formControl]="formOtp" [readonly]='readonlyOtp'>
+                        </mat-form-field>
+                        <button mat-raised-button color="warn" class="otp-button" (click)='checkOtp()'>Confirm
+                            OTP</button>
+                    </div>
+
+
+
+                    <!-- reset password -->
+                    <div *ngIf='resetPassword'>
+                        <div class="forget-password">
+                            <mat-form-field class="form-field col-md-12" appearance="outline" color="warn">
+                                <mat-label> New Password
+                                </mat-label>
+                                <input matInput [formControl]="newPassword" [type]="hide ? 'password' : 'text'">
+                                <mat-icon matSuffix (click)="hide = !hide" color="warn">
+                                    {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                <mat-error
+                                    *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+                                    <span *ngIf="loginForm.controls.password.errors.required">This field is
+                                        mandatory.</span>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-error>
+                                <span *ngIf="errForgotPassword">{{errForgotPassword}}</span>
+                            </mat-error>
+                            <button mat-raised-button color="warn" class="otp-button"
+                                (click)='confirmResetPassword()'>Reset
+                                Password</button>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+
+        </ng-container>
+
+    </mat-dialog-content>
+
+
+</section>

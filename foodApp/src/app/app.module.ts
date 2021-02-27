@@ -17,7 +17,7 @@ import { LandingMainComponent } from './components/landing-main/landing-main.com
 import { RestaurantCardComponent } from './components/restaurant-card/restaurant-card.component';
 import { TopFoodCardComponent } from './components/top-food-card/top-food-card.component';
 import { RestaurentOwnerHomeComponent } from './components/restaurent-owner-home/restaurent-owner-home.component';
-
+import {LoginComponent} from './components/login/login.component';
 import { RestaurantHomeComponent } from './components/restaurant-home/restaurant-home.component';
 import { AddRatingDialogComponent } from './components/add-rating-dialog/add-rating-dialog.component';
 import { RatingModule } from 'ng-starrating';
@@ -42,7 +42,7 @@ import { ViewCartItemComponent } from './components/view-cart-item/view-cart-ite
     RestaurantCardComponent,
     TopFoodCardComponent,
     RestaurentOwnerHomeComponent,
-    
+    LoginComponent,
     RestaurantHomeComponent,
     AddRatingDialogComponent,
     FoodItemComponent,

@@ -1,9 +1,11 @@
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 var mongoose = require("mongoose");
 
 const userSchema = require('../models/userModel');
-
+const auth = require("../helpers/authAPI");
 const app = require("../server");
+const generateOtp= require("../helpers/generateOtp");
+const sendOtp= require("../helpers/sendOtp");
 
 // user schema
 const userDataCollection = mongoose.model('user', userSchema, 'users');
@@ -15,6 +17,34 @@ exports.getUsers = async (req, res, next) => {
     res.send(users);
 }
 
+// user authentication login 
+exports.loginUser = async (req, res, next) => {
+    let email = req.body.email;
+    let password = req.body.password;
+
+    console.log(email);
+    
+
+    let user = await userDataCollection.findOne({ 'email': email });
+    console.log("userRole",user);
+
+    if (user && password === user.password) {
+        const token = jwt.sign({ userId: user._id, email: user.email, password: user.password, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1d" });
+        console.log('token',token)
+        req.session.token = token;
+        return res.status(200).json({ token: token});
+    }
+    else if (!user) {
+        res.status(404).json({ message: "User not found ! Register yourself first.." });
+    }
+    else {
+        res.status(400).json({ message: "Email or Password does not match!" });
+    }
+}
+
+exports.logoutUser = (req, res, next) => {
+    req.session.name = null;
+}
 
 // To register user
 exports.addUser = (req, res, next) => {
@@ -68,7 +98,7 @@ exports.addUser = (req, res, next) => {
 
 // update profile data of user
 exports.updateUser = async (req, res, next) => {
-    let id = req.query.id;
+    let id = req.body.userId;
     let updateData = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -77,40 +107,37 @@ exports.updateUser = async (req, res, next) => {
     await userDataCollection.findByIdAndUpdate(id, updateData);
 }
 
-
-// user authentication login 
-exports.loginUser = async (req, res, next) => {
+exports.resetPassword = async (req, res, next) => {
     let email = req.body.email;
-    let password = req.body.password;
-    let user = await userDataCollection.find({ 'email': email }, { 'email': 1, 'password': 1 })
-
-    if (user != null) {
-        if (password === user.password) {
-            console.log("User Logged in Successfully");
-        }
-        else {
-            console.log("Wrong Password");
-        }
+    let newPassword = req.body.newPassword;
+    let updateData = {
+        password : newPassword
     }
-    else {
-        console.log("User doesn't Exist");
+    let user = await userDataCollection.findOne({ 'email': email });
+    if(user){
+        let data=await userDataCollection.updateOne({email:email}, updateData);
+        res.send(data);
     }
+    else{
+        res.send("User doesn't exist, register first!");
+    }    
 }
+
 
 
 // Add to cart
 exports.addToCart = async (req, res, next) => {
-    let id = req.query.userId;
+    let id = req.body.userId;
     const restaurantId = req.body.restaurantId;
     const foodId = req.body.foodId;
     const foodItem = {
         foodId:foodId,
         quantity : 1
     };
-    console.log(">>>>>>" + req.query.role);
+    console.log(">>>>>>" + req.body.role);
 
     let result;
-    if (req.query.role == "user") {
+    if (req.body.role == "user") {
 
         let existingCart = await userDataCollection.findById(id, { cart: 1 });
         if (existingCart.cart == undefined) {
@@ -149,14 +176,14 @@ exports.addToCart = async (req, res, next) => {
 }
 
 exports.reduceCartItem = async (req, res, next) => {
-    let id = mongoose.Types.ObjectId(req.query.userId);
+    let id = mongoose.Types.ObjectId(req.body.userId);
     const foodItem = req.body;
     const restaurantId = req.body.restaurantId;
     const foodId = req.body.foodId;
 
     let result;
 
-    if (req.query.role == "user") {
+    if (req.body.role == "user") {
         let existingCart = await userDataCollection.findById(id, { cart: 1 });
 
         if (existingCart.cart.foodList.length == 1 && existingCart.cart.foodList[0].quantity == 1) {
@@ -182,12 +209,12 @@ exports.reduceCartItem = async (req, res, next) => {
 
 exports.removeItem =async (req, res, next) => {
 
-    let id = mongoose.Types.ObjectId(req.query.userId);
+    let id = mongoose.Types.ObjectId(req.body.userId);
     const foodItem = req.body;
     const restaurantId = req.body.restaurantId;
     const foodId = req.body.foodId;
 
-    if (req.query.role == "user") {
+    if (req.body.role == "user") {
         let existingCart = await userDataCollection.findById(id, { cart: 1 });
 
         let foodIndex = existingCart.cart.foodList.findIndex((food) => {
@@ -203,7 +230,7 @@ exports.removeItem =async (req, res, next) => {
 
 
 exports.clearCart = async (req, res, next) => {
-    let id = mongoose.Types.ObjectId(req.query.userId);
+    let id = mongoose.Types.ObjectId(req.body.userId);
     console.log(id);
     let result = await userDataCollection.updateOne({ _id: id }, { $unset: { cart: 1 } });
     res.send(result);
@@ -212,11 +239,22 @@ exports.clearCart = async (req, res, next) => {
 
 //Get user using id
 exports.getUserById = (req, res, next) => {
-    let id = mongoose.Types.ObjectId(req.query.id);
+    let id = mongoose.Types.ObjectId(req.body.userId);
     userDataCollection.findById(id, function (err, user) {
         if (err) console.log(err.message);
         res.status(200).json({
             user: user
         })
     })
+}
+
+
+exports.sendOtpForResetPassword= (req,res,next)=>{
+    otp= generateOtp.generateOtp();
+    email= req.body.email;
+console.log(email);
+
+    sendOtp.sendOtpForResetPassword(email,otp);
+    
+    res.send(otp);
 }
