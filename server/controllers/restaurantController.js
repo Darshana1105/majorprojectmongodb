@@ -189,11 +189,9 @@ exports.searchRestaurants = async (req, res, next) => {
                 }
             },
            ]);
-        console.log("sdfssf",searchRestaurants);
         res.send(searchRestaurants);
     }
     catch (err) {
-        console.log(err);
         res.send(err)
     }
     // .catch((err) => {
@@ -253,7 +251,8 @@ exports.acceptOrderRo = (req,res,next) => {
     orderStatus: req.body.status,
   }
   orderDataCollection.findByIdAndUpdate(id,updateData,function(err, order) {
-    if (err) console.log(err.message);
+    if (err)
+        res.send(err);
     else {
         res.status(200).json({"Data updated ": order});
         }
@@ -310,7 +309,6 @@ exports.addFoodRating = async (req, res, next) => {
     let result;
     await foodId.forEach(async (value) => {
 
-        console.log(value);
         result=await restaurantDataCollection.findOneAndUpdate(
             {$and:[{
                 _id: mongoose.Types.ObjectId(restaurantId)},{

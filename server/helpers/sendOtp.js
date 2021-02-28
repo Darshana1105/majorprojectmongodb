@@ -29,6 +29,5 @@ exports.sendOtpForResetPassword=async function(email, otp) {
         html: "<p>Thanks For Choosing Bite</p><p>Your One Time Password is - </p><h1>" + otp + "</h1>"
     });
 
-    console.log("Message sent: %s", info.messageId);
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    
 }

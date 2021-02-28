@@ -39,7 +39,6 @@ const userSchema = new mongoose.Schema(
         restaurantOwner: {
           type: mongoose.Schema.Types.ObjectId, // think for data type
           ref: "restaurant",
-          required: true,
       },
         cart: {
             type: {

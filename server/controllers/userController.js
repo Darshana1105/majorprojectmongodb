@@ -22,15 +22,12 @@ exports.loginUser = async (req, res, next) => {
     let email = req.body.email;
     let password = req.body.password;
 
-    console.log(email);
     
 
     let user = await userDataCollection.findOne({ 'email': email });
-    console.log("userRole",user);
 
     if (user && password === user.password) {
         const token = jwt.sign({ userId: user._id, email: user.email, password: user.password, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1d" });
-        console.log('token',token)
         req.session.token = token;
         return res.status(200).json({ token: token});
     }
@@ -92,7 +89,7 @@ exports.addUser = (req, res, next) => {
         if (err){ console.log(err.message);
             res.send(err);   }
         else {
-            console.log("User Data======>", user);
+            res.send(user)
         }
     })
 
@@ -139,7 +136,6 @@ exports.addToCart = async (req, res, next) => {
         foodId:foodId,
         quantity : 1
     };
-    console.log(">>>>>>" + req.body.role);
 
     let result;
     if (req.body.role == "user") {
@@ -236,7 +232,6 @@ exports.removeItem =async (req, res, next) => {
 
 exports.clearCart = async (req, res, next) => {
     let id = mongoose.Types.ObjectId(req.body.userId);
-    console.log(id);
     let result = await userDataCollection.updateOne({ _id: id }, { $unset: { cart: 1 } });
     res.send(result);
 }
@@ -257,7 +252,6 @@ exports.getUserById = (req, res, next) => {
 exports.sendOtpForResetPassword= (req,res,next)=>{
     otp= generateOtp.generateOtp();
     email= req.body.email;
-console.log(email);
 
     sendOtp.sendOtpForResetPassword(email,otp);
     

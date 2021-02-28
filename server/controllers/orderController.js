@@ -10,10 +10,8 @@ let userDataCollection = mongoose.model('user', userSchema, 'users');
 
 exports.getOrders = async (req, res, next) => {
     let userId = mongoose.Types.ObjectId(req.body.userId);
-    console.log(userId);
 
     let orders = await orderDataCollection.find({ userId: userId });
-    console.log(orders);
 
     res.send(orders);
 }
@@ -21,7 +19,6 @@ exports.getOrders = async (req, res, next) => {
 exports.addOrder = async (req, res, next) => {
     // let userId = req.body.userId;
     let userId = req.body.userId;
-    console.log(userId);
     let deliveryExecutive = req.body.deliveryExecutive;
 
     let orderOtp = generateOTP();
@@ -69,7 +66,6 @@ exports.addOrder = async (req, res, next) => {
             res.send(err);
         }
         else {
-            console.log("Order Data======>", order);
             res.send(order);
         }
     })
@@ -96,7 +92,6 @@ function getFoodList(foodList, restaurantMenu) {
     };
     foodList.forEach((element) => {
         let foodItem = restaurantMenu.menuDetails.find((x) => {
-            console.log("x:", x);
             return x._id.toString() == element.foodId;
         })
         totalAmount += (foodItem.foodPrice) * element.quantity;

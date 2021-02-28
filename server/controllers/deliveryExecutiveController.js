@@ -134,7 +134,6 @@ exports.updateDe = (req,res,next) => {
 }
 
 exports.sendMail = (req,res,next) =>{
-  console.log(req.body)
   main(req.params.mail,req.params.status,req.body);
   res.status(200).json({
     status:"sent"
@@ -181,8 +180,6 @@ async function main(id,status,body) {
     "<p> Billing Amount - "+body.billAmount+"</p>", // html body
   });
 
-  console.log("Message sent: %s", info.messageId);
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
 
 async function sendOtp(id,otp) {
@@ -210,7 +207,5 @@ async function sendOtp(id,otp) {
     html: "<p>Thanks For Choosing Bite</p><p>Your Order OTP is - </p><h1>"+otp+"</h1>"
   });
 
-  console.log("Message sent: %s", info.messageId);
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
 
