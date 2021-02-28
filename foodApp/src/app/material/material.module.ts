@@ -19,6 +19,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 const materialComponents = [
   MatButtonModule,
   MatIconModule,
@@ -31,6 +33,8 @@ const materialComponents = [
   MatInputModule,
   MatSelectModule,
   MatGridListModule,
+  MatSlideToggleModule,
+  MatDialogModule,
   BrowserAnimationsModule,
   MatTabsModule,
   MatChipsModule,
@@ -38,7 +42,9 @@ const materialComponents = [
   MatSnackBarModule,
   MatButtonToggleModule,
   MatDialogModule,
-  MatRadioModule
+  MatRadioModule,
+  MatAutocompleteModule,
+  MatCheckboxModule
 ];
 
 @NgModule({

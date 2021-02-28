@@ -36,8 +36,8 @@
                 <div class="carousel-item active  ">
                   <div class="restaurant-carousel-item row " *ngIf="topRestaurants.length>0">
                     <ng-container *ngFor='let restaurant of topRestaurants| slice:0:3'>
-                      <app-restaurant-card [restaurant]='restaurant' class=" col-lg-4 col-md-5 col-9 mb-3">
-                      </app-restaurant-card>
+                      <app-top-restaurant-card [restaurant]='restaurant' class=" col-lg-4 col-md-5 col-9 mb-3">
+                      </app-top-restaurant-card>
                     </ng-container>
 
                   </div>
@@ -45,8 +45,8 @@
                 <div class="carousel-item  " *ngIf='topRestaurants.length>3'>
                   <div class="restaurant-carousel-item row  ">
                     <ng-container *ngFor='let restaurant of topRestaurants| slice:3'>
-                      <app-restaurant-card [restaurant]='restaurant' class=" col-lg-4 col-md-5 col-9 mb-3">
-                      </app-restaurant-card>
+                      <app-top-restaurant-card [restaurant]='restaurant' class=" col-lg-4 col-md-5 col-9 mb-3">
+                      </app-top-restaurant-card>
                     </ng-container>
                   </div>
                 </div>
@@ -99,4 +99,9 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
   </div>
+=======
+  </div>
+</div>
+>>>>>>> restaurantlist

@@ -1,29 +1,31 @@
-<button mat-button class="card-clickable" *ngIf='foodItem!=undefined' routerLink='/restaurant/{{foodItem.restaurantId}}'  >
+<button mat-button class="card-clickable" *ngIf='foodItem!=undefined' routerLink='/restaurant/{{foodItem.restaurantId}}>
 
-<mat-card *ngIf='foodItem!=undefined' class="top-food-card text-left"  >
-    <img mat-card-image class="dish-image shadow-lg  overflow-hidden" src="../../../assets/images/pizza.jpg"
-      alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      <div class="d-flex justify-content-between">
+  <mat-card *ngIf=' foodItem!=undefined' class="top-food-card text-left">
+  <img mat-card-image class="dish-image shadow-lg  overflow-hidden" src="../../../assets/images/pizza.jpg"
+    alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <div class="d-flex justify-content-between">
 
-        <mat-card-title>{{foodItem.food.foodName}}</mat-card-title>
-        <mat-icon aria-hidden="false" [ngClass]="foodItem.food.foodType==='veg' ? 'text-success':'text-danger' " class="h3">filter_center_focus</mat-icon>
+      <mat-card-title>{{foodItem.food.foodName}}</mat-card-title>
+      <!-- <mat-icon aria-hidden="false" [ngClass]="foodItem.food.foodType==='veg' ? 'text-success':'text-danger' "
+          class="h3">filter_center_focus</mat-icon> -->
+      <img *ngIf="foodItem.food.foodType==='veg'" src="../../../assets/images/veg-icon.png" class="type-icon" />
+      <img *ngIf="foodItem.food.foodType==='non-veg'" src="../../../assets/images/non-veg-icon.png" class="type-icon" />
+    </div>
 
-      </div>
+    <mat-card-subtitle class="d-flex mb-0">
 
-      <mat-card-subtitle class="d-flex mb-0">
-
-        <mat-icon aria-hidden="false" class="text-white bg-warning">star</mat-icon>
-        <h3 class="rating ml-1 mb-0"><strong>{{foodItem.avgRating}}
-          </strong>(12) </h3>
-      </mat-card-subtitle>
-      <!-- <h3 class="strong text-wrap overflow-hidden">
+      <mat-icon aria-hidden="false" class="text-white bg-warning">star</mat-icon>
+      <h3 class="rating ml-1 mb-0"><strong>{{foodItem.avgRating}}
+        </strong>(12) </h3>
+    </mat-card-subtitle>
+    <!-- <h3 class="strong text-wrap overflow-hidden">
         restaurant name
       </h3> -->
-      <mat-card-subtitle class=" text-wrap overflow-hidden">
-        {{foodItem.food.foodCategory}}
-      </mat-card-subtitle>
+    <mat-card-subtitle class=" text-wrap overflow-hidden">
+      {{foodItem.food.foodCategory.join(', ')}}
+    </mat-card-subtitle>
 
-    </mat-card-content>
+  </mat-card-content>
   </mat-card>
-  </button>
+</button>

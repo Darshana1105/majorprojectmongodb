@@ -66,4 +66,10 @@ export class RestaurantService {
 
     return this.httpClient.get<any>(this.baseUrl + "getFoodByRestaurant", { params: queryParam });
   }
+  
+  searchRestaurants(city: string, searchText: string): Observable<Array<Restaurant>> {
+    let queryParam = new HttpParams({ fromString: 'city=' + city + '&search=' + searchText });
+    
+    return this.httpClient.get<any>(this.baseUrl + 'searchRestaurants', { params: queryParam });
+  }
 }

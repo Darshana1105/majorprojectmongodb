@@ -7,16 +7,12 @@ import { Restaurant } from 'src/app/interfaces/restaurant';
   styleUrls: ['./restaurant-card.component.scss']
 })
 export class RestaurantCardComponent implements OnInit {
- 
+
   @Input() restaurant:Restaurant|undefined;
 
-  constructor() {
-    
-   }
+  constructor() { }
 
   ngOnInit(): void {
-    console.log(this.restaurant);
-
   }
 
 }

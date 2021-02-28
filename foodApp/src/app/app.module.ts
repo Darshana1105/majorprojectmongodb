@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { LandingMainComponent } from './components/landing-main/landing-main.component';
-import { RestaurantCardComponent } from './components/restaurant-card/restaurant-card.component';
+import { TopRestaurantCardComponent } from './components/top-restaurant-card/top-restaurant-card.component';
 import { TopFoodCardComponent } from './components/top-food-card/top-food-card.component';
 import { RestaurentOwnerHomeComponent } from './components/restaurent-owner-home/restaurent-owner-home.component';
 import {LoginComponent} from './components/login/login.component';
@@ -27,6 +27,11 @@ import { UpperCaseConverterButtonPipe } from './utilities/upper-case-converter-b
 import { PureVegFilterPipe } from './utilities/pure-veg-filter.pipe';
 import { ViewCartComponent } from './components/view-cart/view-cart.component';
 import { ViewCartItemComponent } from './components/view-cart-item/view-cart-item.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { RestaurantCardComponent } from './components/restaurant-card/restaurant-card.component';
+import { RestaurantListComponent } from './components/restaurant-list/restaurant-list.component';
+import { FilterDialogComponent } from './components/filter-dialog/filter-dialog.component';
+import { TopRatedRestaurantPipe } from './top-rated-restaurant.pipe';
 
 
 @NgModule({
@@ -39,6 +44,10 @@ import { ViewCartItemComponent } from './components/view-cart-item/view-cart-ite
     FooterComponent,
     DeliveryUserProfileComponent,
     LandingMainComponent,
+    TopRestaurantCardComponent,
+    TopFoodCardComponent,
+    RestaurantListComponent,
+    SearchBarComponent,
     RestaurantCardComponent,
     TopFoodCardComponent,
     RestaurentOwnerHomeComponent,
@@ -50,8 +59,10 @@ import { ViewCartItemComponent } from './components/view-cart-item/view-cart-ite
     UpperCaseConverterButtonPipe,
     PureVegFilterPipe,
     ViewCartComponent,
-    ViewCartItemComponent
-
+    ViewCartItemComponent,
+    FilterDialogComponent,
+    TopRatedRestaurantPipe,
+    
 
   ],
   imports: [
@@ -60,6 +71,7 @@ import { ViewCartItemComponent } from './components/view-cart-item/view-cart-ite
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
     ChartsModule,
     RatingModule,

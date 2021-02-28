@@ -29,6 +29,10 @@ const restaurantSchema = new mongoose.Schema(
             type:String,
             required: true   
         }],
+        avgCost:{
+            type:Number,
+            required:true
+        },
         restaurantRatings:[{
             type:ratingSchema
         }],
