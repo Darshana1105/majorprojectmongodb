@@ -5,11 +5,9 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DeliveryComponent } from './components/deliveryExecutive/delivery/delivery.component';
-import { DeliveryProfileComponent } from './components/deliveryExecutive/delivery-profile/delivery-profile.component';
 import { DeliveryReportsComponent } from './components/deliveryExecutive/delivery-reports/delivery-reports.component';
 import { MaterialModule } from './material/material.module';
 import { FooterComponent } from './components/footer/footer.component';
-import { DeliveryUserProfileComponent } from './components/deliveryExecutive/delivery-user-profile/delivery-user-profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
@@ -36,6 +34,7 @@ import { OrderBillComponent } from './components/order-bill/order-bill.component
 import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 import { AddressDialogueComponent } from './components/address-dialogue/address-dialogue.component';
 import { ActiveOrderComponent } from './components/active-order/active-order.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -43,10 +42,8 @@ import { ActiveOrderComponent } from './components/active-order/active-order.com
     AppComponent,
     HeaderComponent,
     DeliveryComponent,
-    DeliveryProfileComponent,
     DeliveryReportsComponent,
     FooterComponent,
-    DeliveryUserProfileComponent,
     LandingMainComponent,
     TopRestaurantCardComponent,
     TopFoodCardComponent,
@@ -70,9 +67,8 @@ import { ActiveOrderComponent } from './components/active-order/active-order.com
     OrderBillComponent,
     UserOrdersComponent,
     AddressDialogueComponent,
-    ActiveOrderComponent
-
-
+    ActiveOrderComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
