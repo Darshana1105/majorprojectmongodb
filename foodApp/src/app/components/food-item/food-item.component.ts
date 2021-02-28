@@ -1,7 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/utilities/user.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-food-item',
@@ -15,7 +17,7 @@ export class FoodItemComponent implements OnInit, OnDestroy {
   userData: any;
   userObs: any;
 
-  constructor(private _userService: UserService, private _itemprice: MatSnackBar) { }
+  constructor(private _userService: UserService, private _itemprice: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -41,13 +43,19 @@ export class FoodItemComponent implements OnInit, OnDestroy {
       restaurantId: this.foodData.restaurantId
     }
 
-    console.log(foodItem);
-    this._userService.incrementCartItem(foodItem).subscribe(async (data) => {
-      await this._userService.updateUserDataLocal();
-      // this.userData = await this._userService.getUser();
-    });
+    if (this.userData?.role == 'user') {
+      this._userService.incrementCartItem(foodItem).subscribe(async (data) => {
+        await this._userService.updateUserDataLocal();
+        // this.userData = await this._userService.getUser();
+      });
 
-    this.addtocart(this.foodData.food.foodPrice)
+      this.addtocart(this.foodData.food.foodPrice)
+
+      console.log(foodItem);
+    }
+    else {
+      this.openDialogLogin();
+    }
 
 
 
@@ -55,14 +63,19 @@ export class FoodItemComponent implements OnInit, OnDestroy {
   }
 
   decrementItem(foodId: String) {
-    let foodItem = {
-      foodId: foodId,
-      restaurantId: this.foodData.restaurantId
+    if (this.userData?.role == 'user') {
+      let foodItem = {
+        foodId: foodId,
+        restaurantId: this.foodData.restaurantId
+      }
+      this._userService.decrementCartItem(foodItem).subscribe(async (data) => {
+        await this._userService.updateUserDataLocal();
+        // this.userData= await this._userService.getUser();
+      })
     }
-    this._userService.decrementCartItem(foodItem).subscribe(async (data) => {
-      await this._userService.updateUserDataLocal();
-      // this.userData= await this._userService.getUser();
-    })
+    else {
+      this.openDialogLogin();
+    }
   }
 
 
@@ -79,4 +92,13 @@ export class FoodItemComponent implements OnInit, OnDestroy {
   //   return this.avgRating ;
   // }
 
+  openDialogLogin() {
+   let loginPopup= this._itemprice.open("Please login to add item.",'Login Here.',{
+      duration: 3000,
+    });
+    loginPopup.onAction().subscribe(()=>{
+
+      const dialogRef = this.dialog.open(LoginComponent);
+    })
+  }
 }

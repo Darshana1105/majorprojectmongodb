@@ -76,8 +76,8 @@ export class LoginComponent implements OnInit {
         this.registerForm.get('area').setValidators(Validators.required);
       }
       else {
-        this.registerForm.get('streetAddress').clearValidators(Validators.required);
-        this.registerForm.get('city').clearValidators(Validators.required);
+        this.registerForm.get('streetAddress').clearValidators();
+        this.registerForm.get('city').clearValidators();
         this.registerForm.get('state').clearValidators(Validators.required);
         this.registerForm.get('country').clearValidators(Validators.required);
         this.registerForm.get('zip').clearValidators(Validators.required);

@@ -30,17 +30,22 @@ export class UserService {
   //   return this.userData;
   // }
 
-  getUserById(): Observable<any> {
+  getHeader():HttpHeaders{
     let token = this._sessionService.getJWTToken();
     console.log(token);
     let bearer = `Bearer ${token}`;
     
     
     let headers = new HttpHeaders().set("Authorization",bearer );
+    return headers;
+  }
+
+  getUserById(): Observable<any> {
+ 
     // headers.append("Authorization", "Bearer " + token)
     // let queryParam = new HttpParams({fromString:"id="+id});
 
-    return this.http.get<any>(this.baseUrl + "getUserById", { headers: headers });
+    return this.http.get<any>(this.baseUrl + "getUserById", { headers: this.getHeader() });
   }
 
   updateUserDataLocal() {
@@ -61,12 +66,8 @@ export class UserService {
   // }
 
   incrementCartItem(foodItem: any): Observable<any> {
-    // let userId: any = "602a4a5214315c2a00e234af";
-    let token = this._sessionService.getJWTToken();
-    let headers = new HttpHeaders();
-    headers.set("Authorization", "Bearer " + token);
-    // let queryParam = new HttpParams({fromString:"userId="+userId+'&role=user'});
-    return this.http.put<any>(this.baseUrl + 'addToCart', foodItem, { headers: headers });
+    
+    return this.http.put<any>(this.baseUrl + 'addToCart', foodItem, { headers: this.getHeader() });
   }
 
   
@@ -91,26 +92,19 @@ export class UserService {
   }
 
   decrementCartItem(foodItem:any):Observable<any>{
-    let token = this._sessionService.getJWTToken();
-    let headers = new HttpHeaders();
-    headers.set("Authorization", "Bearer " + token);
+   
     
-    return this.http.put<any>(this.baseUrl+'reduceCartItem',foodItem,{headers:headers});
+    return this.http.put<any>(this.baseUrl+'reduceCartItem',foodItem,{headers:this.getHeader()});
   }
 
   removeItem(foodItem:any):Observable<any>{
-    let token = this._sessionService.getJWTToken();
-    let headers = new HttpHeaders();
-    headers.set("Authorization", "Bearer " + token);
+
     
-    
-    return this.http.put<any>(this.baseUrl+'removeItem',foodItem,{headers:headers});
+    return this.http.put<any>(this.baseUrl+'removeItem',foodItem,{headers:this.getHeader()});
   }
 
   clearCart():Observable<any>{
-    let token = this._sessionService.getJWTToken();
-    let headers = new HttpHeaders();
-    headers.set("Authorization", "Bearer " + token);
-    return this.http.put<any>(this.baseUrl+'clearCart',null,{headers:headers});
+   
+    return this.http.put<any>(this.baseUrl+'clearCart',null,{headers:this.getHeader()});
   }
 }
