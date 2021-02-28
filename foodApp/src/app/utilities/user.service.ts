@@ -22,6 +22,10 @@ export class UserService {
         return this.userOb.asObservable();
   }
 
+  resetLocalData(){
+    this.userOb.next(null);
+  }
+
   // async getUser(): Promise<any>{
    
   //   if(this.userData==undefined){

@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddressDialogueComponent } from '../address-dialogue/address-dialogue.component';
 import { threadId } from 'worker_threads';
 import { OrderService } from 'src/app/utilities/order.service';
+import { ActivatedRoute, Router } from '@angular/router';
 // import { AddAddressComponent } from '../add-address/add-address.component';
 
 @Component({
@@ -33,7 +34,7 @@ export class OrderBillComponent implements OnInit {
   isInOrderBill: boolean = true;
 
 
-  constructor(private _userService: UserService, private _restaurantService: RestaurantService,private _orderService:OrderService, public dialog: MatDialog) {
+  constructor(private _userService: UserService, private _restaurantService: RestaurantService,private _orderService:OrderService, public dialog: MatDialog,private router:Router) {
     this.userObs = this._userService.getUser().subscribe((user) => {
       if (user?.cart != undefined && user?.cart != null) {
 
@@ -98,9 +99,10 @@ export class OrderBillComponent implements OnInit {
   placeOrder(){
     this._orderService.addOrder(this.addressData).subscribe(async (data)=>{
       console.log("Order Placed....:",data);      
+      this._userService.clearCart().subscribe(async (data)=>{        
+        await this._orderService.updateUserOrderDataLocal();
+        this.router.navigate(['/userOrders'])
     });
-    this._userService.clearCart().subscribe(async (data)=>{        
-      await this._orderService.updateUserOrderDataLocal();
     });
   }
 }

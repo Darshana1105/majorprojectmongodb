@@ -282,7 +282,7 @@ exports.getOrdersByRes = (req, res, next) => {
 // Add  foodRatings
 
 exports.addFoodRating = async (req, res, next) => {
-    const userId = req.query.userId;
+    const userId = req.body.userId;
     const restaurantId = req.body.restaurantId;
     const foodId = req.body.foodList.map((item) => {
         return item.foodItem._id;

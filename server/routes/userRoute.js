@@ -24,8 +24,10 @@ router.put('/clearCart',auth.authAPI,userController.clearCart);
 
 router.get('/getUserById',auth.authAPI,userController.getUserById);
 
+router.put('/removeItem',auth.authAPI,userController.removeItem);
+
 router.post('/sendOtpForResetPassword',userController.sendOtpForResetPassword);
 
-router.put('/addDeRating',userController.addDeRating);
+router.put('/addDeRating',auth.authAPI,userController.addDeRating);
 
 module.exports = router; 

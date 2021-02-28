@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'de-reports', component: DeliveryReportsComponent },
   { path: 'de-dashboard', component: DeliveryComponent },
   { path: 'orderBill', component: OrderBillComponent },
-  { path: 'userOrders/:id', component: UserOrdersComponent },
+  { path: 'userOrders', component: UserOrdersComponent },
   { path: 'restaurant/:id', component: RestaurantHomeComponent }
 
 

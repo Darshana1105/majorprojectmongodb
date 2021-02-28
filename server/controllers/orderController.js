@@ -9,7 +9,7 @@ let restaurantDataCollection = mongoose.model('restaurant', restaurantSchema, 'r
 let userDataCollection = mongoose.model('user', userSchema, 'users');
 
 exports.getOrders = async (req, res, next) => {
-    let userId = mongoose.Types.ObjectId(req.query.userId);
+    let userId = mongoose.Types.ObjectId(req.body.userId);
     console.log(userId);
 
     let orders = await orderDataCollection.find({ userId: userId });
@@ -20,8 +20,8 @@ exports.getOrders = async (req, res, next) => {
 
 exports.addOrder = async (req, res, next) => {
     // let userId = req.body.userId;
-    let userId = req.query.userId;
-
+    let userId = req.body.userId;
+    console.log(userId);
     let deliveryExecutive = req.body.deliveryExecutive;
 
     let orderOtp = generateOTP();
@@ -29,12 +29,11 @@ exports.addOrder = async (req, res, next) => {
     let userCart = await userDataCollection.findById(userId, { cart: 1 });
 
     // let totalAmount = 0;
+        let foodList = userCart.cart.foodList;
 
-    let foodList = userCart.cart.foodList;
+    let restaurantMenu = await restaurantDataCollection.findById(userCart.cart.restaurantId, { menuDetails: 1, restaurantName: 1, restaurantLocation: 1, restaurantImages: 1 })
 
-    let restaurantMenu = await restaurantDataCollection.findById(userCart.cart.restaurantId, { menuDetails: 1, restaurantName: 1, restaurantLocation:1, restaurantImages:1 })
-
-// console.log(restaurantMenu);
+    // console.log(restaurantMenu);
     let orderFoodList = getFoodList(foodList, restaurantMenu);
 
     // foodList.forEach((element) => {
@@ -51,7 +50,7 @@ exports.addOrder = async (req, res, next) => {
     let orderObj = new orderDataCollection({
         userId: userId,
         orderLocation: req.body,
-        totalAmount: orderFoodList.totalAmount+40,
+        totalAmount: orderFoodList.totalAmount + 40,
         orderOtp: parseInt(orderOtp),
         orderStatus: 'ordered',
         orderDateAndTime: Date.now(),
@@ -66,9 +65,12 @@ exports.addOrder = async (req, res, next) => {
     })
 
     orderObj.save(function (err, order) {
-        if (err) console.log(err.message);
+        if (err){
+            res.send(err);
+        }
         else {
             console.log("Order Data======>", order);
+            res.send(order);
         }
     })
 }
@@ -87,10 +89,10 @@ function generateOTP() {
 
 // get foodList from cart and from restaurant details
 function getFoodList(foodList, restaurantMenu) {
-    let totalAmount=0;
+    let totalAmount = 0;
     orderFoodList = {
-        foodList:[],
-        totalAmount:0
+        foodList: [],
+        totalAmount: 0
     };
     foodList.forEach((element) => {
         let foodItem = restaurantMenu.menuDetails.find((x) => {
@@ -99,7 +101,7 @@ function getFoodList(foodList, restaurantMenu) {
         })
         totalAmount += (foodItem.foodPrice) * element.quantity;
         orderFoodList.foodList.push({ foodItem: foodItem, quantity: element.quantity });
-        orderFoodList.totalAmount=totalAmount;
+        orderFoodList.totalAmount = totalAmount;
     });
 
     return orderFoodList;

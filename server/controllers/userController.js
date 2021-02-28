@@ -265,7 +265,7 @@ console.log(email);
 }
 exports.addDeRating= async (req,res,next)=> {
 
-    const userId=req.query.userId;
+    const userId=req.body.userId;
     deId=req.body.deId;
     deRating={
         userId:userId,

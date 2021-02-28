@@ -37,33 +37,34 @@ export class FoodItemComponent implements OnInit, OnDestroy {
     return this.userData.cart.foodList.findIndex((item: any) => item.foodId == id);
   }
 
-   incrementItem(foodId: String) {
+  incrementItem(foodId: String) {
+    if (this.userData?.role == 'user') {
+      if (this.userData.cart == undefined || this.userData.cart == null || this.userData?.cart.restaurantId == this.foodData.restaurantId) {
+        let foodItem = {
+          foodId: foodId,
+          restaurantId: this.foodData.restaurantId
+        }
 
-    if (this.userData.cart==undefined || this.userData.cart==null || this.userData?.cart.restaurantId == this.foodData.restaurantId) {
-      let foodItem = {
-        foodId: foodId,
-        restaurantId: this.foodData.restaurantId
+        console.log(foodItem);
+
+
+        this._userService.incrementCartItem(foodItem).subscribe(async (data) => {
+          await this._userService.updateUserDataLocal();
+          // this.userData = await this._userService.getUser();
+        });
+
+        this.addtocart(this.foodData.food.foodPrice);
+
+      } else {
+        if (confirm("Your cart has existing items from another restaurant. Do you want to clear cart?")) {
+          this._userService.clearCart().subscribe(async (data) => {
+            await this._userService.updateUserDataLocal();
+          })
+        }
       }
-
-      console.log(foodItem);
-      if (this.userData?.role == 'user') {
-
-      this._userService.incrementCartItem(foodItem).subscribe(async (data) => {
-        await this._userService.updateUserDataLocal();
-        // this.userData = await this._userService.getUser();
-      });
-
-      this.addtocart(this.foodData.food.foodPrice);
     }
     else {
       this.openDialogLogin();
-    }
-    }else{
-      if(confirm("Your cart has existing items from another restaurant. Do you want to clear cart?")){
-        this._userService.clearCart().subscribe(async (data)=>{
-          await this._userService.updateUserDataLocal();
-        })
-      }
     }
   }
 
@@ -98,10 +99,10 @@ export class FoodItemComponent implements OnInit, OnDestroy {
   // }
 
   openDialogLogin() {
-   let loginPopup= this._itemprice.open("Please login to add item.",'Login Here.',{
+    let loginPopup = this._itemprice.open("Please login to add item.", 'Login Here.', {
       duration: 3000,
     });
-    loginPopup.onAction().subscribe(()=>{
+    loginPopup.onAction().subscribe(() => {
 
       const dialogRef = this.dialog.open(LoginComponent);
     })
