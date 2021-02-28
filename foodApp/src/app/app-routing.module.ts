@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DeliveryReportsComponent } from './components/deliveryExecutive/delivery-reports/delivery-reports.component';
-import { DeliveryUserProfileComponent } from './components/deliveryExecutive/delivery-user-profile/delivery-user-profile.component';
 import { DeliveryComponent } from './components/deliveryExecutive/delivery/delivery.component';
 import { LandingMainComponent } from './components/landing-main/landing-main.component';
 import { RestaurentOwnerHomeComponent } from './components/restaurent-owner-home/restaurent-owner-home.component';
 import { RestaurantHomeComponent } from './components/restaurant-home/restaurant-home.component';
 import { RestaurantListComponent } from './components/restaurant-list/restaurant-list.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
 
   { path: '', component: LandingMainComponent },
 {path:'restaurants',component:RestaurantListComponent},
   { path: 'de-home', component: DeliveryComponent },
-  { path: 'profile', component: DeliveryUserProfileComponent },
+  { path: 'profile', component: UserProfileComponent },
   { path: 'ro-home', component: RestaurentOwnerHomeComponent },
   { path: 'de-reports', component: DeliveryReportsComponent },
   { path: 'de-dashboard', component: DeliveryComponent },

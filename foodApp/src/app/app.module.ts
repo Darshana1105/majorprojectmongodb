@@ -5,11 +5,9 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DeliveryComponent } from './components/deliveryExecutive/delivery/delivery.component';
-import { DeliveryProfileComponent } from './components/deliveryExecutive/delivery-profile/delivery-profile.component';
 import { DeliveryReportsComponent } from './components/deliveryExecutive/delivery-reports/delivery-reports.component';
 import { MaterialModule } from './material/material.module';
 import { FooterComponent } from './components/footer/footer.component';
-import { DeliveryUserProfileComponent } from './components/deliveryExecutive/delivery-user-profile/delivery-user-profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
@@ -32,6 +30,7 @@ import { RestaurantCardComponent } from './components/restaurant-card/restaurant
 import { RestaurantListComponent } from './components/restaurant-list/restaurant-list.component';
 import { FilterDialogComponent } from './components/filter-dialog/filter-dialog.component';
 import { TopRatedRestaurantPipe } from './top-rated-restaurant.pipe';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -39,10 +38,8 @@ import { TopRatedRestaurantPipe } from './top-rated-restaurant.pipe';
     AppComponent,
     HeaderComponent,
     DeliveryComponent,
-    DeliveryProfileComponent,
     DeliveryReportsComponent,
     FooterComponent,
-    DeliveryUserProfileComponent,
     LandingMainComponent,
     TopRestaurantCardComponent,
     TopFoodCardComponent,
@@ -62,8 +59,7 @@ import { TopRatedRestaurantPipe } from './top-rated-restaurant.pipe';
     ViewCartItemComponent,
     FilterDialogComponent,
     TopRatedRestaurantPipe,
-    
-
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

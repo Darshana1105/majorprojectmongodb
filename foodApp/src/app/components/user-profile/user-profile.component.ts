@@ -4,22 +4,24 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { element } from 'protractor';
 import { DeliveryExecutiveService } from 'src/app/utilities/delivery-executive/delivery-executive.service';
 import { UserService } from 'src/app/utilities/user.service';
-
-
 @Component({
-  selector: 'app-delivery-user-profile',
-  templateUrl: './delivery-user-profile.component.html',
-  styleUrls: ['./delivery-user-profile.component.scss']
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.scss']
 })
-export class DeliveryUserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit {
+
   hide = true;
   profileForm: any;
   avgRating: number = 0;
-
+  userRole : any;
+  usrgender:any
+  userprofileForm: any;
   constructor(private _ordersServ: DeliveryExecutiveService,private _userService: UserService) {}
   userdata:any
   userName:any
-  postData:any
+  postDeData:any
+  postUserData:any;
   RatingsObj:any;
   deRatings:any;
   ngOnInit(): void {
@@ -28,8 +30,17 @@ export class DeliveryUserProfileComponent implements OnInit {
       if(res!=null)
       {
         this.userdata = res;
-        this.Ratings();
-        this.form();
+        this.userRole = res.role;
+        this.usrgender = res.gender;
+        
+        if(this.userRole == "de"){
+          this.form();
+          this.Ratings();
+        }
+        if(this.userRole == "user"){
+          this.userForm();
+        }
+        
       }
     });
   }
@@ -48,22 +59,22 @@ export class DeliveryUserProfileComponent implements OnInit {
   }
 
   // Get Profile Data from DE 
-  sendProfile():void{
-    this.postData = this.profileForm.value;
+  sendDeProfile():void{
+    this.postDeData = this.profileForm.value;
     let dataDe = {
-      firstName:this.postData.firstName,
-      lastName:this.postData.lastName,
-      email:this.postData.email,
-      mobileNumber:this.postData.mobileNumber,
+      firstName:this.postDeData.firstName,
+      lastName:this.postDeData.lastName,
+      email:this.postDeData.email,
+      mobileNumber:this.postDeData.mobileNumber,
         $set:{
-            "deliveryExecutive.vehicleNumber" : this.postData.vehicleNumber,
-            "deliveryExecutive.deliveryExecutiveLocation.streetAddress" : this.postData.streetAddress,
-            "deliveryExecutive.deliveryExecutiveLocation.city" : this.postData.city,
-            "deliveryExecutive.deliveryExecutiveLocation.state" : this.postData.state,
-            "deliveryExecutive.deliveryExecutiveLocation.country" : this.postData.country,
-            "deliveryExecutive.deliveryExecutiveLocation.zip" : this.postData.pincode,
-            "deliveryExecutive.deliveryExecutiveLocation.landmark" : this.postData.landmark,
-            "deliveryExecutive.deliveryExecutiveLocation.area" : this.postData.area
+            "deliveryExecutive.vehicleNumber" : this.postDeData.vehicleNumber,
+            "deliveryExecutive.deliveryExecutiveLocation.streetAddress" : this.postDeData.streetAddress,
+            "deliveryExecutive.deliveryExecutiveLocation.city" : this.postDeData.city,
+            "deliveryExecutive.deliveryExecutiveLocation.state" : this.postDeData.state,
+            "deliveryExecutive.deliveryExecutiveLocation.country" : this.postDeData.country,
+            "deliveryExecutive.deliveryExecutiveLocation.zip" : this.postDeData.pincode,
+            "deliveryExecutive.deliveryExecutiveLocation.landmark" : this.postDeData.landmark,
+            "deliveryExecutive.deliveryExecutiveLocation.area" : this.postDeData.area
         }
     }
 
@@ -72,8 +83,24 @@ export class DeliveryUserProfileComponent implements OnInit {
     alert("Data Updated Successfully");
     });
   }
- 
+
+  sendUserProfile(){
+    this.postUserData = this.userprofileForm.value;
+    let dataDe = {
+      firstName:this.postUserData.firstNameUser,
+      lastName:this.postUserData.lastNameUser,
+      email:this.postUserData.emailUser,
+      mobileNumber:this.postUserData.mobileNumberUser,
+    }
+    console.log(dataDe);
+    this._ordersServ.updateDe( dataDe ).subscribe(res => {
+    console.log(res);
+    alert("Data Updated Successfully");
+    });
+  }
+
   form(){
+    // console.log("form")
     this.profileForm = new FormGroup({
         firstName: new FormControl(this.userdata.firstName,Validators.required),
         lastName: new FormControl(this.userdata.lastName,Validators.required),
@@ -88,6 +115,16 @@ export class DeliveryUserProfileComponent implements OnInit {
         landmark:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.landmark,Validators.required),
         area:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.area,Validators.required),
     });
+
+  }
+  userForm(){
+    this.userprofileForm = new FormGroup({
+      firstNameUser: new FormControl(this.userdata.firstName,Validators.required),
+      lastNameUser: new FormControl(this.userdata.lastName,Validators.required),
+      emailUser:new FormControl(this.userdata.email,[Validators.required, Validators.email]),
+      mobileNumberUser: new FormControl(this.userdata.mobileNumber,[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+    });
+    console.log(this.userprofileForm.value)
   }
 
   get firstName() { return this.profileForm.get('firstName'); }
@@ -100,4 +137,9 @@ export class DeliveryUserProfileComponent implements OnInit {
   get pincode() { return this.profileForm.get('pincode'); }
   get state() { return this.profileForm.get('state'); }
 
+
+  get firstNameUser() { return this.userprofileForm.get('firstNameUser'); }
+  get lastNameUser() { return this.userprofileForm.get('lastNameUser'); }
+  get emailUser() { return this.userprofileForm.get('emailUser'); }
+  get mobileNumberUser() { return this.userprofileForm.get('mobileNumberUser'); }
 }
