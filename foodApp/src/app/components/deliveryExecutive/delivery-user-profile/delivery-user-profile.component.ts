@@ -61,7 +61,9 @@ export class DeliveryUserProfileComponent implements OnInit {
             "deliveryExecutive.deliveryExecutiveLocation.city" : this.postData.city,
             "deliveryExecutive.deliveryExecutiveLocation.state" : this.postData.state,
             "deliveryExecutive.deliveryExecutiveLocation.country" : this.postData.country,
-            "deliveryExecutive.deliveryExecutiveLocation.zip" : this.postData.pincode
+            "deliveryExecutive.deliveryExecutiveLocation.zip" : this.postData.pincode,
+            "deliveryExecutive.deliveryExecutiveLocation.landmark" : this.postData.landmark,
+            "deliveryExecutive.deliveryExecutiveLocation.area" : this.postData.area
         }
     }
 
@@ -83,6 +85,8 @@ export class DeliveryUserProfileComponent implements OnInit {
         pincode:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.zip,[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{6}$")]),
         state:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.state,Validators.required),
         country:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.country,Validators.required),
+        landmark:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.landmark,Validators.required),
+        area:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.area,Validators.required),
     });
   }
 

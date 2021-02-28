@@ -1,8 +1,13 @@
-<div class="cart-item mx-auto" *ngIf='cartItem!=undefined && foodItem!=undefined'>
-    <img src="../../../assets/images/veg-icon.png" class="veg-icon">
+
+
+<div class="cart-item mx-auto " *ngIf='cartItem!=undefined && foodItem!=undefined'>
     <div class="cart-item-details mx-auto justify-content-between row">
-        <h3 class="col-lg-4 col-12">{{foodItem.foodName}} </h3>
-        <div class="d-flex cart-qty-div col-lg-4 col-12 ">
+        <div class="col-lg-4  col-md-4 row">
+
+                <img src="../../../assets/images/veg-icon.png" class="veg-icon mt-2 "> 
+                 <h3 class="col">{{foodItem.foodName}} </h3>
+        </div>  
+        <div class="d-flex cart-qty-div col-lg-4 col-12 justify-content-center">
             <mat-button-toggle-group name="fontStyle" aria-label="Font Style"
                 class="cart-qty-button text-danger">
                 <mat-button-toggle value="bold" (click)='decrementItem(cartItem.foodId)'>-</mat-button-toggle>
@@ -12,9 +17,38 @@
             </mat-button-toggle-group>
             <button mat-icon-button class="text-danger ml-3 cart-item-delete-btn" aria-label="Example icon button with a home icon" (click)="removeItem(cartItem.foodId)">
                 <mat-icon>delete</mat-icon>
-              </button>
-            <!-- <mat-button><mat-icon class="text-danger ml-3 cart-item-delete-btn"  (click)="removeItem(cartItem.foodId)">delete</mat-icon></mat-button> -->
+              </button>    
         </div>
-        <h3 class="col-lg-4 col-12 text-right ">{{(foodItem.foodPrice*cartItem.quantity)|currency:"INR":"symbol"}}</h3>
+        <h3 class="col-lg-4 col-12 col-sm-12 text-right text-danger" >{{(foodItem.foodPrice*cartItem.quantity)|currency:"INR":"symbol"}}</h3>
     </div>
 </div>
+
+
+<!-- <hr>
+
+<div class="cart-item mx-auto row justify-content-between" *ngIf='cartItem!=undefined && foodItem!=undefined'>
+    
+    <div class="col-md-2 col-lg-2 col">
+        <img src="../../../assets/images/veg-icon.png" class="veg-icon mt-2">
+    </div>
+    <div class="cart-item-details col-lg-4 col-md-4 col-12  ">
+        <h3 class="col">{{foodItem.foodName}} </h3>
+    </div>
+   
+    <div class="d-flex cart-qty-div col-lg-4 col-12 ">
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style"
+            class="cart-qty-button text-danger">
+            <mat-button-toggle value="bold" (click)='decrementItem(cartItem.foodId)'>-</mat-button-toggle>
+            <mat-button-toggle value="italic" class="cart-count-item">{{cartItem.quantity}}
+            </mat-button-toggle>
+            <mat-button-toggle value="underline" (click)='incrementItem(cartItem.foodId)'>+</mat-button-toggle>
+        </mat-button-toggle-group>
+        <button mat-icon-button class="text-danger ml-3 cart-item-delete-btn" aria-label="Example icon button with a home icon" (click)="removeItem(cartItem.foodId)">
+            <mat-icon>delete</mat-icon>
+          </button>
+    </div>
+   
+</div>
+<div class="">
+    <h3 class="col-lg-4 col-12 text-weight-bold ">{{(foodItem.foodPrice*cartItem.quantity)|currency:"INR":"symbol"}}</h3>
+</div> -->
