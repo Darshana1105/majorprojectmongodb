@@ -6,6 +6,8 @@ import { DeliveryComponent } from './components/deliveryExecutive/delivery/deliv
 import { LandingMainComponent } from './components/landing-main/landing-main.component';
 import { RestaurentOwnerHomeComponent } from './components/restaurent-owner-home/restaurent-owner-home.component';
 import { RestaurantHomeComponent } from './components/restaurant-home/restaurant-home.component';
+import { OrderBillComponent } from './components/order-bill/order-bill.component';
+import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 
 const routes: Routes = [
 
@@ -14,12 +16,15 @@ const routes: Routes = [
   { path: 'de-profile', component: DeliveryUserProfileComponent },
   { path: 'ro-home', component: RestaurentOwnerHomeComponent },
   { path: 'de-reports', component: DeliveryReportsComponent },
-{ path: 'restaurant/:id', component: RestaurantHomeComponent }
+  { path: 'orderBill', component: OrderBillComponent },
+  { path: 'userOrders/:id', component: UserOrdersComponent },
+  { path: 'restaurant/:id', component: RestaurantHomeComponent }
+
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{anchorScrolling:'enabled',scrollPositionRestoration: 'enabled'})],
+  imports: [RouterModule.forRoot(routes, { anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

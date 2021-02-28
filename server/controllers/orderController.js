@@ -9,7 +9,7 @@ let restaurantDataCollection = mongoose.model('restaurant', restaurantSchema, 'r
 let userDataCollection = mongoose.model('user', userSchema, 'users');
 
 exports.getOrders = async (req, res, next) => {
-    let userId = mongoose.Types.ObjectId(req.body.userId);
+    let userId = mongoose.Types.ObjectId(req.query.userId);
     console.log(userId);
 
     let orders = await orderDataCollection.find({ userId: userId });
@@ -19,7 +19,8 @@ exports.getOrders = async (req, res, next) => {
 }
 
 exports.addOrder = async (req, res, next) => {
-    let userId = req.body.userId;
+    // let userId = req.body.userId;
+    let userId = req.query.userId;
 
     let deliveryExecutive = req.body.deliveryExecutive;
 
@@ -31,9 +32,9 @@ exports.addOrder = async (req, res, next) => {
 
     let foodList = userCart.cart.foodList;
 
-    let restaurantMenu = await restaurantDataCollection.findById(userCart.cart.restaurantId, { menuDetails: 1, restaurantName: 1 })
+    let restaurantMenu = await restaurantDataCollection.findById(userCart.cart.restaurantId, { menuDetails: 1, restaurantName: 1, restaurantLocation:1, restaurantImages:1 })
 
-
+// console.log(restaurantMenu);
     let orderFoodList = getFoodList(foodList, restaurantMenu);
 
     // foodList.forEach((element) => {
@@ -45,19 +46,21 @@ exports.addOrder = async (req, res, next) => {
     //     totalAmount += (foodItem.foodPrice) * element.quantity;
     // });
 
-    console.log("Total amount:", orderFoodList);
+    // console.log("Total amount:", orderFoodList);
 
     let orderObj = new orderDataCollection({
         userId: userId,
-        orderLocation: req.body.orderLocation,
-        totalAmount: orderFoodList.totalAmount,
+        orderLocation: req.body,
+        totalAmount: orderFoodList.totalAmount+40,
         orderOtp: parseInt(orderOtp),
         orderStatus: 'ordered',
         orderDateAndTime: Date.now(),
         foodList: orderFoodList.foodList,
         restaurantDetails: {
-            restaurantId: restaurantMenu._id,
-            restaurantName: restaurantMenu.restaurantName
+            restaurantId: mongoose.Types.ObjectId(restaurantMenu._id),
+            restaurantName: restaurantMenu.restaurantName,
+            restaurantLocation: restaurantMenu.restaurantLocation,
+            restaurantImages: restaurantMenu.restaurantImages
         },
         deliveryExecutive: deliveryExecutive
     })

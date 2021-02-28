@@ -38,7 +38,7 @@ export class UserService {
   }
 
   updateUserDataLocal(){
-    let userId: any = "602a4a5214315c2a00e234af";
+    let userId: any = "603ba4cbebcc8c5ffba639da";
     this.getUserById(userId).subscribe((data)=>{
 
       this.userData=data.user;
@@ -46,34 +46,37 @@ export class UserService {
     });
   }
   // async updateUserDataLocal():Promise<any>{
-  //   let userId: any = "602a4a5214315c2a00e234af";
+  //   let userId: any = "603ba4cbebcc8c5ffba639da";
   //   let temp=await this.getUserById(userId).toPromise();
   //   this.userData=temp.user;
   // }
 
   incrementCartItem(foodItem:any):Observable<any>{
-    let userId: any = "602a4a5214315c2a00e234af";
+    let userId: any = "603ba4cbebcc8c5ffba639da";
     let queryParam = new HttpParams({fromString:"userId="+userId+'&role=user'});
     return this.http.put<any>(this.baseUrl+'addToCart',foodItem,{params:queryParam});
   }
   
   
   decrementCartItem(foodItem:any):Observable<any>{
-    let userId: any = "602a4a5214315c2a00e234af";
+    let userId: any = "603ba4cbebcc8c5ffba639da";
     let queryParam = new HttpParams({fromString:"userId="+userId+'&role=user'});
     return this.http.put<any>(this.baseUrl+'reduceCartItem',foodItem,{params:queryParam});
   }
 
   removeItem(foodItem:any):Observable<any>{
-    let userId: any = "602a4a5214315c2a00e234af";
+    let userId: any = "603ba4cbebcc8c5ffba639da";
     let queryParam = new HttpParams({fromString:"userId="+userId+'&role=user'});
-    
     return this.http.put<any>(this.baseUrl+'removeItem',foodItem,{params:queryParam});
   }
 
   clearCart():Observable<any>{
-    let userId:any="602a4a5214315c2a00e234af"
+    let userId:any="603ba4cbebcc8c5ffba639da"
     let queryParam = new HttpParams({fromString:"userId="+userId+'&role=user'});
     return this.http.put<any>(this.baseUrl+'clearCart',null,{params:queryParam});
   }
+  
+  
+  
+
 }

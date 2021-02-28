@@ -24,5 +24,6 @@ router.put('/clearCart',userController.clearCart);
 
 router.get('/getUserById',userController.getUserById);
 
+router.put('/addDeRating',userController.addDeRating);
 
 module.exports = router; 

@@ -34,7 +34,7 @@
             </ng-container>
         </ng-container>
 
-        <ng-container *ngIf='userData?.cart === undefined || userData?.cart==null'>
+        <ng-container *ngIf='userData?.cart === undefined || userData?.cart==null || userData?.cart.restaurantId != foodData.restaurantId '>
             <button mat-stroked-button color="accent" class="add-to-cart-button"
                 (click)="incrementItem(foodData.food._id)">Add to
                 Cart</button>

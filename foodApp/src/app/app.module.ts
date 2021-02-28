@@ -17,7 +17,6 @@ import { LandingMainComponent } from './components/landing-main/landing-main.com
 import { RestaurantCardComponent } from './components/restaurant-card/restaurant-card.component';
 import { TopFoodCardComponent } from './components/top-food-card/top-food-card.component';
 import { RestaurentOwnerHomeComponent } from './components/restaurent-owner-home/restaurent-owner-home.component';
-
 import { RestaurantHomeComponent } from './components/restaurant-home/restaurant-home.component';
 import { AddRatingDialogComponent } from './components/add-rating-dialog/add-rating-dialog.component';
 import { RatingModule } from 'ng-starrating';
@@ -27,6 +26,10 @@ import { UpperCaseConverterButtonPipe } from './utilities/upper-case-converter-b
 import { PureVegFilterPipe } from './utilities/pure-veg-filter.pipe';
 import { ViewCartComponent } from './components/view-cart/view-cart.component';
 import { ViewCartItemComponent } from './components/view-cart-item/view-cart-item.component';
+import { OrderBillComponent } from './components/order-bill/order-bill.component';
+import { UserOrdersComponent } from './components/user-orders/user-orders.component';
+import { AddressDialogueComponent } from './components/address-dialogue/address-dialogue.component';
+import { ActiveOrderComponent } from './components/active-order/active-order.component';
 
 
 @NgModule({
@@ -42,7 +45,6 @@ import { ViewCartItemComponent } from './components/view-cart-item/view-cart-ite
     RestaurantCardComponent,
     TopFoodCardComponent,
     RestaurentOwnerHomeComponent,
-    
     RestaurantHomeComponent,
     AddRatingDialogComponent,
     FoodItemComponent,
@@ -50,7 +52,11 @@ import { ViewCartItemComponent } from './components/view-cart-item/view-cart-ite
     UpperCaseConverterButtonPipe,
     PureVegFilterPipe,
     ViewCartComponent,
-    ViewCartItemComponent
+    ViewCartItemComponent,
+    OrderBillComponent,
+    UserOrdersComponent,
+    AddressDialogueComponent,
+    ActiveOrderComponent
 
 
   ],
@@ -63,9 +69,7 @@ import { ViewCartItemComponent } from './components/view-cart-item/view-cart-ite
     ReactiveFormsModule,
     ChartsModule,
     RatingModule,
-    FormsModule
-
-    
+    FormsModule,    
   ],
   providers: [],
   bootstrap: [AppComponent]

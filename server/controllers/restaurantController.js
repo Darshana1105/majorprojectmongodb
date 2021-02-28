@@ -85,7 +85,7 @@ exports.addRestaurantRating = async (req, res, next) => {
     if (restaurantRating == undefined) {
         await restaurantDataCollection.findByIdAndUpdate(restaurantId, { $push: { restaurantRatings: restaurantRatings } });
     } else {
-        await restaurantDataCollection.updateOne({"_id":restaurantId, "restaurantRatings.userId":req.body.userId}, { $set: { 'restaurantRatings.$.rating': req.body.restaurantRating } });
+        await restaurantDataCollection.updateOne({ "_id": restaurantId, "restaurantRatings.userId": req.body.userId }, { $set: { 'restaurantRatings.$.rating': req.body.restaurantRating } });
     }
 
 
@@ -182,38 +182,82 @@ exports.getTopFood = async (req, res, next) => {
 
     res.send(foodlist);
 }
-exports.acceptOrderRo = (req,res,next) => {
-  let id = mongoose.Types.ObjectId(req.params.id);
-  let updateData = {
-    orderStatus: req.body.status,
-  }
-  orderDataCollection.findByIdAndUpdate(id,updateData,function(err, order) {
-    if (err) console.log(err.message);
-    else {
-        res.status(200).json({"Data updated ": order});
+exports.acceptOrderRo = (req, res, next) => {
+    let id = mongoose.Types.ObjectId(req.params.id);
+    let updateData = {
+        orderStatus: req.body.status,
     }
-  });
-  
+    orderDataCollection.findByIdAndUpdate(id, updateData, function (err, order) {
+        if (err) console.log(err.message);
+        else {
+            res.status(200).json({ "Data updated ": order });
+        }
+    });
+
 }
 
 exports.getOrdersByRes = (req, res, next) => {
     let id = mongoose.Types.ObjectId(req.params.id);
     //console.log(id);
-    orderDataCollection.find({$and:[{orderStatus:"ordered"},{restaurantDetails:id}]}).populate('restaurantDetails'
-  , ['restaurantName', 'restaurantLocation']).populate('userId', ['firstName', 'email'])
-      .exec(function (err, order) {
-        if (err) {
-          console.error(err);
-          
-        }
-        //console.log(order);
-        res.status(200).json({
-          orders: order
-        });
-      })
-  }
+    orderDataCollection.find({ $and: [{ orderStatus: "ordered" }, { restaurantDetails: id }] }).populate('restaurantDetails'
+        , ['restaurantName', 'restaurantLocation']).populate('userId', ['firstName', 'email'])
+        .exec(function (err, order) {
+            if (err) {
+                console.error(err);
+
+            }
+            //console.log(order);
+            res.status(200).json({
+                orders: order
+            });
+        })
+}
 
 
+
+
+// Add  foodRatings
+
+exports.addFoodRating = async (req, res, next) => {
+    const userId = req.query.userId;
+    const restaurantId = req.body.restaurantId;
+    const foodId = req.body.foodList.map((item) => {
+        return item.foodItem._id;
+    });
+    // const foodId = req.body.foodId;
+    // console.log(">>>>>>>",typeof(foodId[0]));
+
+// console.log(foodId);
+
+    const foodRating = {
+        userId: userId,
+        rating: req.body.rating
+    }
+    // let restaurantData=await restaurantDataCollection.findById(restaurantId);
+
+    // let menu=restaurantData.menuDetails;
+
+    // food=menu.find((food)=>{return food._id==foodId});
+
+    // food.foodRating.push(foodRating);.
+
+
+
+
+    let result;
+    await foodId.forEach(async (value) => {
+
+        console.log(value);
+        result=await restaurantDataCollection.findOneAndUpdate(
+            {$and:[{
+                _id: mongoose.Types.ObjectId(restaurantId)},{
+                "menuDetails._id": mongoose.Types.ObjectId(value)
+            }]},
+            { $push: { "menuDetails.$.foodRating": foodRating } }
+        );
+
+    })
+};
 
 
 // exports.getTopFood = (req, res, next) => {

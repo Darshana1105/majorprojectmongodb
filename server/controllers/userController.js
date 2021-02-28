@@ -75,7 +75,9 @@ exports.updateUser = async (req, res, next) => {
         mobileNumber: req.body.mobileNumber
     }
     await userDataCollection.findByIdAndUpdate(id, updateData);
-}
+};
+
+
 
 
 // user authentication login 
@@ -220,3 +222,28 @@ exports.getUserById = (req, res, next) => {
         })
     })
 }
+
+
+exports.addDeRating= async (req,res,next)=> {
+
+    const userId=req.query.userId;
+    deId=req.body.deId;
+    deRating={
+        userId:userId,
+        rating: req.body.rating
+    }
+
+    // let deData=await userDataCollection.findById(deId);
+
+    // let de=deData.deliveryExecutive;
+    // console.log(deData);
+
+    // let deRatingArr=deData.deliveryExecutive.deliveryExecutiveRatings;
+
+    let result=await userDataCollection.updateOne({_id:deId},{$push:{'deliveryExecutive.deliveryExecutiveRatings':deRating}});
+ 
+    // console.log(deRatingArr);
+    res.send(result);
+}
+
+
