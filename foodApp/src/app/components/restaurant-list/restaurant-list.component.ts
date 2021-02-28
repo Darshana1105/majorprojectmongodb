@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Restaurant } from 'src/app/interfaces/restaurant';
-import { RestaurantService } from 'src/app/utilities/restaurant.service';
+import { RestaurantService } from 'src/app/utilities/restaurant/restaurant.service';
 import { FilterDialogComponent } from '../filter-dialog/filter-dialog.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 
