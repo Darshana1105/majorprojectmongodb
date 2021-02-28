@@ -1,6 +1,6 @@
 <div class="rest-menu-div row mt-3 justify-content-center">
     <div class="rest-menu-image col-md-4 col-sm-6 col-xs-6 ">
-        <img [src]='foodData.food.foodImage' alt="Sorry!">
+        <img [src]='foodData.food.foodImage' onerror="this.src='../../../assets/images/image-not-found.jpeg'" alt="Sorry!">
     </div>
 
     <div class="rest-menu-content-subdiv1 col-md-6 col-sm-6 col-xs-12">

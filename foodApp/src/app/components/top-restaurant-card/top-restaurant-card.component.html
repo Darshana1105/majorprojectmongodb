@@ -1,6 +1,6 @@
 <button mat-button class="card-clickable" *ngIf='restaurant!=undefined'  routerLink='/restaurant/{{restaurant._id}}'>
     <mat-card class="restaurant-card shadow text-left ">
-        <img mat-card-image [src]='restaurant.restaurantImages[0]' alt="oops.">
+        <img mat-card-image [src]='restaurant.restaurantImages[0]' onerror="this.src='../../../assets/images/image-not-found.jpeg'" alt="oops.">
         <mat-card-content>
 
           <h1 >{{restaurant.restaurantName}}</h1>

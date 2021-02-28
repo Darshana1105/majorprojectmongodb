@@ -57,7 +57,6 @@ export class ViewCartComponent implements OnInit, OnDestroy {
       this.cartItems = user.cart.foodList;
 
 
-      console.log("cart :    00000", this.cartItems);
 
       this._restaurantService.getRestaurantById(this.restaurantId).then((data) => {
         this.restaurantFoodList = data.menuDetails;      

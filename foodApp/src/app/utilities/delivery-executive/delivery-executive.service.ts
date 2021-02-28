@@ -20,7 +20,6 @@ export class DeliveryExecutiveService {
 
   getHeader(): HttpHeaders {
     let token = this._sessionService.getJWTToken();
-    console.log(token);
     let bearer = `Bearer ${token}`;
 
 
@@ -67,7 +66,6 @@ export class DeliveryExecutiveService {
 
   sendMail(eid: any, status: any, order: any): Observable<any> {
     let body = order;
-    console.log(body)
     return this.http.post<any>(this.url + "/send-mail/" + eid + "/" + status, body);
   }
 

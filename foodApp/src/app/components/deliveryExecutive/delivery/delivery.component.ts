@@ -28,17 +28,14 @@ export class DeliveryComponent implements OnInit {
       this._ordersServ.activeOrders().subscribe(res  =>{
         this.Acount = res.orders.length;
         this.activeOrders = res.orders;
-        console.log(this.activeOrders);
 
       });
        this._ordersServ.getOrders(this.deCity).subscribe(res  =>{
          this.Ocount = res.orders.length;
          this.orders = res.orders;
-         console.log(res.orders);
        });
        this._ordersServ.getRecent().subscribe(res  =>{
         this.recentOrders = res.orders;
-        console.log(res.orders);
       });
     }
   });
@@ -59,18 +56,15 @@ export class DeliveryComponent implements OnInit {
     if(res.orders.length!=this.Acount){
       this.Acount = res.orders.length;
       this.activeOrders = res.orders;
-      console.log(this.activeOrders);
     }
   });
 
  }
 
   acceptOrder(value:any,email:any):void{
-    console.log(value,email);
     if(this.Acount<3){
       let val = Math.floor(1000 + Math.random() * 9000);
       this._ordersServ.acceptOrder(value,val,email).subscribe(res =>{
-        console.log(res);
       })
       //console.log(value)
     }else{
@@ -81,7 +75,6 @@ export class DeliveryComponent implements OnInit {
 
 
  change(id:any,email:any,restaurantName:string,total:number,otp:number){
-   console.log(id);
   let status = '';
   status = this.statusForm.value.selected;
   let data = {

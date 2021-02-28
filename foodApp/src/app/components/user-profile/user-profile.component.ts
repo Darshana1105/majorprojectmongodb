@@ -54,7 +54,6 @@ export class UserProfileComponent implements OnInit {
 
     });
 
-      console.log( (this.avgRating)/arrayLength);
       this.deRatings = (this.avgRating)/arrayLength
   }
 
@@ -94,7 +93,6 @@ export class UserProfileComponent implements OnInit {
     }
     console.log(dataDe);
     this._ordersServ.updateDe( dataDe ).subscribe(res => {
-    console.log(res);
     alert("Data Updated Successfully");
     });
   }
@@ -133,7 +131,6 @@ export class UserProfileComponent implements OnInit {
       emailUser:new FormControl(this.userdata.email,[Validators.required, Validators.email]),
       mobileNumberUser: new FormControl(this.userdata.mobileNumber,[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
     });
-    console.log(this.userprofileForm.value)
   }
 
   get firstName() { return this.profileForm.get('firstName'); }

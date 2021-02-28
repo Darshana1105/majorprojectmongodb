@@ -28,12 +28,10 @@ export class ActiveOrderComponent implements OnInit, AfterViewInit {
     if (this.myStepper != undefined) {
 
       if (this.order.orderStatus == 'ordered') {
-        console.log("NOT UNDEFINED");
         this.myStepper.next();
 
       }
       else if (this.order.orderStatus == 'accepted-ro' || this.order.orderStatus == 'accepted-de') {
-        console.log("NOT UNDEFINED");
         this.myStepper.next();
         this.myStepper.next();
         this.myStepper.next();
@@ -41,7 +39,6 @@ export class ActiveOrderComponent implements OnInit, AfterViewInit {
 
 
       if (this.order.orderStatus == 'Picked-up') {
-        console.log("NOT UNDEFINED");
         this.myStepper.next();
         this.myStepper.next();
         this.myStepper.next();
@@ -49,7 +46,6 @@ export class ActiveOrderComponent implements OnInit, AfterViewInit {
       }
 
       if (this.order.orderStatus == 'On-the-Way') {
-        console.log("NOT UNDEFINED");
         this.myStepper.next();
         this.myStepper.next();
         this.myStepper.next();

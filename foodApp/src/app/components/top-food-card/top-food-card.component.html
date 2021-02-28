@@ -1,8 +1,9 @@
 <button mat-button class="card-clickable" *ngIf='foodItem!=undefined' routerLink='/restaurant/{{foodItem.restaurantId}}'>
 
   <mat-card *ngIf=' foodItem!=undefined' class="top-food-card text-left">
-  <img mat-card-image class="dish-image shadow-lg  overflow-hidden" src="../../../assets/images/pizza.jpg"
-    alt="Photo of a Shiba Inu">
+  <img mat-card-image if class="dish-image shadow-lg  overflow-hidden" [src]='foodItem.food.foodImage'
+  onerror="this.src='../../../assets/images/image-not-found.jpeg'"  alt="Image NOt Found">
+  
   <mat-card-content>
     <div class="d-flex justify-content-between">
 
@@ -10,7 +11,7 @@
       <!-- <mat-icon aria-hidden="false" [ngClass]="foodItem.food.foodType==='veg' ? 'text-success':'text-danger' "
           class="h3">filter_center_focus</mat-icon> -->
       <img *ngIf="foodItem.food.foodType==='veg'" src="../../../assets/images/veg-icon.png" class="type-icon" />
-      <img *ngIf="foodItem.food.foodType==='non-veg'" src="../../../assets/images/non-veg-icon.png" class="type-icon" />
+      <img *ngIf="foodItem.food.foodType==='non veg'" src="../../../assets/images/non-veg-icon.png" class="type-icon" />
     </div>
 
     <mat-card-subtitle class="d-flex mb-0">

@@ -49,7 +49,6 @@ export class RestaurantService {
     restaurant = this.restaurantsData.find((restaurant: any) => {
       return restaurant._id == id;
     })
-    console.log("in restaurant service restaurant by id:", restaurant);
 
 
     return restaurant;

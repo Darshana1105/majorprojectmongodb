@@ -44,7 +44,6 @@ selectedIndex:number=0;
 
     this._orderService.getUserOrders().subscribe((data) => {
 
-      console.log(data);
       this.orders = data; 
 
       if(this.orders!=undefined)
@@ -72,7 +71,6 @@ selectedIndex:number=0;
       }
 
       this._orderService.addFoodRating(ratingData).subscribe((data)=>{
-        console.log(data);
       })
 
     });
@@ -88,7 +86,6 @@ selectedIndex:number=0;
       }
 
       this._orderService.addDeRating(ratingData).subscribe((data)=>{
-        console.log(data);
       })
     });
   }

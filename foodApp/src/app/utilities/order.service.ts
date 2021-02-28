@@ -17,7 +17,6 @@ export class OrderService {
 
   getHeader():HttpHeaders{
     let token = this._sessionService.getJWTToken();
-    console.log(token);
     let bearer = `Bearer ${token}`;
     
     
@@ -35,7 +34,6 @@ export class OrderService {
 
   updateUserOrderDataLocal(){
     this.getOrders().subscribe((data)=>{
-      console.log(">>>>>>",data);
       
       this.orderData=data;
       this.orderOb.next(this.orderData);

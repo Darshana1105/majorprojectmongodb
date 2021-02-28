@@ -8,7 +8,7 @@
             <mat-grid-tile class="restaurant-image-tile" rowspan="2" colspan="2">
                 <div>
                     <img *ngIf='restaurantData?.restaurantImages!=undefined && restaurantData?.restaurantImages[0]!=undefined'
-                        [src]='restaurantData?.restaurantImages[0]'>
+                        [src]='restaurantData?.restaurantImages[0]' onerror="this.src='../../../assets/images/image-not-found.jpeg'" >
                     <img *ngIf='restaurantData?.restaurantImages==undefined || restaurantData?.restaurantImages[0]==undefined'
                         src='../../../assets/images/image-not-found.jpeg'>
                 </div>
@@ -17,33 +17,33 @@
                 <div>
 
                     <img *ngIf='restaurantData?.restaurantImages!=undefined && restaurantData?.restaurantImages[1]!=undefined'
-                        [src]='restaurantData?.restaurantImages[1]' alt=''>
+                        [src]='restaurantData?.restaurantImages[1]' onerror="this.src='../../../assets/images/image-not-found.jpeg'" alt=''>
                     <img *ngIf='restaurantData?.restaurantImages==undefined || restaurantData?.restaurantImages[1]==undefined'
-                        src='../../../assets/images/image-not-found.jpg'>
+                        src='../../../assets/images/image-not-found.jpeg'>
                 </div>
             </mat-grid-tile>
             <mat-grid-tile class="restaurant-image-tile" rowspan="1" colspan="1">
                 <div>
                     <img *ngIf='restaurantData?.restaurantImages!=undefined && restaurantData?.restaurantImages[2]!=undefined'
-                        [src]='restaurantData?.restaurantImages[2]'>
+                        [src]='restaurantData?.restaurantImages[2]' onerror="this.src='../../../assets/images/image-not-found.jpeg'">
                     <img *ngIf='restaurantData?.restaurantImages==undefined || restaurantData?.restaurantImages[2]==undefined'
-                        src='../../../assets/images/image-not-found.jpg'>
+                        src='../../../assets/images/image-not-found.jpeg'>
                 </div>
             </mat-grid-tile>
             <mat-grid-tile class="restaurant-image-tile" rowspan="1" colspan="1">
                 <div>
                     <img *ngIf='restaurantData?.restaurantImages!=undefined && restaurantData?.restaurantImages[3]!=undefined'
-                        [src]='restaurantData?.restaurantImages[3]'>
+                        [src]='restaurantData?.restaurantImages[3]' onerror="this.src='../../../assets/images/image-not-found.jpeg'">
                     <img *ngIf='restaurantData?.restaurantImages==undefined || restaurantData?.restaurantImages[3]==undefined'
-                        src='../../../assets/images/image-not-found.jpg'>
+                        src='../../../assets/images/image-not-found.jpeg'>
                 </div>
             </mat-grid-tile>
             <mat-grid-tile class="restaurant-image-tile" rowspan="1" colspan="1">
                 <div>
                     <img *ngIf='restaurantData?.restaurantImages!=undefined && restaurantData?.restaurantImages[4]!=undefined'
-                        [src]='restaurantData?.restaurantImages[4]'>
+                        [src]='restaurantData?.restaurantImages[4]' onerror="this.src='../../../assets/images/image-not-found.jpeg'">
                     <img *ngIf='restaurantData?.restaurantImages==undefined || restaurantData?.restaurantImages[4]==undefined'
-                        src='../../../assets/images/image-not-found.jpg'>
+                        src='../../../assets/images/image-not-found.jpeg'>
                 </div>
             </mat-grid-tile>
         </mat-grid-list>

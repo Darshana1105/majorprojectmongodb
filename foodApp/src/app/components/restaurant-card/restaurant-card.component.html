@@ -2,7 +2,7 @@
 
     <mat-card *ngIf='restaurant!=undefined' class="restaurant-card text-left">
         <img mat-card-image class="dish-image shadow-lg  overflow-hidden" [src]='restaurant.restaurantImages[0]'
-            alt="oops">
+        onerror="this.src='../../../assets/images/image-not-found.jpeg'" alt="oops">
         <mat-card-content>
 
             <mat-card-title>{{restaurant?.restaurantName}}</mat-card-title>

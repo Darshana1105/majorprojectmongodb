@@ -36,7 +36,6 @@ export class UserService {
 
   getHeader():HttpHeaders{
     let token = this._sessionService.getJWTToken();
-    console.log(token);
     let bearer = `Bearer ${token}`;
     
     
@@ -56,7 +55,6 @@ export class UserService {
     // let userId: any = "602a4a5214315c2a00e234af";
     if (this._sessionService.checkSession()) {
       this.getUserById().subscribe((data) => {
-          console.log(data);
           
         this.userData = data.user;
         this.userOb.next(this.userData);

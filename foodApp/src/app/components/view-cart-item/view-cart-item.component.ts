@@ -22,8 +22,6 @@ userData:any
 
   ngOnInit(): void {
 
-    console.log(this.foodItem);
-    console.log(this.cartItem);
   }
 
   incrementItem(foodId:String){
