@@ -96,7 +96,6 @@ exports.searchRestaurants = async (req, res, next) => {
     let city = req.query.city;
     let searchRestaurants
     let searchRegex, cityregex;
-console.log(req.query);
     if (search == '') {
         // searchRestaurants = await restaurantDataCollection.find({ 'restaurantLocation.city': city });
         searchRegex = new RegExp('^');
@@ -111,49 +110,66 @@ console.log(req.query);
         cityregex = new RegExp(city);
     }
     try {
-        searchRestaurants = await restaurantDataCollection.aggregate([{
-            $match: {
-                $and: [
-                    {
-                        'restaurantLocation.city': { $regex: cityregex, $options: 'i' }
-                    },
-                    {
-                        $or: [
-                            {
-                                'restaurantName': {
-                                    $regex: searchRegex,
-                                    $options: 'i'
-                                }
+        searchRestaurants = await restaurantDataCollection.aggregate([
+            {
+                '$addFields': {
+                    "rating_avg": {
+                        "$avg": {
+                            "$map": {
+                                "input": "$restaurantRatings",
+                                "as": "restRating",
+                                "in": "$$restRating.rating"
                             }
-                            ,
-                            {
-                                'restaurantCategory': {
-                                    $regex: searchRegex,
-                                    $options: 'i'
-                                }
-                            },
-                            {
-                                'menuDetails.foodName': {
-                                    $regex: searchRegex,
-                                    $options: 'i'
-                                }
-                            },
-                            {
-                                'menuDetails.foodCategory': {
-                                    $regex: searchRegex,
-                                    $options: 'i'
-                                }
-                            }
-                        ]
+                        }
                     }
-                ]
+                }
+            },
+            {
+                $match: {
+                    $and: [
+                        {
+                            'restaurantLocation.city': { $regex: cityregex, $options: 'i' }
+                        },
+                        {
+                            $or: [
+                                {
+                                    'restaurantName': {
+                                        $regex: searchRegex,
+                                        $options: 'i'
+                                    }
+                                }
+                                ,
+                                {
+                                    'restaurantCategory': {
+                                        $regex: searchRegex,
+                                        $options: 'i'
+                                    }
+                                },
+                                {
+                                    'menuDetails.foodName': {
+                                        $regex: searchRegex,
+                                        $options: 'i'
+                                    }
+                                },
+                                {
+                                    'menuDetails.foodCategory': {
+                                        $regex: searchRegex,
+                                        $options: 'i'
+                                    }
+                                }
+                            ]
+                        }
+                    ]
 
 
-            }
-        }])
+                }
+            },
+           ]);
+        console.log("sdfssf",searchRestaurants);
         res.send(searchRestaurants);
     }
     catch (err) {
+        console.log(err);
         res.send(err)
     }
     // .catch((err) => {

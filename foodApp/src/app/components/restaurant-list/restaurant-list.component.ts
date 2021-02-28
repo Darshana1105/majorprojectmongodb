@@ -16,6 +16,7 @@ export class RestaurantListComponent implements OnInit {
   selectedFilters: Array<string> = [];
   selectedCity: string = '';
   searchText: string = '';
+  topRatedCheck:boolean=false;
   constructor(private filter_dialog: MatDialog, private _restaurantService: RestaurantService) {
     this.restaurants = [];
   }
@@ -39,6 +40,8 @@ export class RestaurantListComponent implements OnInit {
 
     this._restaurantService.searchRestaurants(this.selectedCity, this.searchText).subscribe((data) => {
       this.restaurants = data;
+      console.log(data);
+      
     },
       (err) => {
         console.log(err);

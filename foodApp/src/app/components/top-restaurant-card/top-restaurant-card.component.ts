@@ -15,7 +15,7 @@ export class TopRestaurantCardComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log(this.restaurant);
+    // console.log(this.restaurant);
 
   }
 

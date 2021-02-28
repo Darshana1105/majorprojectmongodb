@@ -16,10 +16,11 @@ import { ChartsModule } from 'ng2-charts';
 import { LandingMainComponent } from './components/landing-main/landing-main.component';
 import { TopRestaurantCardComponent } from './components/top-restaurant-card/top-restaurant-card.component';
 import { TopFoodCardComponent } from './components/top-food-card/top-food-card.component';
-import { RestaurantListComponent } from './components/restaurant-list/restaurant-list.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { RestaurantCardComponent } from './components/restaurant-card/restaurant-card.component';
+import { RestaurantListComponent } from './components/restaurant-list/restaurant-list.component';
 import { FilterDialogComponent } from './components/filter-dialog/filter-dialog.component';
+import { TopRatedRestaurantPipe } from './top-rated-restaurant.pipe';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { FilterDialogComponent } from './components/filter-dialog/filter-dialog.
     SearchBarComponent,
     RestaurantCardComponent,
     FilterDialogComponent,
+    TopRatedRestaurantPipe,
     
 
   ],
