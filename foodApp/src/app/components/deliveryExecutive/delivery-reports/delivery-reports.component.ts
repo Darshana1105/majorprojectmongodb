@@ -12,9 +12,8 @@ import { DeliveryExecutiveService } from 'src/app/utilities/delivery-executive/d
 export class DeliveryReportsComponent implements OnInit {
 
   constructor(private _ordersServ: DeliveryExecutiveService){}
-    
+
   public orders:any;
-  public dId = "6030c1a0a56123fa757da6ba";
   public ratings:any;
   ngOnInit(){
     this._ordersServ.deliveredOrders().subscribe(res  =>{

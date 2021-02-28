@@ -35,6 +35,7 @@ import { UserOrdersComponent } from './components/user-orders/user-orders.compon
 import { AddressDialogueComponent } from './components/address-dialogue/address-dialogue.component';
 import { ActiveOrderComponent } from './components/active-order/active-order.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 @NgModule({
@@ -63,7 +64,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     ViewCartItemComponent,
     FilterDialogComponent,
     TopRatedRestaurantPipe,
-    
+    NotFoundComponent,
     OrderBillComponent,
     UserOrdersComponent,
     AddressDialogueComponent,
@@ -80,7 +81,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     ReactiveFormsModule,
     ChartsModule,
     RatingModule,
-    FormsModule,    
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

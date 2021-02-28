@@ -18,7 +18,7 @@ router.get('/topFoods',restaurantController.getTopFood);
 
 router.get('/searchRestaurants', restaurantController.searchRestaurants);
 
-router.patch('/accept-order-ro',auth.authAPI, restaurantController.acceptOrderRo);
+router.patch('/accept-order-ro', restaurantController.acceptOrderRo);
 
 router.get('/get-orders-res/:id/', restaurantController.getOrdersByRes);
 

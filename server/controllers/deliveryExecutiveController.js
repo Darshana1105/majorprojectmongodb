@@ -15,7 +15,8 @@ const orderDataCollection = mongoose.model('order', orderSchema, 'orders');
 
 
 exports.getOrders = (req, res, next) => {
-  orderDataCollection.find({orderStatus:"accepted-ro"}).populate('userId',['firstName','email'])
+  orderDataCollection.find({$and:[{orderStatus:"accepted-ro"},
+  {"orderLocation.city" : req.params.city}]}).populate('userId',['firstName','email'])
   .exec(function (err,order) {
     if (err) {
         console.error(err);

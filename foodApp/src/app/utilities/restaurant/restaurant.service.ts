@@ -31,9 +31,10 @@ export class RestaurantService {
 
   acceptOrder(oId: any): Observable<any> {
     let body = {
+      oId: oId,
       status: "accepted-ro"
     };
-    return this.httpClient.patch<any>(this.baseUrl + "/accept-order-ro/" + oId, body)
+    return this.httpClient.patch<any>(this.baseUrl + "accept-order-ro", body)
   }
 
   async getRestaurantById(id: any): Promise<any> {
@@ -66,10 +67,10 @@ export class RestaurantService {
 
     return this.httpClient.get<any>(this.baseUrl + "getFoodByRestaurant", { params: queryParam });
   }
-  
+
   searchRestaurants(city: string, searchText: string): Observable<Array<Restaurant>> {
     let queryParam = new HttpParams({ fromString: 'city=' + city + '&search=' + searchText });
-    
+
     return this.httpClient.get<any>(this.baseUrl + 'searchRestaurants', { params: queryParam });
   }
 }

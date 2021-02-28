@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const deliveryExecutiveSchema = require('./deliveryExecutiveModel');
-
 const userSchema = new mongoose.Schema(
     {
         firstName: {
@@ -37,6 +36,11 @@ const userSchema = new mongoose.Schema(
         deliveryExecutive: {
             type: deliveryExecutiveSchema
         },
+        restaurantOwner: {
+          type: mongoose.Schema.Types.ObjectId, // think for data type
+          ref: "restaurant",
+          required: true,
+      },
         cart: {
             type: {
                 _id: false,

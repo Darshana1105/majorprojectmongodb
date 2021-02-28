@@ -248,7 +248,7 @@ exports.getTopFood = async (req, res, next) => {
     res.send(foodlist);
 }
 exports.acceptOrderRo = (req,res,next) => {
-  let id = mongoose.Types.ObjectId(req.body.userId);
+  let id = mongoose.Types.ObjectId(req.body.oId);
   let updateData = {
     orderStatus: req.body.status,
   }
@@ -256,8 +256,6 @@ exports.acceptOrderRo = (req,res,next) => {
     if (err) console.log(err.message);
     else {
         res.status(200).json({"Data updated ": order});
-
-            res.status(200).json({ "Data updated ": order });
         }
     });
 
@@ -266,11 +264,13 @@ exports.acceptOrderRo = (req,res,next) => {
 exports.getOrdersByRes = (req, res, next) => {
     let id = mongoose.Types.ObjectId(req.params.id);
     //console.log(id);
-    orderDataCollection.find({$and:[{orderStatus:"ordered"},{restaurantDetails:id}]}).populate('userId', ['firstName', 'email'])
+    orderDataCollection.find({$and:[{orderStatus:"ordered"}
+    ,{"restaurantDetails.restaurantId":id}]})
+    .populate('userId', ['firstName', 'email'])
       .exec(function (err, order) {
         if (err) {
           console.error(err);
-          
+
         }
         //console.log(order);
         res.status(200).json({

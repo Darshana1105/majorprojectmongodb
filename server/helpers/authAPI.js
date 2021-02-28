@@ -10,7 +10,7 @@ const authAPI = async function (req, res, next) {
     const authHeader = req.header('authorization');
 
     console.log(authHeader);
-    
+
 
     try {
         const token = authHeader.split(" ")[1];
@@ -22,7 +22,7 @@ const authAPI = async function (req, res, next) {
                 throw err;
             }
             console.log(decoded);
-            
+
         var isUser = await userDataCollection.findOne({ 'email': decoded.email, 'password': decoded.password }).exec();
         if (isUser != null) {
             req.body.userId = decoded.userId;

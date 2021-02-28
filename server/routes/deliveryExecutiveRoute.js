@@ -8,7 +8,7 @@ const deliveryExecutiveController = require("../controllers/deliveryExecutiveCon
 
 const router = express.Router();
 
-router.get('/orders', deliveryExecutiveController.getOrders);
+router.get('/orders/:city', deliveryExecutiveController.getOrders);
 
 router.patch('/accept-order-de/:oid',auth.authAPI, deliveryExecutiveController.acceptOrderDe);
 

@@ -32,7 +32,7 @@ export class UserProfileComponent implements OnInit {
         this.userdata = res;
         this.userRole = res.role;
         this.usrgender = res.gender;
-        
+
         if(this.userRole == "de"){
           this.form();
           this.Ratings();
@@ -40,25 +40,25 @@ export class UserProfileComponent implements OnInit {
         if(this.userRole == "user"){
           this.userForm();
         }
-        
+
       }
     });
   }
-  
-  // Calculate Average Ratings From Ratings Object 
+
+  // Calculate Average Ratings From Ratings Object
   Ratings(){
       this.RatingsObj= this.userdata.deliveryExecutive.deliveryExecutiveRatings;
       const arrayLength:any = this.RatingsObj.length ;
       this.RatingsObj.forEach((element:any) => {
       this.avgRating  = this.avgRating + element.rating;
-      
+
     });
 
       console.log( (this.avgRating)/arrayLength);
       this.deRatings = (this.avgRating)/arrayLength
   }
 
-  // Get Profile Data from DE 
+  // Get Profile Data from DE
   sendDeProfile():void{
     this.postDeData = this.profileForm.value;
     let dataDe = {
@@ -105,15 +105,24 @@ export class UserProfileComponent implements OnInit {
         firstName: new FormControl(this.userdata.firstName,Validators.required),
         lastName: new FormControl(this.userdata.lastName,Validators.required),
         email:new FormControl(this.userdata.email,[Validators.required, Validators.email]),
-        mobileNumber: new FormControl(this.userdata.mobileNumber,[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
-        vehicleNumber:new FormControl(this.userdata.deliveryExecutive.vehicleNumber,Validators.required),
-        streetAddress:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.streetAddress,Validators.required),
-        city:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.city,Validators.required),
-        pincode:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.zip,[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{6}$")]),
-        state:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.state,Validators.required),
-        country:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.country,Validators.required),
-        landmark:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.landmark,Validators.required),
-        area:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.area,Validators.required),
+        mobileNumber: new FormControl(this.userdata.mobileNumber,[Validators
+          .required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+        vehicleNumber:new FormControl(this.userdata.deliveryExecutive.vehicleNumber,
+          Validators.required),
+        streetAddress:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation
+          .streetAddress,Validators.required),
+        city:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.city,
+          Validators.required),
+        pincode:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.zip,
+          [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{6}$")]),
+        state:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.state,
+          Validators.required),
+        country:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.country,
+          Validators.required),
+        landmark:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.
+          landmark,Validators.required),
+        area:new FormControl(this.userdata.deliveryExecutive.deliveryExecutiveLocation.
+          area,Validators.required),
     });
 
   }

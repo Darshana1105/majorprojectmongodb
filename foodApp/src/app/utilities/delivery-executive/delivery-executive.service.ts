@@ -10,8 +10,9 @@ export class DeliveryExecutiveService {
 
   constructor(private http: HttpClient, private _sessionService: SessionService) { }
   url = 'http://localhost:3000';
-  getOrders(): Observable<any> {
-    return this.http.get<any>(this.url + "/orders");
+  getOrders(city:String): Observable<any> {
+
+    return this.http.get<any>(this.url + "/orders/"+city);
   }
   getRestaurantById(id: any): Observable<any> {
     return this.http.get<any>(this.url + "/getRestaurantById/" + id);
@@ -21,8 +22,8 @@ export class DeliveryExecutiveService {
     let token = this._sessionService.getJWTToken();
     console.log(token);
     let bearer = `Bearer ${token}`;
-    
-    
+
+
     let headers = new HttpHeaders().set("Authorization",bearer );
     return headers;
   }

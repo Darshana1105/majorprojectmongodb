@@ -10,25 +10,28 @@ import { UserService } from 'src/app/utilities/user.service';
 })
 export class DeliveryComponent implements OnInit {
  activeOrders:any = [];
- dId = "6030c1a0a56123fa757da6ba";
  statusForm = this.formBuilder.group({
   selected: ['', Validators.required],
 });
   recentOrders:any = [];
+  deCity:String = "";
 
- constructor(private _ordersServ: DeliveryExecutiveService,private _userService:UserService,private formBuilder: FormBuilder) { }
+ constructor(private _ordersServ: DeliveryExecutiveService,
+  private _userService:UserService,private formBuilder: FormBuilder) { }
  orders:any = [];
  ngOnInit(): void {
   this._userService.getUser().subscribe((data)=>{
     if(data!=undefined && data.role=='de')
     {
+      this.deCity = data.deliveryExecutive.deliveryExecutiveLocation.city;
+      //console.log(this.deCity)
       this._ordersServ.activeOrders().subscribe(res  =>{
         this.Acount = res.orders.length;
         this.activeOrders = res.orders;
         console.log(this.activeOrders);
-    
+
       });
-       this._ordersServ.getOrders().subscribe(res  =>{
+       this._ordersServ.getOrders(this.deCity).subscribe(res  =>{
          this.Ocount = res.orders.length;
          this.orders = res.orders;
          console.log(res.orders);
@@ -40,12 +43,12 @@ export class DeliveryComponent implements OnInit {
     }
   });
    setInterval(() => { this.gOrders(); }, 2000);
-  
+
  }
  Acount = 0;
  Ocount = 0;
  gOrders():void{
-   this._ordersServ.getOrders().subscribe(res  =>{
+   this._ordersServ.getOrders(this.deCity).subscribe(res  =>{
      if(res.orders.length!=this.Ocount){
        this.Ocount = res.orders.length
        this.orders = res.orders

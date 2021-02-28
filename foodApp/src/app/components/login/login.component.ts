@@ -29,11 +29,11 @@ export class LoginComponent implements OnInit {
 
   isSelected(name: string): boolean {
     if (!this.selectedRole) {
-      // if no radio button is selected, always return false so every nothing is shown  
+      // if no radio button is selected, always return false so every nothing is shown
       return false;
 
     }
-    return (this.registerForm.value.role === name); // if current radio button is selected, return true, else return false  
+    return (this.registerForm.value.role === name); // if current radio button is selected, return true, else return false
   }
 
 
@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
         this.registerForm.get('area').clearValidators(Validators.required);
       }
     })
-  
+
   }
 
 
@@ -96,7 +96,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     console.log("In submit button");
-    
+
     this._userService.userLogin(this.loginForm.value).subscribe((data) => {
       console.log("Data:", data);
       this._sessionService.setLocalSession(data.token);
@@ -148,7 +148,7 @@ onSubmit() {
 
   resetPassword: boolean=false;
   newPassword=new FormControl('',[Validators.required, Validators.minLength(6)])
-  
+
 
   sendOtpForResetpassword() {
     // console.log(this.email.value);
@@ -166,7 +166,7 @@ onSubmit() {
 
   checkOtp() {
     console.log("in check otp");
-    
+
     if (this.otp != null && this.otp == this.formOtp.value) {
       this.resetPassword=true;
       this.readonlyEmail = true;
@@ -186,7 +186,7 @@ onSubmit() {
       this.forgotpassword=false;
     },(err)=>{
       console.log(err);
-      this.errForgotPassword=err.error.text      
+      this.errForgotPassword=err.error.text
     })
   }
 }
