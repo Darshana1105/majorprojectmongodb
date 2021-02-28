@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 const restaurantSchema = require('../models/restaurantModel');
+const { options } = require("../routes/userRoute");
 // const foodSchema = require('../models/foodModel');
 const app = require("../server");
 // const categorySchema = require("../models/categoryModel");
@@ -24,7 +25,6 @@ exports.getRestaurants = (req, res, next) => {
         }
     ]).exec(function (err, result) {
         if (err) throw err;
-        console.log(result);
         res.send(result);
     });
 }
@@ -50,7 +50,6 @@ exports.getRestaurantById = (req, res, next) => {
     ])
         .exec(function (err, result) {
             if (err) throw err;
-            console.log(result);
             res.send(result);
         });
 }
@@ -87,7 +86,6 @@ exports.getTopRestaurants = (req, res, next) => {
         .limit(6)
         .exec(function (err, result) {
             if (err) throw err;
-            console.log(result);
             res.send(result);
         });
 }
@@ -96,20 +94,74 @@ exports.getTopRestaurants = (req, res, next) => {
 exports.searchRestaurants = async (req, res, next) => {
     let search = req.query.search;
     let city = req.query.city;
-    console.log(req.query);
-    let searchRestaurants = await restaurantDataCollection.find({$and:[{'restaurantLocation.city': city },
-        {$text:{
-            $search: search
-        }
+    let searchRestaurants
+    let searchRegex, cityregex;
+console.log(req.query);
+    if (search == '') {
+        // searchRestaurants = await restaurantDataCollection.find({ 'restaurantLocation.city': city });
+        searchRegex = new RegExp('^');
     }
-    ]});
-        // .catch((err) => {
-        //     res.send(err)
-        // });
+    else {
+        searchRegex = new RegExp(search);
+    }
+    if (city == '') {
+        cityregex = new RegExp('^');
+    }
+    else {
+        cityregex = new RegExp(city);
+    }
+    try {
+        searchRestaurants = await restaurantDataCollection.aggregate([{
+            $match: {
+                $and: [
+                    {
+                        'restaurantLocation.city': { $regex: cityregex, $options: 'i' }
+                    },
+                    {
+                        $or: [
+                            {
+                                'restaurantName': {
+                                    $regex: searchRegex,
+                                    $options: 'i'
+                                }
+                            }
+                            ,
+                            {
+                                'restaurantCategory': {
+                                    $regex: searchRegex,
+                                    $options: 'i'
+                                }
+                            },
+                            {
+                                'menuDetails.foodName': {
+                                    $regex: searchRegex,
+                                    $options: 'i'
+                                }
+                            },
+                            {
+                                'menuDetails.foodCategory': {
+                                    $regex: searchRegex,
+                                    $options: 'i'
+                                }
+                            }
+                        ]
+                    }
+                ]
+
+
+            }
+        }])
+        res.send(searchRestaurants);
+    }
+    catch (err) {
+        res.send(err)
+    }
+    // .catch((err) => {
+    //     res.send(err)
+    // });
     // let searchRestaurants= await restaurantDataCollection.aggregate([{"search city":{$in:[city,'$restaurantLocation.city']}}]).exec(function(err,data){
 
-
-    res.send(searchRestaurants);
+    // console.log(searchRestaurants);
 }
 
 

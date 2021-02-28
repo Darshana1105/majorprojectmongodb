@@ -19,7 +19,7 @@ export class FilterDialogComponent implements OnInit {
   }
 
 
-  constructor(private _categoryService: CategoryService, private dialogRef: MatDialogRef<FilterDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(private _categoryService: CategoryService, private dialogRef: MatDialogRef<FilterDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: Array<string>) {
     
     this.categoriesForm = new FormGroup({
       categories: new FormArray([])
@@ -29,7 +29,6 @@ export class FilterDialogComponent implements OnInit {
       this.addCheckboxes(data);
     }, (err) => {
       console.log(err.message);
-
     })
 
   }
@@ -45,9 +44,21 @@ export class FilterDialogComponent implements OnInit {
 
   private addCheckboxes(data:any) {
 
+    console.log(data);
+    
     this.categoryData.forEach((item) => {
-      data.find
-      this.categoriesFormArray.push(new FormControl(false))
+      let index=data.findIndex((field:string)=>{
+            field==item.categoryName;
+      });
+      console.log(index);
+      
+      if(index)
+      {
+        this.categoriesFormArray.push(new FormControl(false));
+      }
+      else{
+        this.categoriesFormArray.push(new FormControl(true));
+      }
     });
   }
 
@@ -59,6 +70,7 @@ export class FilterDialogComponent implements OnInit {
       .filter((v: any) => v !== null);
 
     console.log(selectedCategories);
+    this.dialogRef.close(selectedCategories);
   }
 
 }

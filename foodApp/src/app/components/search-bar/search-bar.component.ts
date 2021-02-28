@@ -705,6 +705,9 @@ export class SearchBarComponent implements OnInit {
       this.onSearchChange.emit(data);
     });
 
+    this.searchedcity.valueChanges.subscribe((data)=>{
+      this.onCitySelect.emit(data);
+    })
 
     this.stateGroupOptions = this.searchedcity!.valueChanges
       .pipe(
@@ -712,7 +715,6 @@ export class SearchBarComponent implements OnInit {
         map(value => this._filterGroup(value))
       );
   }
-
 
   onCitySelection(event: any) {
 
