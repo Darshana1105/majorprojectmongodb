@@ -37,29 +37,34 @@ export class FoodItemComponent implements OnInit, OnDestroy {
     return this.userData.cart.foodList.findIndex((item: any) => item.foodId == id);
   }
 
-  incrementItem(foodId: String) {
-    let foodItem = {
-      foodId: foodId,
-      restaurantId: this.foodData.restaurantId
-    }
+   incrementItem(foodId: String) {
 
-    if (this.userData?.role == 'user') {
+    if (this.userData.cart==undefined || this.userData.cart==null || this.userData?.cart.restaurantId == this.foodData.restaurantId) {
+      let foodItem = {
+        foodId: foodId,
+        restaurantId: this.foodData.restaurantId
+      }
+
+      console.log(foodItem);
+      if (this.userData?.role == 'user') {
+
       this._userService.incrementCartItem(foodItem).subscribe(async (data) => {
         await this._userService.updateUserDataLocal();
         // this.userData = await this._userService.getUser();
       });
 
-      this.addtocart(this.foodData.food.foodPrice)
-
-      console.log(foodItem);
+      this.addtocart(this.foodData.food.foodPrice);
     }
     else {
       this.openDialogLogin();
     }
-
-
-
-
+    }else{
+      if(confirm("Your cart has existing items from another restaurant. Do you want to clear cart?")){
+        this._userService.clearCart().subscribe(async (data)=>{
+          await this._userService.updateUserDataLocal();
+        })
+      }
+    }
   }
 
   decrementItem(foodId: String) {

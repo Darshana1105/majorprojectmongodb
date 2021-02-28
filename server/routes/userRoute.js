@@ -26,5 +26,6 @@ router.get('/getUserById',auth.authAPI,userController.getUserById);
 
 router.post('/sendOtpForResetPassword',userController.sendOtpForResetPassword);
 
+router.put('/addDeRating',userController.addDeRating);
 
 module.exports = router; 

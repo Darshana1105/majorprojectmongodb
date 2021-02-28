@@ -21,6 +21,9 @@ router.get('/searchRestaurants', restaurantController.searchRestaurants);
 router.patch('/accept-order-ro',auth.authAPI, restaurantController.acceptOrderRo);
 
 router.get('/get-orders-res/:id/', restaurantController.getOrdersByRes);
+
 router.get('/getFoodByRestaurant', restaurantController.getFoodByRestaurant);
+
+router.put('/addFoodRating', restaurantController.addFoodRating);
 
 module.exports = router;

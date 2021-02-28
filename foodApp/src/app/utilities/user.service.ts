@@ -60,7 +60,7 @@ export class UserService {
     }
   }
   // async updateUserDataLocal():Promise<any>{
-  //   let userId: any = "602a4a5214315c2a00e234af";
+  //   let userId: any = "603ba4cbebcc8c5ffba639da";
   //   let temp=await this.getUserById(userId).toPromise();
   //   this.userData=temp.user;
   // }
@@ -107,4 +107,8 @@ export class UserService {
    
     return this.http.put<any>(this.baseUrl+'clearCart',null,{headers:this.getHeader()});
   }
+  
+  
+  
+
 }

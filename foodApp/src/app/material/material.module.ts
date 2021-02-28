@@ -21,6 +21,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatStepperModule} from '@angular/material/stepper';
+
 const materialComponents = [
   MatButtonModule,
   MatIconModule,
@@ -44,7 +46,9 @@ const materialComponents = [
   MatDialogModule,
   MatRadioModule,
   MatAutocompleteModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatStepperModule
+  
 ];
 
 @NgModule({

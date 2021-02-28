@@ -1,4 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { RestaurantService } from 'src/app/utilities/restaurant/restaurant.service';
 import { UserService } from 'src/app/utilities/user.service';
 
@@ -12,10 +13,22 @@ export class ViewCartComponent implements OnInit, OnDestroy {
   cartItems: Array<any> = [];
   restaurantFoodList: Array<any> = [];
   restaurantId: any = '';
-
   userObs: any;
 
-  constructor(private _userService: UserService, private _restaurantService: RestaurantService) {
+  isInOrderBill:boolean=false;
+
+  constructor(private _userService: UserService, private _restaurantService: RestaurantService, private route: ActivatedRoute) {
+
+    this.route.url.subscribe((data)=>{
+
+      console.log(data[0].path);
+      if(data[0].path=='orderBill'){
+        this.isInOrderBill=true;
+      }
+    })
+
+    
+    // if(this.route.url=='')
   }
 
   ngOnInit(): void {

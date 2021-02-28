@@ -32,6 +32,10 @@ import { RestaurantCardComponent } from './components/restaurant-card/restaurant
 import { RestaurantListComponent } from './components/restaurant-list/restaurant-list.component';
 import { FilterDialogComponent } from './components/filter-dialog/filter-dialog.component';
 import { TopRatedRestaurantPipe } from './top-rated-restaurant.pipe';
+import { OrderBillComponent } from './components/order-bill/order-bill.component';
+import { UserOrdersComponent } from './components/user-orders/user-orders.component';
+import { AddressDialogueComponent } from './components/address-dialogue/address-dialogue.component';
+import { ActiveOrderComponent } from './components/active-order/active-order.component';
 
 
 @NgModule({
@@ -63,6 +67,11 @@ import { TopRatedRestaurantPipe } from './top-rated-restaurant.pipe';
     FilterDialogComponent,
     TopRatedRestaurantPipe,
     
+    OrderBillComponent,
+    UserOrdersComponent,
+    AddressDialogueComponent,
+    ActiveOrderComponent
+
 
   ],
   imports: [
@@ -75,9 +84,7 @@ import { TopRatedRestaurantPipe } from './top-rated-restaurant.pipe';
     ReactiveFormsModule,
     ChartsModule,
     RatingModule,
-    FormsModule
-
-    
+    FormsModule,    
   ],
   providers: [],
   bootstrap: [AppComponent]
